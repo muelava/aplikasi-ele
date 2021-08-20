@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/*primary color*/
+	/*color: #0CAF7F;*/
+	/*	background: #1E0B45;*/
+
+
+*{
+	padding: 0;
+	margin: 0;
+	color: #0CAF7F;
+
+font-family: 'Atkinson Hyperlegible', sans-serif;
+}
+
+body{
+	background-color: #F6F3FD;
+}
+
+	.nav-link, .navbar-brand{
+		color: #0CAF7F!important;
+	}
+
+.navbar-toggler{
+border: none!important;
+}
+.navbar-toggler:focus{
+box-shadow: none!important;
+}
+.nav-link:hover{
+	color: #1E0B45;
+transform: scale(1.1);
+transition: .3s;
+}
+
+.login-now{
+	background-color: #0CAF7F;
+	border-radius: 2em;
+	font-size: .9em;
+	transition: .5s;
+	color:white!important;
+}
+.login-now:hover{
+	transform: scale(1.1);
+	background-color: #1E0B45;
+}
+.program{
+	background: linear-gradient(to right, #0CAF7F, #1E0B45);
+	border-radius: 50px 50px;
+}
+
+
+
+/*responive break point 1*/
+@media (max-width: 991px) {
+	.navbar{
+		padding-right: 0!important;
+		padding-left: 0!important;
+	}
+	.nav-link:hover{
+		transform: unset;
+		transform: translateX(10px);
+	}
+}
+
+/*responsive break point 2*/
+@media (max-width: 991px) {
+	.program div{
+		text-align: center!important;
+	}
+}
