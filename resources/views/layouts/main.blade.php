@@ -10,20 +10,31 @@
 
     <!-- style css -->
     <link rel="stylesheet" href="/css/style.css">
-
+    
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Efect scroll -->
+    <script src="/js/jquery.easing.1.3.js"></script>
 
-    <title>SMK Bina ikhwani</title>
+    {{-- icon bootstrap --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <title>@yield('title')</title>
   </head>
   <body>
 
 
-   @include('partials.navbar');
+   @include('partials.navbar')
 
 
-<div class="container" style="margin-top: 15%;">
+{{-- <div class="container"> --}}
   @yield('container')
-</div>
+{{-- </div> --}}
+
+
+
+@include('partials.footer')
 
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -37,11 +48,11 @@
 
 
 <script>
-  $('.nav-link, .navbar-brand').on('click', function(){
-    setTimeout(function(){
-    $('.navbar-toggler').click();
-    },1000)
-  });
+  // $('.nav-link, .navbar-brand').on('click', function(){
+  //   setTimeout(function(){
+  //   $('.navbar-toggler').click();
+  //   },1000)
+  // });
 </script>
 
 
