@@ -8,8 +8,8 @@
       <div class="carousel-item active">
         {{-- <img class="img-background" src="/img/hero (2).jpg" alt="" > --}}
         <div class="container d-flex">
-          <div class="carousel-caption text-start">
-            <p><a class="btn btn-lg fw-bold btn-light shadow-sm" href="#cara-login">Lihat Cara Login <i class="bi bi-chevron-double-down"></i></a></p>
+          <div class="carousel-caption lihat-cara-login text-start">
+            <p><a class="btn btn-lg fw-bold btn-premiere text-white shadow-sm" href="#cara-login">Lihat Cara Login <i class="bi bi-chevron-double-down"></i></a></p>
           </div>
         </div>
       </div>
@@ -19,23 +19,41 @@
   </div>
 
   <div class="container">
-  <h4 class="fw-bold text-center my-5" id="cara-login">Please Login</h4>
+  <h4 class="fw-bold text-center my-5" id="form-login">Please Login</h4>
    <div class="row justify-content-center">
 
-    <form class="col-4 text-center">
+    <form action="" class="col-lg-4 text-center">
       <div class="mb-3 form-floating">
-        <input type="text" id="username" class="form-control form-control-sm" placeholder="Username" aria-describedby="emailHelp" autofocus>
+        <input type="text" id="username" class="form-control form-control-sm" placeholder="Username" autofocus>
         <label for="username">Username</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="password" id="password" class="form-control form-control-sm" placeholder="Password">
         <label for="password">Password</label>
       </div>
-      <button type="submit" class="btn btn-primary my-3">Submit</button>
+      <button type="submit" class="btn my-3 btn-premiere text-white fw-bold px-5">Login</button>
     </form>
-    <small class="text-center"><a href="#">Lupa Password?</a></small>
-    
-  </div>
 
+    <small class="text-center"><a href="#">Lupa Password?</a></small>
+  </div>
+  
+  <section class="row justify-content-center" id="cara-login">
+    <h4 class="fw-bold text-center mb-4">Cara Login</h4>
+    <div class="col-md-5">
+      <img class="w-100" src="/img/cara-login-guru.png" alt="">
+    </div>
+    <div class="col-md-5">
+      <img class="w-100" src="/img/cara-login-siswa.png" alt="">
+    </div>
+  </section>
 </div>
+
+<script>
+  $(document).ready(function(){
+  $('html,body').animate({
+    scrollTop: $('#form-login').offset().top - 80
+  }, 800, 'easeInOutExpo');
+  })
+</script>
+
 @endsection

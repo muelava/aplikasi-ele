@@ -11,11 +11,6 @@ function myFunction() {
   }
 }
 
-$(document).ready(function(){
-  $('html,body').animate({
-    scrollTop: $('#cara-login').offset().top - 80
-  }, 800, 'easeInOutExpo');
-  })
 
 // smooth scroll for all element 'href'
 $('a').click(function(e){

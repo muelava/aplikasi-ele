@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparant px-5 position-fixed w-100" style="top: 0;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-transparent {{ ($active === 'courses') ? 'bg-premiere-2' : '' }} px-5 position-fixed w-100" style="top: 0;">
     <div class="container-fluid">
       <a class="navbar-brand d-flex align-items-center" href="/">
         <img src="/img/logo_bina_ikhwani.png" alt="" width="50" class="d-inline-block align-text-top">

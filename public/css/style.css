@@ -12,7 +12,8 @@
     font-family: "Atkinson Hyperlegible", sans-serif;
 }
 
-.bg-premiere {
+.bg-premiere,
+.bg-premiere-2 {
     background: linear-gradient(
         60deg,
         rgba(29, 199, 181, 1),
@@ -64,13 +65,13 @@ nav {
     left: 0%;
     bottom: 0%;
     right: 0%;
+    padding: 15%;
+    padding-top: 15%;
     background: linear-gradient(
         60deg,
         rgba(29, 199, 181, 0.7),
         rgba(50, 90, 159, 0.7)
     );
-    padding: 15%;
-    padding-top: 15%;
 }
 .modal {
     transition: 0.3s;
@@ -88,6 +89,109 @@ footer {
     background-color: #142139;
     color: white;
 }
+.btn-premiere {
+    background-color: #1dc7b5;
+    border-radius: 5em;
+    transition: 0.2s;
+}
+.btn-premiere:hover {
+    background-color: #1db8a8;
+    box-shadow: 0px 0px 2px rgb(202, 202, 202);
+}
+#username,
+#password {
+    border-radius: 5em;
+    background-color: rgb(240, 240, 240);
+    border: initial !important;
+}
+#cara-login {
+    margin-top: 10%;
+}
+
+/* sidebar css */
+.main-sidebar {
+    padding-top: 7em;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    /* position: relative; */
+}
+
+.my-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 8;
+    /* overflow-y: scroll; */
+    width: 25%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    transition: 0.3s;
+    transform: translateX(0%);
+}
+
+.hide-side {
+    transform: translateX(-100%);
+    /* width: 0% !important; */
+}
+.hide-toggle {
+    /* transform: translateX(170%); */
+    border-radius: initial !important;
+    box-shadow: initial !important;
+    /* position: fixed !important; */
+    /* right: -8%; */
+}
+
+.my-toggle {
+    cursor: pointer;
+    position: fixed;
+    top: 7em;
+    left: 103%;
+    width: 45px;
+    padding: 6px 10px;
+    box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.2);
+    border-radius: 0.5em;
+}
+.my-toggle:hover {
+    box-shadow: 0px 0px 5px rgba(92, 92, 92, 0.4);
+}
+.my-toggle-item {
+    padding: 1.5px 1px;
+    margin-bottom: 3px;
+    border-radius: 5em;
+    background-color: rgb(136, 136, 136);
+}
+.my-toggle-item:nth-of-type(1) {
+    width: 100%;
+    margin-top: 3px;
+}
+.my-toggle-item:nth-of-type(2) {
+    width: 70%;
+}
+.my-toggle-item:nth-of-type(3) {
+    width: 50%;
+}
+
+.mapel {
+    padding-left: 25%;
+}
+.aktif {
+    background-color: #1dc7b5;
+    font-weight: bold;
+}
+
+/* scroll style */
+.my-sidebar::-webkit-scrollbar {
+    background-color: transparent;
+    max-width: 0.3em;
+    max-height: 0;
+}
+
+.my-sidebar::-webkit-scrollbar-thumb {
+    /* background: rgba(29, 199, 181, 1);
+    border-radius: 1em; */
+}
+/* end scroll style */
+/* end sidebar css */
 
 /*responive break point 1*/
 @media (max-width: 991px) {
@@ -111,6 +215,9 @@ footer {
     .carousel-indicators {
         bottom: 40px;
     }
+    .lihat-cara-login {
+        padding-top: 40% !important;
+    }
     .carousel-caption h3 {
         width: initial !important;
     }
@@ -121,11 +228,60 @@ footer {
     .carousel-caption {
         padding-top: 30%;
     }
+    .lihat-cara-login {
+        padding-top: 50% !important;
+    }
+    .my-sidebar {
+        width: 35% !important;
+    }
+    .content-toggle h4 {
+        font-size: 18px;
+        margin-top: 1.5em !important;
+        margin-bottom: 1.5em !important;
+    }
+    .content-toggle a {
+        font-size: 14px;
+        padding-top: 1em !important;
+        padding-bottom: 1em !important;
+    }
 }
 
 /*responsive break point 2*/
 @media (max-width: 575px) {
     .carousel-caption {
         padding-top: 40%;
+    }
+    .lihat-cara-login {
+        padding-top: 80% !important;
+    }
+    .my-sidebar {
+        width: 40% !important;
+    }
+    .content-toggle h4 {
+        font-size: 16px;
+        margin-top: 1.5em !important;
+        margin-bottom: 1.5em !important;
+    }
+    .content-toggle a {
+        font-size: 12px;
+        padding-top: 1em !important;
+        padding-bottom: 1em !important;
+    }
+}
+
+/*responsive break point 3*/
+@media (max-width: 320px) {
+    .my-sidebar {
+        width: 40% !important;
+    }
+    .content-toggle h4 {
+        font-size: 14px;
+        margin-top: 1em !important;
+        margin-bottom: 1em !important;
+    }
+    .content-toggle a {
+        font-size: 10px;
+        padding-top: 0.5em !important;
+        padding-bottom: 0.5em !important;
     }
 }
