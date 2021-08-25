@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class LoginController extends Controller
 {
@@ -11,5 +13,21 @@ class LoginController extends Controller
         return view('login.index', [
             'active' => 'login'
         ]);
+    }
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email:dns'],
+            'password' => ['required']
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/courses');
+        }
+
+        return back()->with('loginError', 'Username atau Password Salah!');
     }
 }

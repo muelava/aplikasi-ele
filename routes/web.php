@@ -21,5 +21,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/login', [LoginController::class, 'index'],);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+
 Route::get('/courses', [CoursesController::class, 'index']);

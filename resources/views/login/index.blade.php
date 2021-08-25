@@ -22,14 +22,33 @@
   <h4 class="fw-bold text-center my-5" id="form-login">Please Login</h4>
    <div class="row justify-content-center">
 
-    <form action="" class="col-lg-4 text-center">
+    <form action="/login" method="POST" class="col-lg-4 text-center">
+      @csrf
+
+      @if (session()->has('loginError'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ session('loginError') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif    
+
       <div class="mb-3 form-floating">
-        <input type="text" id="username" class="form-control form-control-sm" placeholder="Username" autofocus>
+        <input type="text" id="username" class="form-control form-control-sm @error('email') is-invalid @enderror" placeholder="Username" name="email" value="{{ old('email') }}" autofocus>
         <label for="username">Username</label>
+        @error('email')
+        <div class="invalid-feedback">
+          {{ $message }}
+        </div>
+        @enderror
       </div>
       <div class="mb-3 form-floating">
-        <input type="password" id="password" class="form-control form-control-sm" placeholder="Password">
+        <input type="password" id="password" class="form-control form-control-sm @error('password') is-invalid @enderror" placeholder="Password" name="password">
         <label for="password">Password</label>
+        @error('password')
+            <div class="invalid-feedback">
+              {{ $message }}
+            </div>
+        @enderror
       </div>
       <button type="submit" class="btn my-3 btn-premiere text-white fw-bold px-5">Login</button>
     </form>

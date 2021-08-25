@@ -2,13 +2,13 @@
 @section('title','E-Learning')
 
 @section('container')
-@extends('partials.my-sidebar')
 
 <div class="container" style="margin-top: 10em">
-    <div class="row mt-5">
-        <a href="#" class="sub-courses col-sm-2 btn p-4 text-center shadow-sm">Pertemuan 1</a>
+    <div class="mt-5 d-flex flex-wrap">
+            @for ($i = 1; $i <= 25; $i++)
+            <a href="#pert" class="btn p-5 text-center shadow-sm pertemuan">Pertemuan <p>{{ $i }}</p></a>
+            @endfor
     </div>
 </div>
-
 
 @endsection
