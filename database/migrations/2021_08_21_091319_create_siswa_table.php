@@ -20,7 +20,7 @@ class CreateSiswaTable extends Migration
             $table->string('nis')->unique();
             $table->string('password');
             $table->string('kelas');
-            $table->enum('status', ['siswa']);
+            $table->enum('role', ['siswa']);
             $table->enum('tingkat', ['smp', 'smk']);
         });
     }

@@ -20,6 +20,9 @@
     {{-- icon bootstrap --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
+    {{-- favicon --}}
+    <link rel="shortcut icon" href="img/logo_bina_ikhwani.png" type="image/x-icon">
+
     <title>@yield('title')</title>
   </head>
   <body>

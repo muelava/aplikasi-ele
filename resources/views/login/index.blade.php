@@ -22,8 +22,14 @@
   <h4 class="fw-bold text-center my-5" id="form-login">Please Login</h4>
    <div class="row justify-content-center">
 
-    <form action="/login" method="POST" class="col-lg-4 text-center">
+     
+     <form action="/login" method="POST" class="col-lg-4 text-center">
+      @if (session()->has('success'))
+      <div class="alert alert-success">{{ session('success') }}</div>
+      @endif
+
       @csrf
+
 
       @if (session()->has('loginError'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">

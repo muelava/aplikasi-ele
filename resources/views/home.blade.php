@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', "SMP-SMK Bina Ikhwati")
+@section('title', "SMP SMK Bina Ikhwani")
 
 @section('container')
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">

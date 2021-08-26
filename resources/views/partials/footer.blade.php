@@ -21,7 +21,7 @@
         </div>
         <hr>
         <small class="text-center d-block mb-0 py-3">
-          <a href="#" class="text-reset text-decoration-none">Copyright © SMP-Smk Bina Ikhwati</a>
+          <a href="#" class="text-reset text-decoration-none">Copyright © SMP SMK Bina Ikhwati</a>
         </small>
 
 </footer>
