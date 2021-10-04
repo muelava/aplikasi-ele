@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Siswa;
+
 
 
 class LoginController extends Controller
@@ -18,15 +20,24 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email:dns'],
+            'nis' => ['required'],
             'password' => ['required']
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, ['id' => 2])) {
             $request->session()->regenerate();
-
             return redirect()->intended('/courses');
         }
+
+
+
+        // $nis = $request->nis;
+
+        // if (Siswa::where('nis', $nis)->first() != null) {
+        //     $request->session()->put('nama', 'elang hardifal');
+        //     return redirect('/courses');
+        // } 
+
 
         return back()->with('loginError', 'Username atau Password Salah!');
     }

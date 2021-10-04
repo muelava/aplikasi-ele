@@ -20,7 +20,7 @@ class RegisterController extends Controller
     {
         $inputValidate =  $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'nis' => 'required',
             'password' => 'required | min:3 | max:255'
         ]);
 

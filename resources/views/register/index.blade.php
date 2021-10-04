@@ -16,9 +16,9 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
-          @error('email')
+         <label for="nis" class="form-label">nis</label>
+          <input type="nis" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ old('nis') }}">
+          @error('nis')
           <div class="invalid-feedback">{{ $message }}</div>                
       @enderror
         </div>

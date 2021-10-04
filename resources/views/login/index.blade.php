@@ -39,9 +39,9 @@
     @endif    
 
       <div class="mb-3 form-floating">
-        <input type="text" id="username" class="form-control form-control-sm @error('email') is-invalid @enderror" placeholder="Username" name="email" value="{{ old('email') }}" autofocus>
+        <input type="text" id="username" class="form-control form-control-sm @error('nis') is-invalid @enderror" placeholder="Username" name="nis" value="{{ old('nis') }}" autofocus>
         <label for="username">Username</label>
-        @error('email')
+        @error('nis')
         <div class="invalid-feedback">
           {{ $message }}
         </div>
