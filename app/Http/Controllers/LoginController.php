@@ -31,12 +31,12 @@ class LoginController extends Controller
 
 
 
-        // $nis = $request->nis;
+        $nis = $request->nis;
 
-        // if (Siswa::where('nis', $nis)->first() != null) {
-        //     $request->session()->put('nama', 'elang hardifal');
-        //     return redirect('/courses');
-        // } 
+        if (Siswa::where('nis', $nis)->first() != null) {
+            $request->session()->put('nama', 'elang hardifal');
+            return redirect('/courses');
+        } 
 
 
         return back()->with('loginError', 'Username atau Password Salah!');

@@ -19,14 +19,16 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         $inputValidate =  $request->validate([
-            'name' => 'required',
+            'nama' => 'required',
             'nis' => 'required',
-            'password' => 'required | min:3 | max:255'
+            'password' => 'required | min:3 | max:255',
+            'confirm-password' => 'required | required_with:password | same:password'
         ]);
-
+        $inputValidate['kelas'] = 'X';        
+        $inputValidate['role'] = 'siswa';        
         $inputValidate['password'] = Hash::make($inputValidate['password']);
 
-        User::create($inputValidate);
+        Siswa::create($inputValidate);
         return redirect('/login')->with('success', 'Berhasil melakukan registrasi');
     }
 }

@@ -1,5 +1,5 @@
 @extends('/layouts.main')
-@section('title', 'Login')
+@section('title', 'Masuk | Selamat Datang Kembali')
 
 @section('container')
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">

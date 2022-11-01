@@ -9,9 +9,9 @@
         <form action="/register" method="POST">
             @csrf
         <div class="mb-3">
-            <label for="name" class="form-label">name</label>
-            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
-            @error('name')
+            <label for="name" class="form-label">nama</label>
+            <input type="text" class="form-control @error('nama') is-invalid @enderror" id="name" name="nama" value="{{ old('nama') }}">
+            @error('nama')
                 <div class="invalid-feedback">{{ $message }}</div>                
             @enderror
         </div>
@@ -26,6 +26,13 @@
             <label for="password" class="form-label">Password</label>
           <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password">
           @error('password')
+          <div class="invalid-feedback">{{ $message }}</div>                
+          @enderror
+        </div>
+        <div class="mb-3">
+            <label for="confirm-password" class="form-label">Konfirmasi Password</label>
+          <input type="password" class="form-control @error('confirm-password') is-invalid @enderror" id="confirm-password" name="confirm-password">
+          @error('confirm-password')
           <div class="invalid-feedback">{{ $message }}</div>                
           @enderror
         </div>
