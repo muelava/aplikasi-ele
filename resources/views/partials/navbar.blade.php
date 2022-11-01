@@ -32,7 +32,7 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <p class="dropdown-item">Nama : {{ auth()->user()->name }}</p>
+                  <p class="dropdown-item"><i class="bi bi-person"></i> Nama : {{ auth()->user()->name }}</p>
                 </li>
                 <li><a class="dropdown-item" href="/courses"><i class="bi bi-layout-text-sidebar-reverse"></i> My Courses</a></li>
                 <li><hr class="dropdown-divider"></li>
@@ -45,7 +45,6 @@
               </ul>
             </li>
             @else
-            
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
