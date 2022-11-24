@@ -9,7 +9,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
-          
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="#">Pendaftaran</a>
           </li>
@@ -28,11 +27,11 @@
             @auth  
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Welcome, {{ auth()->user()->nama }}
+                Welcome, {{ auth()->user()->name }}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <p class="dropdown-item"><i class="bi bi-person"></i> {{ auth()->user()->nama }}</p>
+                  <p class="dropdown-item"><i class="bi bi-person"></i>{{ auth()->user()->name }}</p>
                 </li>
                 <li><a class="dropdown-item" href="/courses"><i class="bi bi-layout-text-sidebar-reverse"></i> My Courses</a></li>
                 <li><hr class="dropdown-divider"></li>
@@ -45,6 +44,7 @@
               </ul>
             </li>
             @else
+            
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>

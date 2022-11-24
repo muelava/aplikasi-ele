@@ -12,7 +12,7 @@
                 <hr class="my-0">
                 <a href="#indo" class="text-decoration-none text-dark aktif shadow-sm py-3 mapel">Bahasa Indonesia</a>
                 <a href="#mate" class="text-decoration-none text-dark shadow-sm py-3 mapel">Matematika</a>
-                <a href="#mate" class="text-decoration-none text-dark shadow-sm py-3 mapel">Matematika</a>
+                <a href="#mate" class="text-decoration-none text-dark shadow-sm py-3 mapel">B. Inggris</a>
             </div>
 
     </div>
