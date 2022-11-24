@@ -20,6 +20,7 @@ class Siswa extends Authenticatable
     // ];
 
     protected $guarded = ['id'];
+    protected $guard = ['siswa'];
 
 
     protected $hidden = [

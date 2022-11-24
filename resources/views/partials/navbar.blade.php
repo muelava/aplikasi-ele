@@ -26,12 +26,12 @@
           <ul class="ms-auto navbar-nav">
             @auth  
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Welcome, {{ auth()->user()->name }}
+              <a class="nav-link dropdown-toggle text-capitalize" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Welcome, {{ auth()->user()->nama }}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <p class="dropdown-item"><i class="bi bi-person"></i>{{ auth()->user()->name }}</p>
+                  <p class="dropdown-item text-capitalize"><i class="bi bi-person"></i> Profile</p>
                 </li>
                 <li><a class="dropdown-item" href="/courses"><i class="bi bi-layout-text-sidebar-reverse"></i> My Courses</a></li>
                 <li><hr class="dropdown-divider"></li>

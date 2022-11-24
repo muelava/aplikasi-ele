@@ -21,6 +21,7 @@ class RegisterController extends Controller
         $inputValidate =  $request->validate([
             'nama' => 'required',
             'nis' => 'required',
+            'email' => 'required',
             'password' => 'required | min:3 | max:255',
             'confirm-password' => 'required | required_with:password | same:password'
         ]);
@@ -28,7 +29,7 @@ class RegisterController extends Controller
         $inputValidate['role'] = 'siswa';        
         $inputValidate['password'] = Hash::make($inputValidate['password']);
 
-        Siswa::create($inputValidate);
+        User::create($inputValidate);
         return redirect('/login')->with('success', 'Berhasil melakukan registrasi');
     }
 }

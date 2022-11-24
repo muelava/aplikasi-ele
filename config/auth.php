@@ -42,7 +42,7 @@ return [
         ],
         'siswa' => [
             'driver' => 'session',
-            'provider' => 'siswas'
+            'provider' => 'siswa'
         ],
         'user' => [
             'driver' => 'session',
@@ -70,10 +70,9 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Siswa::class, //default "User"
         ],
-
-        'siswas' => [
+        'siswa' => [
             'driver' => 'eloquent',
             'model' => App\Models\Siswa::class,
         ],

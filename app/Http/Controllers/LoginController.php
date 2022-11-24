@@ -24,20 +24,19 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
 
-        if (Auth::attempt($credentials, ['id' => 2])) {
+
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/courses');
         }
+        
+        // $nis = $request->nis;
 
-
-
-        $nis = $request->nis;
-
-        if (Siswa::where('nis', $nis)->first() != null) {
-            $request->session()->put('nama', 'elang hardifal');
-            return redirect('/courses');
-        } 
-
+        // if (Siswa::where('nis', $nis)->first() != null) {
+        //     $request->session()->put('nama', 'muhammad elang');
+        //     return redirect('/courses');
+        //     dd(session()->all());
+        // } 
 
         return back()->with('loginError', 'Username atau Password Salah!');
     }
