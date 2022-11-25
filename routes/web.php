@@ -4,6 +4,7 @@ use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,9 +27,18 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/courses', [CoursesController::class, 'index'])->middleware('auth', 'CekLevel:1');
+// route halaman admin
+Route::group(['middleware' => ['auth:user','CekLevel:1']], function() {
+    Route::get('/admin', [AdminController::class, 'index']);
+});
+
+// route halaman guru dan siswa
+Route::group(['middleware' => ['auth:siswa','CekLevel:1']], function() {
+    Route::get('/courses', [CoursesController::class, 'index']);
+});
 
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
 
+// logout
 Route::post('/logout', [LoginController::class, 'logout']);

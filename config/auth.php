@@ -70,7 +70,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Siswa::class, //default "User"
+            'model' => App\Models\User::class, //default "User"
         ],
         'siswa' => [
             'driver' => 'eloquent',

@@ -24,11 +24,19 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
 
-
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('user')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/admin');
+        }elseif (Auth::guard('siswa')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/courses');
         }
+
+
+        // if (Auth::attempt($credentials)) {
+        //     $request->session()->regenerate();
+        //     return redirect()->intended('/courses');
+        // }
         
         // $nis = $request->nis;
 
