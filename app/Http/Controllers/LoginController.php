@@ -12,9 +12,15 @@ class LoginController extends Controller
 {
     public function index()
     {
-        return view('login.index', [
-            'active' => 'login'
-        ]);
+        if (Auth::guard('user')->check()) {
+            return redirect('/admin');
+        }elseif(Auth::guard('siswa')->check()){
+            return redirect('/courses');
+        }else{
+            return view('login.index', [
+                'active' => 'login'
+            ]);
+        }
     }
 
     public function authenticate(Request $request)
@@ -51,6 +57,10 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        // if (Auth::guard('user')->check()) {
+        //     Auth::guard('user')->logout()
+        // }
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
