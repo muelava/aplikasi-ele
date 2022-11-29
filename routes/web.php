@@ -29,7 +29,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 // route halaman admin
 Route::group(['middleware' => ['auth:user','CekLevel:1']], function() {
-    Route::get('/admin', [AdminController::class, 'index']);
+    Route::get('/admins', [AdminController::class, 'index']);
 });
 
 // route halaman guru dan siswa
