@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title', "Dashboard Admin")
+@section('title', "Admin")
 
 @section('container')
 <div class="app-content content ">

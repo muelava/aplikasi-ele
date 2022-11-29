@@ -11,7 +11,7 @@
               <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                 <li class="dropdown-menu-header">
                   <div class="dropdown-header d-flex">
-                    <h4 class="notification-title mb-0 mr-auto">Notifications</h4>
+                    <h4 class="notification-title mb-0 mr-auto">Pemberitahuan</h4>
                   </div>
                 </li>
                 <li class="scrollable-container media-list"><a class="d-flex" href="javascript:void(0)">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -12,9 +13,15 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return view('register.index', [
-            'active' => 'register'
-        ]);
+        if (Auth::guard('user')->check()) {
+            return redirect('/admin');
+        }elseif(Auth::guard('siswa')->check()){
+            return redirect('/courses');
+        }else{
+            return view('register.index', [
+                'active' => 'register'
+            ]);
+        }
     }
     public function store(Request $request)
     {

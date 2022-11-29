@@ -24,16 +24,16 @@
         </ul>
                   
           <ul class="ms-auto navbar-nav">
-            @auth  
+            @if(auth('user')->check() || auth('siswa')->check())
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-capitalize" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Welcome, {{ auth()->user()->nama }}
+                Welcome, {{ auth('user')->check() ? auth('user')->user()->nama : auth('siswa')->user()->nama }}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
                   <p class="dropdown-item text-capitalize"><i class="bi bi-person"></i> Profile</p>
                 </li>
-                <li><a class="dropdown-item" href="/courses"><i class="bi bi-layout-text-sidebar-reverse"></i> My Courses</a></li>
+                <li><a class="dropdown-item" href="{{asset('/courses')}}"><i class="bi bi-layout-text-sidebar-reverse"></i> My Course</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                   <form action="/logout" method="POST">
@@ -44,11 +44,10 @@
               </ul>
             </li>
             @else
-            
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
-            @endauth
+            @endif
           </ul>
       </div>
     </div>
