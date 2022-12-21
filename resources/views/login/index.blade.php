@@ -1,5 +1,5 @@
 @extends('/layouts.main')
-@section('title', 'Masuk | Selamat Datang Kembali')
+@section('title', 'Login | Selamat Datang Kembali')
 
 @section('container')
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -9,7 +9,7 @@
         {{-- <img class="img-background" src="/img/hero (2).jpg" alt="" > --}}
         <div class="container d-flex">
           <div class="carousel-caption lihat-cara-login text-start">
-            <p><a class="btn btn-lg fw-bold btn-premiere text-white shadow-sm" href="#cara-login">Lihat Cara Login <i class="bi bi-chevron-double-down"></i></a></p>
+            {{-- <p><a class="btn text-white" href="#cara-login">Lihat Cara Login <i class="bi bi-chevron-right"></i></a></p> --}}
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
   </div>
 
   <div class="container">
-  <h4 class="fw-bold text-center my-5" id="form-login">Please Login</h4>
+  <h4 class="fw-bold text-center my-5" id="form-login">Silakan Login</h4>
    <div class="row justify-content-center">
 
      
