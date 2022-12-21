@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title', "Admin")
+@section('title', "Selamat Datang Admin!")
 
 @section('container')
 <div class="app-content content ">

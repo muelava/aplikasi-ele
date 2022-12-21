@@ -13,7 +13,7 @@ class LoginController extends Controller
     public function index()
     {
         if (Auth::guard('user')->check()) {
-            return redirect('/admin');
+            return redirect('/administrator');
         }elseif(Auth::guard('siswa')->check()){
             return redirect('/courses');
         }else{
@@ -32,7 +32,7 @@ class LoginController extends Controller
 
         if (Auth::guard('user')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin');
+            return redirect()->intended('/administrator');
         }elseif (Auth::guard('siswa')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/courses');

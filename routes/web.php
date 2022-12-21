@@ -29,11 +29,11 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 // route halaman admin
 Route::group(['middleware' => ['auth:user','CekLevel:1']], function() {
-    Route::get('/admins', [AdminController::class, 'index']);
+    Route::get('/administrator', [AdminController::class, 'index']);
 });
 
 // route halaman guru dan siswa
-Route::group(['middleware' => ['auth:siswa','CekLevel:1']], function() {
+Route::group(['middleware' => ['auth:siswa']], function() {
     Route::get('/courses', [CoursesController::class, 'index']);
 });
 
