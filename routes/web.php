@@ -26,6 +26,10 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
+// login admin
+Route::get('/admin/login', [LoginController::class, 'login_admin'])->name('login')->middleware('guest');
+Route::post('/admin/login', [LoginController::class, 'authenticate']);
+
 // route halaman admin
 Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     Route::get('/administrator', [HomeController::class, 'admin']);
