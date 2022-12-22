@@ -7,14 +7,18 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Guru;
 use App\Models\Siswa;
 
 class RegisterController extends Controller
 {
     public function index()
     {
-        if (Auth::guard('user')->check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect('/admin');
+        }elseif(Auth::guard('guru')->check()){
+            return redirect('/guru');
         }elseif(Auth::guard('siswa')->check()){
             return redirect('/courses');
         }else{
@@ -36,7 +40,7 @@ class RegisterController extends Controller
         $inputValidate['role'] = 'siswa';        
         $inputValidate['password'] = Hash::make($inputValidate['password']);
 
-        User::create($inputValidate);
+        Siswa::create($inputValidate);
         return redirect('/login')->with('success', 'Berhasil melakukan registrasi');
     }
 }

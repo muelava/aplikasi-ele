@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin'
+        ],
+        'guru' => [
+            'driver' => 'session',
+            'provider' => 'guru'
+        ],
         'siswa' => [
             'driver' => 'session',
             'provider' => 'siswa'
@@ -71,6 +79,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class, //default "User"
+        ],
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class, //default "User"
+        ],
+        'guru' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Guru::class, //default "User"
         ],
         'siswa' => [
             'driver' => 'eloquent',

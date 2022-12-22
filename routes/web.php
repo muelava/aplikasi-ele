@@ -27,7 +27,7 @@ Route::get('/login', [LoginController::class, 'index'])->name('login')->middlewa
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 // route halaman admin
-Route::group(['middleware' => ['auth:user','CekLevel:1']], function() {
+Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     Route::get('/administrator', [HomeController::class, 'admin']);
 });
 

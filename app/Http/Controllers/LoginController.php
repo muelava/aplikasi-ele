@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Admin;
 use App\Models\Siswa;
 
 
@@ -12,7 +13,7 @@ class LoginController extends Controller
 {
     public function index()
     {
-        if (Auth::guard('user')->check()) {
+        if (Auth::guard('admin')->check()) {
             return redirect('/administrator');
         }elseif(Auth::guard('siswa')->check()){
             return redirect('/courses');
@@ -30,7 +31,7 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
 
-        if (Auth::guard('user')->attempt($credentials)) {
+        if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/administrator');
         }elseif (Auth::guard('siswa')->attempt($credentials)) {

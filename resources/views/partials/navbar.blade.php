@@ -24,10 +24,10 @@
         </ul>
                   
           <ul class="ms-auto navbar-nav">
-            @if(auth('user')->check() || auth('siswa')->check())
+            @if(auth('admin')->check() || auth('siswa')->check())
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-capitalize" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Welcome, {{ auth('user')->check() ? auth('user')->user()->nama : auth('siswa')->user()->nama }}
+                Welcome, {{ auth('admin')->check() ? auth('admin')->user()->nama : auth('siswa')->user()->nama }}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
