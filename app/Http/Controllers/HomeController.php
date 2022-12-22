@@ -12,4 +12,11 @@ class HomeController extends Controller
             'active' => 'home'
         ]);
     }
+
+    public function admin()
+    {
+        return view('admin.index', [
+            'active' => 'admin'
+        ]);
+    }
 }
