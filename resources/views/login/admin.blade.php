@@ -79,18 +79,18 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
           @endif
           <div class="form-group">
-            <label for="email" class="form-label">Email</label>
+            <label for="username" class="form-label">Username/Email</label>
             <input
               type="text"
               class="form-control"
-              id="email"
-              name="email"
+              id="username"
+              name="username"
               placeholder="nama@email.com"
-              aria-describedby="login-email"
+              aria-describedby="username"
               tabindex="1"
               autofocus
               required
-              value="{{ old('email') }}"
+              value="{{ old('username') }}"
             />
           </div>
 

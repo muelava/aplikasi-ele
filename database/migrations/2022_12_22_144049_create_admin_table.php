@@ -19,7 +19,7 @@ class CreateAdminTable extends Migration
             $table->string('username');
             $table->string('email');
             $table->string('no_handphone');
-            $table->enum('role', ['admin', 'guru', 'siswa']);;
+            $table->enum('role', ['admin']);;
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

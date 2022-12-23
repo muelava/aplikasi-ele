@@ -15,10 +15,13 @@ class CreateGuruTable extends Migration
     {
         Schema::create('guru', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('nip');
+            $table->string('nip')->unique();
+            $table->string('nama')->unique();
             $table->string('email');
             $table->string('password');
+            $table->enum('role', ['guru']);
+            $table->string('no_handphone');
+            $table->date('tanggal_lahir');
             $table->rememberToken();
             $table->timestamps();
         });

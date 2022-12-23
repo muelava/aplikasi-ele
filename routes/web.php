@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -35,8 +36,13 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     Route::get('/administrator', [HomeController::class, 'admin']);
 });
 
-// route halaman guru dan siswa
-Route::group(['middleware' => ['auth:siswa']], function() {
+// route halaman guru
+Route::group(['middleware' => ['auth:guru']], function() {
+    Route::get('/guru', [GuruController::class, 'index']);
+});
+
+// route halaman course
+Route::group(['middleware' => ['auth:siswa,guru']], function() {
     Route::get('/courses', [CoursesController::class, 'index']);
 });
 

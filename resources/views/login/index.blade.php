@@ -6,7 +6,7 @@
     
     <div class="carousel-inner">
       <div class="carousel-item active">
-        {{-- <img class="img-background" src="/img/hero (2).jpg" alt="" > --}}
+        <img class="img-background" src="/img/hero (2).jpg" alt="" >
         <div class="container d-flex">
           <div class="carousel-caption lihat-cara-login text-start">
             {{-- <p><a class="btn text-white" href="#cara-login">Lihat Cara Login <i class="bi bi-chevron-right"></i></a></p> --}}
@@ -39,9 +39,9 @@
     @endif    
 
       <div class="mb-3 form-floating">
-        <input type="text" id="username" class="form-control form-control-sm @error('nis') is-invalid @enderror" placeholder="Username" name="nis" value="{{ old('nis') }}" autofocus>
-        <label for="username">Username</label>
-        @error('nis')
+        <input type="text" id="email" class="form-control form-control-sm @error('email') is-invalid @enderror" placeholder="NIS/Email" name="email" value="{{ old('email') }}" autofocus>
+        <label for="email">NIS/Email</label>
+        @error('email')
         <div class="invalid-feedback">
           {{ $message }}
         </div>
