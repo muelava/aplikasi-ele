@@ -48,8 +48,12 @@ Route::group(['middleware' => ['auth:siswa,guru']], function() {
     Route::get('/courses', [CoursesController::class, 'index']);
 });
 
+// crud siswa
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
+
+// crud guru
+Route::post('/administrator/data-guru/tambah', [RegisterController::class, 'storeGuru']);
 
 // logout
 Route::post('/logout', [LoginController::class, 'logout']);

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,5 +42,21 @@ class RegisterController extends Controller
 
         Siswa::create($inputValidate);
         return redirect('/login')->with('success', 'Berhasil melakukan registrasi');
+    }
+
+    public function storeGuru(Request $request)
+    {
+        $inputValidate =  $request->validate([
+            'nip' => 'required | unique:guru,nip',
+            'nama' => 'required',
+            'email' => 'required | required|unique:guru,email',
+            'tanggal_lahir' => 'required',
+            'no_handphone' => 'required'
+        ]);
+        $inputValidate['role'] = 'guru';
+        $inputValidate['password'] = Hash::make('123');
+
+        Guru::create($inputValidate);
+        return redirect('/administrator/data-guru')->with('success', 'Data guru berhasil ditambahkan');
     }
 }

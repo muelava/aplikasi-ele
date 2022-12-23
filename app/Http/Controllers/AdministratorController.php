@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class AdministratorController extends Controller
@@ -20,8 +21,11 @@ class AdministratorController extends Controller
 
     public function data_guru()
     {
+        $gurus = DB::table('guru')->get();
+        
         return view('admin.pages.data-guru',[
-            'active' => 'data-guru'
+            'active' => 'data-guru',
+            'gurus' => $gurus
         ]);
     }
 
