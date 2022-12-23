@@ -18,10 +18,10 @@
               <div class="card-body">
                 <h5>Selamat Datang 🎉 {{auth()->user()->nama}}!</h5>
                 <p class="card-text font-small-3">You have won gold medal</p>
-                <h3 class="mb-75 mt-2 pt-50">
+                {{-- <h3 class="mb-75 mt-2 pt-50">
                   <a href="javascript:void(0);">$48.9k</a>
                 </h3>
-                <button type="button" class="btn btn-primary">View Sales</button>
+                <button type="button" class="btn btn-primary">View Sales</button> --}}
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">230k</h4>
+                        <h4 class="font-weight-bolder mb-0">50</h4>
                         <p class="card-text font-small-3 mb-0">Kelas</p>
                       </div>
                     </div>
@@ -59,7 +59,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">149</h4>
+                        <h4 class="font-weight-bolder mb-0">60</h4>
                         <p class="card-text font-small-3 mb-0">Guru</p>
                       </div>
                     </div>
@@ -72,7 +72,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">1.423</h4>
+                        <h4 class="font-weight-bolder mb-0">100</h4>
                         <p class="card-text font-small-3 mb-0">Siswa/i SMK</p>
                       </div>
                     </div>
@@ -85,7 +85,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">9.745</h4>
+                        <h4 class="font-weight-bolder mb-0">200</h4>
                         <p class="card-text font-small-3 mb-0">Siswa/i SMP</p>
                       </div>
                     </div>

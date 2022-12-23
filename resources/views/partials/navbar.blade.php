@@ -9,7 +9,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" aria-current="page" href="#">Pendaftaran</a>
           </li>
           <li class="nav-item dropdown">
@@ -20,7 +20,7 @@
               <li><a class="dropdown-item" href="#">SMP</a></li>
               <li><a class="dropdown-item" href="#">SMK</a></li>
             </ul>
-          </li>
+          </li> --}}
         </ul>
                   
           <ul class="ms-auto navbar-nav">

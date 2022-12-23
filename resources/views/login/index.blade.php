@@ -39,7 +39,7 @@
     @endif    
 
       <div class="mb-3 form-floating">
-        <input type="text" id="email" class="form-control form-control-sm @error('email') is-invalid @enderror" placeholder="NIS/Email" name="email" value="{{ old('email') }}" autofocus>
+        <input type="text" id="email" class="form-control form-control-sm rounded-pill @error('email') is-invalid @enderror" placeholder="NIS/Email" name="email" value="{{ old('email') }}" autofocus>
         <label for="email">NIS/Email</label>
         @error('email')
         <div class="invalid-feedback">
@@ -48,7 +48,7 @@
         @enderror
       </div>
       <div class="mb-3 form-floating">
-        <input type="password" id="password" class="form-control form-control-sm @error('password') is-invalid @enderror" placeholder="Password" name="password">
+        <input type="password" id="password" class="form-control form-control-sm rounded-pill @error('password') is-invalid @enderror" placeholder="Password" name="password">
         <label for="password">Password</label>
         @error('password')
             <div class="invalid-feedback">

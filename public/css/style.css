@@ -98,12 +98,6 @@ footer {
     background-color: #1db8a8;
     box-shadow: 0px 0px 2px rgb(202, 202, 202);
 }
-#username,
-#password {
-    border-radius: 5em;
-    background-color: rgb(240, 240, 240);
-    border: initial !important;
-}
 #cara-login {
     margin-top: 10%;
 }
