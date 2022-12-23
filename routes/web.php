@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -31,9 +32,10 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::get('/admin/login', [LoginController::class, 'login_admin'])->name('login')->middleware('guest');
 Route::post('/admin/login', [LoginController::class, 'authenticate']);
 
-// route halaman admin
+// route halaman administrator
 Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
-    Route::get('/administrator', [HomeController::class, 'admin']);
+    Route::get('/administrator', [AdministratorController::class, 'index']);
+    Route::get('/administrator/data-guru', [AdministratorController::class, 'data_guru']);
 });
 
 // route halaman guru

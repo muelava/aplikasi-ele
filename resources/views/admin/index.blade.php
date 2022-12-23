@@ -1,6 +1,16 @@
 @extends('admin.layouts.main')
 @section('title', "Selamat Datang Admin!")
 
+@section('vendor-css')
+<link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/vendors.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/extensions/toastr.min.css')}}">
+@endsection
+
+@section('page-css')
+<link rel="stylesheet" type="text/css" href="{{asset('admin/css/core/menu/menu-types/vertical-menu.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/extensions/ext-component-toastr.min.css')}}">
+@endsection
+
 @section('container')
 <div class="app-content content ">
   <div class="content-overlay"></div>
@@ -102,4 +112,12 @@
     </div>
   </div>
 </div>
+@endsection
+
+@section('page-vendor-js')
+<script src="{{asset('/admin/vendors/js/extensions/toastr.min.js')}}"></script>
+@endsection
+
+@section('page-js')
+<script src="{{asset('/admin/assets/js/main.js')}}"></script>
 @endsection
