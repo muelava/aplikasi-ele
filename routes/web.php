@@ -34,8 +34,16 @@ Route::post('/admin/login', [LoginController::class, 'authenticate']);
 
 // route halaman administrator
 Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
+    
+    // dashboard
     Route::get('/administrator', [AdministratorController::class, 'index']);
-    Route::get('/administrator/data-guru', [AdministratorController::class, 'data_guru']);
+
+    // crud guru
+    Route::get('/administrator/data-guru', [AdministratorController::class, 'data_guru'])->name('data-guru');
+    Route::get('/administrator/data-guru/hapus/{id_guru}', [AdministratorController::class, 'delete_guru']);
+    Route::get('/administrator/data-guru/lihat/{id_guru}', [AdministratorController::class, 'lihat_guru']);
+    Route::post('/administrator/data-guru/ubah/{id_guru}', [AdministratorController::class, 'ubah_guru']);
+
 });
 
 // route halaman guru

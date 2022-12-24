@@ -29,6 +29,31 @@ class AdministratorController extends Controller
         ]);
     }
 
+    public function lihat_guru($id_guru)
+    {
+        $guru = DB::table('guru')->where('id', $id_guru)->first();
+        
+        return view('admin.pages.data-guru-lihat',[
+            'active' => 'data-guru',
+            'guru' => $guru
+        ]);
+    }
+
+    public function ubah_guru(Request $request, $id_guru)
+    {
+        $inputValidate =  $request->validate([
+            'nip' => 'required | unique:guru,nip,'.$id_guru,
+            'nama' => 'required',
+            'email' => 'required | unique:guru,email,'.$id_guru,
+            'tanggal_lahir' => 'required',
+            'no_handphone' => 'required'
+        ]);
+
+        $affected = DB::table('guru')->where('id', $id_guru)->update($inputValidate);
+
+        return redirect('/administrator/data-guru/lihat/'.$id_guru)->with('success', 'Data guru berhasil diubah');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -93,5 +118,11 @@ class AdministratorController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete_guru($id_guru)
+    {
+        DB::table('guru')->where('id', $id_guru)->delete();
+        return redirect('/administrator/data-guru')->with('success', 'Data berhasil dihapus!');
     }
 }
