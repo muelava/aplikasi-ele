@@ -158,7 +158,7 @@
     $('#tabel-guru').printThis({
       importCSS: true,
       loadCSS: "",
-      header: "<h2 style='margin-top:2rem; margin-bottom:2rem;'>Data Guru SMP SMK Bina Ikhwani</h2>"
+      header: "<div style='display: flex; align-items:center; gap:1rem; margin-bottom:3rem'><img src='{{asset('/img/logo_bina_ikhwani.png')}}' style='max-width:100px'><h1 style='font-weight:bold'>SMP SMK Bina Ikhwani</h1></div><h5 style='margin-top:2rem; margin-bottom:1.5rem;'>Data Guru</h5>"
     });
   })
 </script>
