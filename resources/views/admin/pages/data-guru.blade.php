@@ -8,6 +8,13 @@
 @section('page-css')
 <link rel="stylesheet" type="text/css" href="{{asset('/admin/css/core/menu/menu-types/vertical-menu.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/admin/css/plugins/forms/pickers/form-flat-pickr.min.css') }}">
+<style>
+  @media print {
+   [except] {
+      display: none;
+   }
+}
+</style>
 @endsection
 
 @section('container')
@@ -33,17 +40,17 @@
                       @endif
                         <div class="card-header justify-content-start">
                             <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-guru"><i data-feather="plus"></i> Tambah Data</button>
-                            <button class="btn btn-outline-primary"><i data-feather="printer"></i> Cetak</button>
+                            <button id="btn-print" class="btn btn-outline-primary"><i data-feather="printer"></i> Cetak</button>
                         </div>
                         <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table id="tabel-guru" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Guru</th>
                                     <th>Tanggal Lahir</th>
                                     <th>No Telepon</th>
-                                    <th>Aksi</th>
+                                    <th except>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,8 +59,8 @@
                                   <td>1</td>
                                   <td>{{ $guru->nama }}</td>
                                   <td>{{ date('d M Y', strtotime($guru->tanggal_lahir)) }}</td>
-                                  <td><span class="badge badge-pill badge-light-primary mr-1">{{ $guru->no_handphone }}</span></td>
-                                  <td>
+                                  <td>{{ $guru->no_handphone }}</td>
+                                  <td except>
                                       <div class="dropdown">
                                           <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown" aria-expanded="false">
                                               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
@@ -143,4 +150,16 @@
 
 @section('page-js')
 <script src="{{asset('/admin/assets/js/main.js')}}"></script>
+
+<script type="text/javascript" src="https://jasonday.github.io/printThis/printThis.js"></script>
+
+<script>
+  $('#btn-print').on('click', function(){
+    $('#tabel-guru').printThis({
+      importCSS: true,
+      loadCSS: "",
+      header: "<h2 style='margin-top:2rem; margin-bottom:2rem;'>Data Guru SMP SMK Bina Ikhwani</h2>"
+    });
+  })
+</script>
 @endsection
