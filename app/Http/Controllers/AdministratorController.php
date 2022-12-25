@@ -83,6 +83,16 @@ class AdministratorController extends Controller
         ]);
     }
 
+    public function lihat_siswa($id_siswa)
+    {
+        $siswa = DB::table('siswa')->where('id', $id_siswa)->first();
+        
+        return view('admin.pages.data-siswa-lihat',[
+            'active' => 'data-siswa',
+            'siswa' => $siswa
+        ]);
+    }
+
     public function tambah_siswa(Request $request)
     {
         $inputValidate =  $request->validate([
@@ -101,6 +111,25 @@ class AdministratorController extends Controller
 
         Siswa::create($inputValidate);
         return redirect('/administrator/data-siswa')->with('success', 'Data siswa berhasil ditambahkan');
+    }
+
+    public function ubah_siswa(Request $request, $id_siswa)
+    {
+        $inputValidate =  $request->validate([
+            'nis' => 'required | unique:siswa,nis,'.$id_siswa,
+            'nama' => 'required',
+            'email' => 'required | unique:siswa,email,'.$id_siswa,
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'no_handphone' => 'required',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'tahun_masuk' => 'required',
+        ]);
+
+        $affected = DB::table('siswa')->where('id', $id_siswa)->update($inputValidate);
+
+        return redirect('/administrator/data-siswa/lihat/'.$id_siswa)->with('success', 'Data siswa berhasil diubah');
     }
 
     /**

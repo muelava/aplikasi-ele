@@ -47,8 +47,10 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
 
     // crud siswa
     Route::get('/administrator/data-siswa', [AdministratorController::class, 'data_siswa'])->name('data-siswa');
-    Route::get('/administrator/data-siswa/hapus/{id_siswa}', [AdministratorController::class, 'delete_siswa']);
     Route::post('/administrator/data-siswa/tambah', [AdministratorController::class, 'tambah_siswa']);
+    Route::get('/administrator/data-siswa/hapus/{id_siswa}', [AdministratorController::class, 'delete_siswa']);
+    Route::get('/administrator/data-siswa/lihat/{id_siswa}', [AdministratorController::class, 'lihat_siswa']);
+    Route::post('/administrator/data-siswa/ubah/{id_siswa}', [AdministratorController::class, 'ubah_siswa']);
 
 });
 
