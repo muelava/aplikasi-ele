@@ -32,7 +32,7 @@
                       <div class="alert alert-success">{{ session('success') }}</div>
                       @endif
                         <div class="card-header justify-content-start">
-                            <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-guru"><i data-feather="plus"></i> Tambah Data</button>
+                            <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-guru"><i data-feather="plus"></i> Tambah Guru</button>
                             <button id="btn-print-guru" class="btn btn-outline-primary"><i data-feather="printer"></i> Cetak</button>
                         </div>
                         <div class="table-responsive">

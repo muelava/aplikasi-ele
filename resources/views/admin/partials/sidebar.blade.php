@@ -25,15 +25,13 @@
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Kelola Data</span><i data-feather="more-horizontal"></i>
             </li>
-            <li class="nav-item {{$active === 'data-guru' || $active === 'data-siswa' || $active === 'data-kelas' ? 'open' : ''}}"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Data">Data</span><span class="badge badge-light-warning badge-pill ml-auto mr-1">3</span></a>
+            <li class="nav-item {{$active === 'data-guru' || $active === 'data-siswa' || $active === 'data-kelas' ? 'open' : ''}}"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Data">Data</span></a>
                 <ul class="menu-content">
-                  <li class="{{$active === 'data-guru' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{url('/administrator/data-guru')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Guru">Guru</span></a>
+                  <li class="{{$active === 'data-guru' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('data-guru')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Guru">Guru</span></a>
                   </li>
                   <li class="{{$active === 'data-siswa' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('data-siswa')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Siswa">Siswa</span></a>
                   </li>
-                  <li class="{{$active === 'data-kelas' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{url('/administrator/data-kelas')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Kelas">Kelas</span></a>
-                  </li>
-                  <li class="{{$active === 'data-jurusan' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{url('data-jurusan')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Kelas">Jurusan</span></a>
+                  <li class="{{$active === 'data-kelas' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('data-kelas')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Kelas">Kelas</span></a>
                   </li>
                 </ul>
             </li>

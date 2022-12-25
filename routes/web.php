@@ -38,19 +38,23 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     // dashboard
     Route::get('/administrator', [AdministratorController::class, 'index']);
 
-    // crud guru
+    // crud data guru
     Route::get('/administrator/data-guru', [AdministratorController::class, 'data_guru'])->name('data-guru');
     Route::post('/administrator/data-guru/tambah', [AdministratorController::class, 'tambah_guru']);
     Route::get('/administrator/data-guru/hapus/{id_guru}', [AdministratorController::class, 'delete_guru']);
     Route::get('/administrator/data-guru/lihat/{id_guru}', [AdministratorController::class, 'lihat_guru']);
     Route::post('/administrator/data-guru/ubah/{id_guru}', [AdministratorController::class, 'ubah_guru']);
 
-    // crud siswa
+    // crud data siswa
     Route::get('/administrator/data-siswa', [AdministratorController::class, 'data_siswa'])->name('data-siswa');
     Route::post('/administrator/data-siswa/tambah', [AdministratorController::class, 'tambah_siswa']);
     Route::get('/administrator/data-siswa/hapus/{id_siswa}', [AdministratorController::class, 'delete_siswa']);
     Route::get('/administrator/data-siswa/lihat/{id_siswa}', [AdministratorController::class, 'lihat_siswa']);
     Route::post('/administrator/data-siswa/ubah/{id_siswa}', [AdministratorController::class, 'ubah_siswa']);
+
+    // crud data kelas
+    Route::get('/administrator/data-kelas', [AdministratorController::class, 'data_kelas'])->name('data-kelas');
+    Route::post('/administrator/data-kelas/tambah', [AdministratorController::class, 'tambah_kelas']);
 
 });
 

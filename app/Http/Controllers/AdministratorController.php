@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Guru;
 use App\Models\Siswa;
+use App\Models\Kelas;
 
 class AdministratorController extends Controller
 {
@@ -98,7 +99,7 @@ class AdministratorController extends Controller
         $inputValidate =  $request->validate([
             'nis' => 'required | unique:siswa,nis',
             'nama' => 'required',
-            'email' => 'required | required|unique:siswa,email',
+            'email' => 'required | unique:siswa,email',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'no_handphone' => 'required',
@@ -130,6 +131,27 @@ class AdministratorController extends Controller
         $affected = DB::table('siswa')->where('id', $id_siswa)->update($inputValidate);
 
         return redirect('/administrator/data-siswa/lihat/'.$id_siswa)->with('success', 'Data siswa berhasil diubah');
+    }
+
+    public function data_kelas()
+    {
+        $kelass = DB::table('kelas')->get();
+        
+        return view('admin.pages.data-kelas',[
+            'active' => 'data-kelas',
+            'kelass' => $kelass
+        ]);
+    }
+
+    public function tambah_kelas(Request $request)
+    {
+        $inputValidate =  $request->validate([
+            'jenjang' => 'required',
+            'kelas' => 'required | unique:kelas,kelas',
+        ]);
+
+        Kelas::create($inputValidate);
+        return redirect('/administrator/data-kelas')->with('success', 'Data kelas berhasil ditambahkan');
     }
 
     /**
