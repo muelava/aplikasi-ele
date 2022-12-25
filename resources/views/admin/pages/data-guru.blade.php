@@ -125,7 +125,7 @@
                                           </div>
                                         </div>
                                         <div class="modal-footer">
-                                          <button type="submit" class="btn btn-primary">Login</button>
+                                          <button type="submit" class="btn btn-primary">Simpan</button>
                                         </div>
                                       </form>
                                     </div>
