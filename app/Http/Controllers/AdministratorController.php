@@ -23,6 +23,7 @@ class AdministratorController extends Controller
         ]);
     }
 
+    // ================== data guru ================== 
     public function data_guru()
     {
         $gurus = DB::table('guru')->get();
@@ -73,7 +74,9 @@ class AdministratorController extends Controller
 
         return redirect('/administrator/data-guru/lihat/'.$id_guru)->with('success', 'Data guru berhasil diubah');
     }
+    // ================== /data guru ================== 
 
+    // ================== data siswa ================== 
     public function data_siswa()
     {
         $siswas = DB::table('siswa')->get();
@@ -132,7 +135,9 @@ class AdministratorController extends Controller
 
         return redirect('/administrator/data-siswa/lihat/'.$id_siswa)->with('success', 'Data siswa berhasil diubah');
     }
+    // ================== /data siswa ================== 
 
+    // ================== data kelas ================== 
     public function data_kelas()
     {
         $kelass = DB::table('kelas')->get();
@@ -140,6 +145,16 @@ class AdministratorController extends Controller
         return view('admin.pages.data-kelas',[
             'active' => 'data-kelas',
             'kelass' => $kelass
+        ]);
+    }
+
+    public function lihat_kelas($id_kelas)
+    {
+        $kelas = DB::table('kelas')->where('id', $id_kelas)->first();
+        
+        return view('admin.pages.data-kelas-lihat',[
+            'active' => 'data-kelas',
+            'kelas' => $kelas
         ]);
     }
 
@@ -153,6 +168,19 @@ class AdministratorController extends Controller
         Kelas::create($inputValidate);
         return redirect('/administrator/data-kelas')->with('success', 'Data kelas berhasil ditambahkan');
     }
+
+    public function ubah_kelas(Request $request, $id_kelas)
+    {
+        $inputValidate =  $request->validate([
+            'jenjang' => 'required',
+            'kelas' => 'required | unique:kelas,kelas,'.$id_kelas,
+        ]);
+
+        $affected = DB::table('kelas')->where('id', $id_kelas)->update($inputValidate);
+
+        return redirect('/administrator/data-kelas')->with('success', 'Data kelas berhasil diubah');
+    }
+    // ================== /data kelas ================== 
 
     /**
      * Show the form for creating a new resource.
@@ -230,5 +258,11 @@ class AdministratorController extends Controller
     {
         DB::table('siswa')->where('id', $id_siswa)->delete();
         return redirect('/administrator/data-siswa')->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function delete_kelas($id_kelas)
+    {
+        DB::table('kelas')->where('id', $id_kelas)->delete();
+        return redirect('/administrator/data-kelas')->with('success', 'Data berhasil dihapus!');
     }
 }

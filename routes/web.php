@@ -55,6 +55,9 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     // crud data kelas
     Route::get('/administrator/data-kelas', [AdministratorController::class, 'data_kelas'])->name('data-kelas');
     Route::post('/administrator/data-kelas/tambah', [AdministratorController::class, 'tambah_kelas']);
+    Route::get('/administrator/data-kelas/hapus/{id_kelas}', [AdministratorController::class, 'delete_kelas']);
+    Route::get('/administrator/data-kelas/ubah/{id_kelas}', [AdministratorController::class, 'lihat_kelas']);
+    Route::post('/administrator/data-kelas/ubah/{id_kelas}', [AdministratorController::class, 'ubah_kelas']);
 
 });
 

@@ -51,7 +51,7 @@
                               @foreach ($kelass as $kelas)
                               <tr>
                                   <td>{{ $i++; }}</td>
-                                  <td>{{ $kelas->jenjang }}</td>
+                                  <td class="text-uppercase">{{ $kelas->jenjang }}</td>
                                   <td>{{ $kelas->kelas }}</td>
                                   <td except>
                                       <div class="dropdown">
@@ -59,11 +59,11 @@
                                               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
                                           </button>
                                         <div class="dropdown-menu" style="">
-                                          <a class="dropdown-item" href="/administrator/data-siswa/lihat/{{ $kelas->id }}">
+                                          <a class="dropdown-item" href="/administrator/data-kelas/ubah/{{ $kelas->id }}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                             <span>Ubah</span>
                                           </a>
-                                          <a class="dropdown-item" href="/administrator/data-siswa/hapus/{{ $kelas->id }}" onclick="return confirm('Apakah anda yakin ingin manghapus data kelas {{ $kelas->kelas }}?')">
+                                          <a class="dropdown-item" href="/administrator/data-kelas/hapus/{{ $kelas->id }}" onclick="return confirm('Apakah anda yakin ingin manghapus data kelas {{ $kelas->kelas }}?')">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                                             <span>Hapus</span>
                                           </a>
@@ -112,9 +112,20 @@
               <option value="smk">SMK</option>
             </select>
           </div>
+          {{-- <label>Tingkat</label>
+          <div class="form-group">
+            <select class="form-control" name="tungkat" required>
+              <option value="VII">VII (tujuh)</option>
+              <option value="VIII">VIII (delapan)</option>
+              <option value="IX">IX (sembilan)</option>
+              <option value="X">X (sepuluh)</option>
+              <option value="XI">XI (sebelas)</option>
+              <option value="XII">XII (duabelas)</option>
+            </select>
+          </div> --}}
           <label>Nama Kelas</label>
           <div class="form-group">
-            <input type="text" placeholder="X TKJ A" class="form-control" name="kelas" required value="{{ old('kelas') }}" />
+            <input type="text" placeholder="10 TKJ A" class="form-control" name="kelas" required value="{{ old('kelas') }}" />
           </div>
         </div>
         <div class="modal-footer">
