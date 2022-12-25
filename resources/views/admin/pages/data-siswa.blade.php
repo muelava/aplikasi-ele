@@ -47,9 +47,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                              @php
+                                  $i = 1;
+                              @endphp
                               @foreach ($siswas as $siswa)
                               <tr>
-                                  <td>1</td>
+                                  <td>{{ $i++; }}</td>
                                   <td>{{ $siswa->nama }}</td>
                                   <td>{{ date('d M Y', strtotime($siswa->tanggal_lahir)) }}</td>
                                   <td>{{ $siswa->no_handphone }}</td>

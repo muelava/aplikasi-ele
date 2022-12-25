@@ -47,9 +47,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                              @php
+                                  $i = 1;
+                              @endphp
                               @foreach ($gurus as $guru)
                               <tr>
-                                  <td>1</td>
+                                  <td>{{ $i++ }}</td>
                                   <td>{{ $guru->nama }}</td>
                                   <td>{{ date('d M Y', strtotime($guru->tanggal_lahir)) }}</td>
                                   <td>{{ $guru->no_handphone }}</td>
