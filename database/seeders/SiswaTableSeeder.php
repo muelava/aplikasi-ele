@@ -15,6 +15,7 @@ class SiswaTableSeeder extends Seeder
     public function run()
     {
         $admin = new Siswa;
+        $admin->kelas_id = '1';
         $admin->nis = '321';
         $admin->nama = 'Siswa';
         $admin->email = 'siswa@binaikhwani.sch.id';

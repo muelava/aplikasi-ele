@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Guru;
 use App\Models\Siswa;
 use App\Models\Kelas;
+use App\Models\SiswaModel;
 
 class AdministratorController extends Controller
 {
@@ -81,6 +82,9 @@ class AdministratorController extends Controller
     {
         $siswas = DB::table('siswa')->get();
         
+        // $siswa = SiswaModel::where('id', '1')->first();
+        // dd($siswa->kelas->kelas);
+
         return view('admin.pages.data-siswa',[
             'active' => 'data-siswa',
             'siswas' => $siswas
@@ -100,7 +104,7 @@ class AdministratorController extends Controller
     public function tambah_siswa(Request $request)
     {
         $inputValidate =  $request->validate([
-            'nis' => 'required | unique:siswa,nis',
+            'nis' => 'required | integer | unique:siswa,nis',
             'nama' => 'required',
             'email' => 'required | unique:siswa,email',
             'tempat_lahir' => 'required',
@@ -110,6 +114,7 @@ class AdministratorController extends Controller
             'agama' => 'required',
             'tahun_masuk' => 'required',
         ]);
+        $inputValidate['kelas_id'] = '2';
         $inputValidate['role'] = 'siswa';
         $inputValidate['password'] = Hash::make('123');
 
