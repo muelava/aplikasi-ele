@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Guru;
+use App\Models\Siswa;
 
 class AdministratorController extends Controller
 {
@@ -39,6 +42,22 @@ class AdministratorController extends Controller
         ]);
     }
 
+    public function tambah_guru(Request $request)
+    {
+        $inputValidate =  $request->validate([
+            'nip' => 'required | unique:guru,nip',
+            'nama' => 'required',
+            'email' => 'required | required|unique:guru,email',
+            'tanggal_lahir' => 'required',
+            'no_handphone' => 'required'
+        ]);
+        $inputValidate['role'] = 'guru';
+        $inputValidate['password'] = Hash::make('123');
+
+        Guru::create($inputValidate);
+        return redirect('/administrator/data-guru')->with('success', 'Data guru berhasil ditambahkan');
+    }
+
     public function ubah_guru(Request $request, $id_guru)
     {
         $inputValidate =  $request->validate([
@@ -52,6 +71,36 @@ class AdministratorController extends Controller
         $affected = DB::table('guru')->where('id', $id_guru)->update($inputValidate);
 
         return redirect('/administrator/data-guru/lihat/'.$id_guru)->with('success', 'Data guru berhasil diubah');
+    }
+
+    public function data_siswa()
+    {
+        $siswas = DB::table('siswa')->get();
+        
+        return view('admin.pages.data-siswa',[
+            'active' => 'data-siswa',
+            'siswas' => $siswas
+        ]);
+    }
+
+    public function tambah_siswa(Request $request)
+    {
+        $inputValidate =  $request->validate([
+            'nis' => 'required | unique:siswa,nis',
+            'nama' => 'required',
+            'email' => 'required | required|unique:siswa,email',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'no_handphone' => 'required',
+            'jenis_kelamin' => 'required',
+            'agama' => 'required',
+            'tahun_masuk' => 'required',
+        ]);
+        $inputValidate['role'] = 'siswa';
+        $inputValidate['password'] = Hash::make('123');
+
+        Siswa::create($inputValidate);
+        return redirect('/administrator/data-siswa')->with('success', 'Data siswa berhasil ditambahkan');
     }
 
     /**
@@ -124,5 +173,11 @@ class AdministratorController extends Controller
     {
         DB::table('guru')->where('id', $id_guru)->delete();
         return redirect('/administrator/data-guru')->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function delete_siswa($id_siswa)
+    {
+        DB::table('siswa')->where('id', $id_siswa)->delete();
+        return redirect('/administrator/data-siswa')->with('success', 'Data berhasil dihapus!');
     }
 }

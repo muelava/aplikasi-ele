@@ -40,9 +40,15 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
 
     // crud guru
     Route::get('/administrator/data-guru', [AdministratorController::class, 'data_guru'])->name('data-guru');
+    Route::post('/administrator/data-guru/tambah', [AdministratorController::class, 'tambah_guru']);
     Route::get('/administrator/data-guru/hapus/{id_guru}', [AdministratorController::class, 'delete_guru']);
     Route::get('/administrator/data-guru/lihat/{id_guru}', [AdministratorController::class, 'lihat_guru']);
     Route::post('/administrator/data-guru/ubah/{id_guru}', [AdministratorController::class, 'ubah_guru']);
+
+    // crud siswa
+    Route::get('/administrator/data-siswa', [AdministratorController::class, 'data_siswa'])->name('data-siswa');
+    Route::get('/administrator/data-siswa/hapus/{id_siswa}', [AdministratorController::class, 'delete_siswa']);
+    Route::post('/administrator/data-siswa/tambah', [AdministratorController::class, 'tambah_siswa']);
 
 });
 
@@ -59,9 +65,6 @@ Route::group(['middleware' => ['auth:siswa,guru']], function() {
 // crud siswa
 Route::get('/register', [RegisterController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'store']);
-
-// crud guru
-Route::post('/administrator/data-guru/tambah', [RegisterController::class, 'storeGuru']);
 
 // logout
 Route::post('/logout', [LoginController::class, 'logout']);
