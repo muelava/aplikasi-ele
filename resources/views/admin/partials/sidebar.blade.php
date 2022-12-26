@@ -15,8 +15,6 @@
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class="nav-item {{$active === 'beranda' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{url('/administrator')}}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Beranda">Beranda</span></a>
             </li>
-            <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/administrator/mata-pelajaran')}}"><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Mata Pelajaran">Mata Pelajaran</span></a>
-            </li>
             <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/administrator/jadwal-pelajaran')}}"><i data-feather="clock"></i><span class="menu-title text-truncate" data-i18n="Jadwal Pelajaran">Jadwal Pelajaran</span></a>
             </li>
             <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/administrator/kelas-siswa')}}"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Kelas Siswa">Kelas Siswa</span></a>
@@ -32,6 +30,8 @@
                   <li class="{{$active === 'data-siswa' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('data-siswa')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Siswa">Siswa</span></a>
                   </li>
                   <li class="{{$active === 'data-kelas' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('data-kelas')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Kelas">Kelas</span></a>
+                  </li>
+                  <li class="{{$active === 'data-mapel' ? 'active' : ''}}"><a class="d-flex align-items-center" href="{{route('data-mapel')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Mata Pelajaran">Mata Pelajaran</span></a>
                   </li>
                 </ul>
             </li>

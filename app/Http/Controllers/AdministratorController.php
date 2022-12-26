@@ -9,6 +9,7 @@ use App\Models\Guru;
 use App\Models\Siswa;
 use App\Models\Kelas;
 use App\Models\SiswaModel;
+use App\Models\Mapel;
 
 class AdministratorController extends Controller
 {
@@ -197,6 +198,49 @@ class AdministratorController extends Controller
     }
     // ================== /data kelas ================== 
 
+    // ================== data mapel ================== 
+    public function data_mapel()
+    {
+        $mapels = DB::table('mata_pelajaran')->get();
+
+        return view('admin.pages.data-mapel', [
+            'active' => 'data-mapel',
+            'mapels' => $mapels
+        ]);
+    }
+
+    public function tambah_mapel(Request $request)
+    {
+        $inputValidate =  $request->validate([
+            'mapel' => 'required | unique:mata_pelajaran,mapel',
+        ]);
+
+        Mapel::create($inputValidate);
+        return redirect('/administrator/data-mata-pelajaran')->with('success', 'Data Mata Pelajaran berhasil ditambahkan');
+    }
+
+    public function lihat_mapel($id_mapel)
+    {
+        $mapel = DB::table('mata_pelajaran')->where('id', $id_mapel)->first();
+        
+        return view('admin.pages.data-mapel-lihat',[
+            'active' => 'data-mapel',
+            'mapel' => $mapel
+        ]);
+    }
+
+    public function ubah_mapel(Request $request, $id_mapel)
+    {
+        $inputValidate =  $request->validate([
+            'mapel' => 'required | unique:mata_pelajaran,mapel,'.$id_mapel,
+        ]);
+
+        $affected = DB::table('mata_pelajaran')->where('id', $id_mapel)->update($inputValidate);
+
+        return redirect('/administrator/data-mata-pelajaran')->with('success', 'Data Mata Pelajaran berhasil diubah');
+    }
+    // ================== /data mapel ================== 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -279,5 +323,11 @@ class AdministratorController extends Controller
     {
         DB::table('kelas')->where('id', $id_kelas)->delete();
         return redirect('/administrator/data-kelas')->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function delete_mapel($id_mapel)
+    {
+        DB::table('mata_pelajaran')->where('id', $id_mapel)->delete();
+        return redirect('/administrator/data-mata-pelajaran')->with('success', 'Data berhasil dihapus!');
     }
 }

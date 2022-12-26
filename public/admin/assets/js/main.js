@@ -48,3 +48,8 @@ $("#btn-print-siswa").on("click", function () {
 if ($("#error-modal-tambah-kelas").length) {
     $("#modal-tambah-kelas").modal("show");
 }
+
+// data mapel -> error ke modal
+if ($("#error-modal-tambah-mapel").length) {
+    $("#modal-tambah-mapel").modal("show");
+}

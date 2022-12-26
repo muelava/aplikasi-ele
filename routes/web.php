@@ -59,6 +59,13 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     Route::get('/administrator/data-kelas/ubah/{id_kelas}', [AdministratorController::class, 'lihat_kelas']);
     Route::post('/administrator/data-kelas/ubah/{id_kelas}', [AdministratorController::class, 'ubah_kelas']);
 
+    // crud data mapel
+    Route::get('/administrator/data-mata-pelajaran', [AdministratorController::class, 'data_mapel'])->name('data-mapel');
+    Route::post('/administrator/data-mapel/tambah', [AdministratorController::class, 'tambah_mapel']);
+    Route::get('/administrator/data-mata-pelajaran/hapus/{id_mapel}', [AdministratorController::class, 'delete_mapel']);
+    Route::get('/administrator/data-mata-pelajaran/ubah/{id_mapel}', [AdministratorController::class, 'lihat_mapel']);
+    Route::post('/administrator/data-mata-pelajaran/ubah/{id_mapel}', [AdministratorController::class, 'ubah_mapel']);
+
 });
 
 // route halaman guru
