@@ -123,7 +123,6 @@ class AdministratorController extends Controller
             'agama' => 'required',
             'tahun_masuk' => 'required',
         ]);
-        $inputValidate['kelas_id'] = '2';
         $inputValidate['role'] = 'siswa';
         $inputValidate['password'] = Hash::make('123');
 
