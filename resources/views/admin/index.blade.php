@@ -82,7 +82,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">{{ $kelass->where('jenjang', 'smk')->first()->siswa_count }}</h4>
+                        <h4 class="font-weight-bolder mb-0">{{ $kelass->where('jenjang', 'smk')->first() ? $kelass->where('jenjang', 'smk')->first()->siswa_count  : 0}}</h4>
                         <p class="card-text font-small-3 mb-0">Siswa/i SMK</p>
                       </div>
                     </div>
@@ -95,7 +95,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">{{ $kelass->where('jenjang', 'smp')->first()->siswa_count }}</h4>
+                        <h4 class="font-weight-bolder mb-0">{{ $kelass->where('jenjang', 'smp')->first() ? $kelass->where('jenjang', 'smp')->first()->siswa_count  : 0}}</h4>
                         <p class="card-text font-small-3 mb-0">Siswa/i SMP</p>
                       </div>
                     </div>
