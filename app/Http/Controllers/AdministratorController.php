@@ -19,8 +19,13 @@ class AdministratorController extends Controller
      */
     public function index()
     {
+        $gurus = Guru::get();
+        $kelass = Kelas::withCount('siswa')->get();
+
         return view('admin.index',[
-            'active'=>'beranda'
+            'active' => 'beranda',
+            'gurus' => $gurus,
+            'kelass' => $kelass,
         ]);
     }
 

@@ -56,7 +56,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">50</h4>
+                        <h4 class="font-weight-bolder mb-0">{{ $kelass->count() }}</h4>
                         <p class="card-text font-small-3 mb-0">Kelas</p>
                       </div>
                     </div>
@@ -69,7 +69,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">60</h4>
+                        <h4 class="font-weight-bolder mb-0">{{ $gurus->count() }}</h4>
                         <p class="card-text font-small-3 mb-0">Guru</p>
                       </div>
                     </div>
@@ -82,7 +82,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">100</h4>
+                        <h4 class="font-weight-bolder mb-0">{{ $kelass->where('jenjang', 'smk')->first()->siswa_count }}</h4>
                         <p class="card-text font-small-3 mb-0">Siswa/i SMK</p>
                       </div>
                     </div>
@@ -95,7 +95,7 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">200</h4>
+                        <h4 class="font-weight-bolder mb-0">{{ $kelass->where('jenjang', 'smp')->first()->siswa_count }}</h4>
                         <p class="card-text font-small-3 mb-0">Siswa/i SMP</p>
                       </div>
                     </div>
