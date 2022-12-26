@@ -41,6 +41,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Siswa</th>
+                                    <th>Kelas</th>
                                     <th>Tanggal Lahir</th>
                                     <th>No Telepon</th>
                                     <th except>Aksi</th>
@@ -54,6 +55,7 @@
                               <tr>
                                   <td>{{ $i++; }}</td>
                                   <td>{{ $siswa->nama }}</td>
+                                  <td>{{ $siswa->kelas->kelas }}</td>
                                   <td>{{ date('d M Y', strtotime($siswa->tanggal_lahir)) }}</td>
                                   <td>{{ $siswa->no_handphone }}</td>
                                   <td except>
@@ -115,6 +117,14 @@
           <label>Nama Siswa</label>
           <div class="form-group">
             <input type="text" placeholder="Nurjanah, S.Pd." class="form-control" name="nama" required value="{{ old('nama') }}" />
+          </div>
+          <label>Kelas</label>
+          <div class="form-group">
+            <select class="form-control" name="kelas_id" required>
+              @foreach ($kelass as $kelas)
+              <option value="{{ $kelas->id }}">{{ $kelas->kelas }}</option>
+              @endforeach
+            </select>
           </div>
           <label>Email Siswa</label>
           <div class="form-group">

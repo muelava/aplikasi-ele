@@ -56,6 +56,14 @@
                   <div class="form-group">
                     <input type="text" placeholder="Nurjanah, S.Pd." class="form-control" name="nama" required value="{{ old('nama') ? old('nama') : $siswa->nama }}" disabled />
                   </div>
+                  <label>Kelas</label>
+                  <div class="form-group">
+                    <select class="form-control" name="kelas_id" required disabled>
+                      @foreach ($kelass as $kelas)
+                      <option value="{{ $kelas->id }}" {{ $siswa->kelas_id === $kelas->id ? 'selected' : '' }}>{{ $kelas->kelas }}</option>
+                      @endforeach
+                    </select>
+                  </div>
                   <label>Email Siswa</label>
                   <div class="form-group">
                     <input type="email" placeholder="email@domain.com" class="form-control" name="email" required value="{{ old('email') ? old('email') : $siswa->email }}" disabled />

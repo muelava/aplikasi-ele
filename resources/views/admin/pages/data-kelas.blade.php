@@ -41,6 +41,7 @@
                                     <th>No</th>
                                     <th>Jenjang Pendidikan</th>
                                     <th>Nama Kelas</th>
+                                    <th>Jumlah Siswa/i</th>
                                     <th except>Aksi</th>
                                 </tr>
                             </thead>
@@ -53,6 +54,7 @@
                                   <td>{{ $i++; }}</td>
                                   <td class="text-uppercase">{{ $kelas->jenjang }}</td>
                                   <td>{{ $kelas->kelas }}</td>
+                                  <td>{{ $kelas->siswa->count() }}</td>
                                   <td except>
                                       <div class="dropdown">
                                           <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown" aria-expanded="false">

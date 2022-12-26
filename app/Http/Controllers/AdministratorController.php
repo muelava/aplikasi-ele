@@ -80,24 +80,27 @@ class AdministratorController extends Controller
     // ================== data siswa ================== 
     public function data_siswa()
     {
-        $siswas = DB::table('siswa')->get();
-        
-        // $siswa = SiswaModel::where('id', '1')->first();
-        // dd($siswa->kelas->kelas);
+        // $siswas = DB::table('siswa')->get();
+        $siswas = SiswaModel::get();
+        $kelass = Kelas::get();
 
         return view('admin.pages.data-siswa',[
             'active' => 'data-siswa',
-            'siswas' => $siswas
+            'siswas' => $siswas,
+            'kelass' => $kelass
         ]);
     }
 
     public function lihat_siswa($id_siswa)
     {
-        $siswa = DB::table('siswa')->where('id', $id_siswa)->first();
+        // $siswa = DB::table('siswa')->where('id', $id_siswa)->first();
+        $siswa = SiswaModel::where('id', $id_siswa)->first();
+        $kelass = Kelas::get();
         
         return view('admin.pages.data-siswa-lihat',[
             'active' => 'data-siswa',
-            'siswa' => $siswa
+            'siswa' => $siswa,
+            'kelass' => $kelass
         ]);
     }
 
@@ -106,6 +109,7 @@ class AdministratorController extends Controller
         $inputValidate =  $request->validate([
             'nis' => 'required | integer | unique:siswa,nis',
             'nama' => 'required',
+            'kelas_id' => 'required',
             'email' => 'required | unique:siswa,email',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
@@ -126,6 +130,7 @@ class AdministratorController extends Controller
     {
         $inputValidate =  $request->validate([
             'nis' => 'required | unique:siswa,nis,'.$id_siswa,
+            'kelas_id' => 'required',
             'nama' => 'required',
             'email' => 'required | unique:siswa,email,'.$id_siswa,
             'tempat_lahir' => 'required',
@@ -145,8 +150,9 @@ class AdministratorController extends Controller
     // ================== data kelas ================== 
     public function data_kelas()
     {
-        $kelass = DB::table('kelas')->get();
-        
+        // $kelass = DB::table('kelas')->get();
+        $kelass = Kelas::get();
+
         return view('admin.pages.data-kelas',[
             'active' => 'data-kelas',
             'kelass' => $kelass
