@@ -27,15 +27,43 @@
           {{-- content start --}}
             <div class="row" id="table-hover-row">
                 <div class="col-12">
+
                     <div class="card">
+
                       @if (session()->has('success'))
                       <div class="alert alert-success">{{ session('success') }}</div>
                       @endif
                         <div class="card-header justify-content-start">
                             <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-materi"><i data-feather="plus"></i> Tambah Materi</button>
                         </div>
+                        <hr>
+                        <div class="card-header justify-content-start">
+                            <a href="javascript:" class="btn btn-primary mr-2" >Semua</a>
+                            <a href="javascript:" class="btn btn-outline-primary mr-2" >SMP</a>
+                            <a href="javascript:" class="btn btn-outline-primary mr-2" >SMK</a>
+                        </div>
+                        <!-- Stats Vertical Card -->
+                        <div class="row mx-0 mb-3">
+                          @for ($i = 0; $i < 5; $i++)
+                          <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="cobain deh">
+                            <div class="card text-center">
+                              <div class="card-body">
+                                <div class="avatar bg-light-primary p-50 mb-1">
+                                  <div class="avatar-content">
+                                    <i data-feather="book" class="font-medium-5"></i>
+                                  </div>
+                                </div>
+                                <h2 class="font-weight-bolder">SMK</h2>
+                                <p class="card-text text-dark">Pythagoras</p>
+                              </div>
+                            </div>
+                          </a>
+                          @endfor
+                        </div>
+                        <!--/ Stats Vertical Card -->
                         
-                    </div>
+                      </div>
+
                 </div>
             </div>
           {{-- content start --}}
