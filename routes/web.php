@@ -70,7 +70,11 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
 
 // route halaman guru
 Route::group(['middleware' => ['auth:guru']], function() {
-    Route::get('/guru', [GuruController::class, 'index']);
+
+    Route::get('/guru', [GuruController::class, 'index'])->name('guru-beranda');
+
+    Route::get('/guru/materi', [GuruController::class, 'materi'])->name('guru-materi');
+
 });
 
 // route halaman course

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class GuruController extends Controller
@@ -15,7 +16,14 @@ class GuruController extends Controller
     public function index()
     {
         return view('guru.index', [
-            'active' => 'guru'
+            'active' => 'beranda',
+        ]);
+    }
+
+    public function materi()
+    {
+        return view('guru.pages.materi', [
+            'active' => 'materi',
         ]);
     }
 

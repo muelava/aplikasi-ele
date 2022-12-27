@@ -46,8 +46,8 @@
                         </div>
                       </div>
                       <div class="media-body my-auto">
-                        <h4 class="font-weight-bolder mb-0">13</h4>
-                        <p class="card-text font-small-3 mb-0">Kelas</p>
+                        <h4 class="font-weight-bolder mb-0">0</h4>
+                        <p class="card-text font-small-3 mb-0">Materi</p>
                       </div>
                     </div>
                   </div>

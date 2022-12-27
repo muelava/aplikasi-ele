@@ -13,13 +13,13 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="active nav-item"><a class="d-flex align-items-center" href="{{url('/guru')}}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Beranda">Beranda</span></a>
+            <li class="nav-item {{ $active === 'beranda' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('guru-beranda')}}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Beranda">Beranda</span></a>
             </li>
-            <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/guru/materi')}}"><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Materi">Materi</span></a>
+            <li class="nav-item {{ $active === 'materi' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('guru-materi')}}"><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Materi">Materi</span></a>
             </li>
-            <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/guru/jadwal')}}"><i data-feather="clock"></i><span class="menu-title text-truncate" data-i18n="Jadwal">Jadwal</span></a>
+            <li class="nav-item" {{ $active === 'jadwal' ? 'active' : '' }}><a class="d-flex align-items-center" href="{{url('/guru/jadwal')}}"><i data-feather="clock"></i><span class="menu-title text-truncate" data-i18n="Jadwal">Jadwal</span></a>
             </li>
-            <li class="nav-item"><a class="d-flex align-items-center" href="{{url('/guru/nilai')}}"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Nilai">Nilai</span></a>
+            <li class="nav-item" {{ $active === 'nilai' ? 'active' : '' }}><a class="d-flex align-items-center" href="{{url('/guru/nilai')}}"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Nilai">Nilai</span></a>
             </li>
           </ul>
         </div>
