@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             AdminTableSeeder::class,
             GuruTableSeeder::class,
             SiswaTableSeeder::class,
-            KelasTableSeeder::class
+            KelasTableSeeder::class,
+            MatapelajaranTableSeeder::class,
+            MateriTableSeeder::class,
         ]);
     }
 }
