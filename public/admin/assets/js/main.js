@@ -59,7 +59,19 @@ if ($("#error-modal-tambah-materi").length) {
     $("#modal-tambah-materi").modal("show");
 }
 
-function card_materi(e) {
-    let title = $(e).attr("title");
-    console.log(get);
+function card_materi(materi, jenjang, kelas, deskripsi, dok_materi) {
+    let modal_view_materi = $("#modal-view-materi");
+
+    modal_view_materi.find(".modal-title").text(materi);
+    modal_view_materi.find(".jenjang>p").text(jenjang);
+    modal_view_materi.find(".kelas>p").text(kelas);
+    modal_view_materi.find(".materi>p").text(materi);
+    modal_view_materi.find(".deskripsi>p").text(deskripsi);
+    modal_view_materi
+        .find(".dok_materi>p")
+        .html(
+            `<a href='../../files/materies/${dok_materi}' class='btn btn-sm btn-outline-primary' target='_blank'>${dok_materi}</a>`
+        );
+
+    modal_view_materi.modal("show");
 }

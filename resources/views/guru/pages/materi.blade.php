@@ -43,11 +43,11 @@
                             <a href="javascript:" class="btn btn-outline-primary" >SMK</a>
                         </div>
                         <!-- Stats Vertical Card -->
-                        <div class="row mx-0 mb-3">
+                        <div class="row mx-0 px-2 mb-3">
                           @foreach ($materis as $materi)
-                          <a href="#" class="col-xl-2 col-md-4 col-sm-6 shadow" title="{{ $materi->materi }}" data-toggle="modal" data-target="#modal-view-materi" onclick="card_materi(this)">
+                          <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="{{ $materi->materi }}" onclick="card_materi('{{ $materi->materi }}', '{{ $materi->kelas->jenjang }}', '{{ $materi->kelas->kelas }}', '{{ $materi->deskripsi }}', '{{ $materi->dok_materi }}')">
                             <div class="card text-left">
-                              <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $materi->created_at ? $materi->created_at->diffForHumans() : '' }}</small>
+                              <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $materi->created_at ? $materi->created_at->diffForHumans() : '-' }}</small>
                               <div class="card-body p-1">
                                 <div class="avatar bg-light-primary p-50 mb-1">
                                   <div class="avatar-content">
@@ -73,7 +73,7 @@
 
 <!-- Modal tambah -->
 <div class="modal fade text-left" id="modal-tambah-materi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel33">Tambah Materi</h4>
@@ -121,9 +121,9 @@
           <div class="form-group">
             <label for="customFile">Dokumen Materi</label>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile" name="dok_materi">
+              <input type="file" class="custom-file-input" id="customFile" name="dok_materi" required>
               <label class="custom-file-label" for="customFile">Pilih file</label>
-              <div class="form-text">Diharuskan PDF, maksimal 4MB</div>
+              <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
             </div>
           </div>
         </div>
@@ -138,13 +138,45 @@
 
 <!-- Modal view -->
 <div class="modal fade text-left" id="modal-view-materi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel33"></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
+      </div>
+      <div class="modal-body">
+
+        <div>
+          <div class="jenjang mb-1">
+            <small class="d-block text-secondary" style="margin-bottom: 0.2rem">Jenjang</small>
+            <p class="h6 text-uppercase"></p>
+          </div>
+          <div class="kelas mb-1">
+            <small class="d-block text-secondary" style="margin-bottom: 0.2rem">Kelas</small>
+            <p class="h6 text-uppercase"></p>
+          </div>
+          <div class="materi mb-1">
+            <small class="d-block text-secondary" style="margin-bottom: 0.2rem">Nama Materi</small>
+            <p class="h6"></p>
+          </div>
+          <div class="deskripsi mb-1">
+            <small class="d-block text-secondary" style="margin-bottom: 0.2rem">Deskripsi</small>
+            <p class="h6"></p>
+          </div>
+          <div class="dok_materi mb-1">
+            <small class="d-block text-secondary" style="margin-bottom: 0.2rem">File Materi</small>
+            <p class="h6"></p>
+          </div>
+          <hr>
+          <div class="d-flex" style="gap:1rem">
+            <button class="btn btn-sm bg-light-warning"><i data-feather="edit"></i> Ubah</button>
+            <button class="btn btn-sm bg-light-primary"><i data-feather="message-circle"></i> Diskusi</button>
+            <button class="btn btn-sm bg-light-danger ml-auto">Hapus</button>
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>
