@@ -40,10 +40,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>NIS</th>
                                     <th>Nama Siswa</th>
                                     <th>Kelas</th>
                                     <th>Tanggal Lahir</th>
-                                    <th>No Telepon</th>
                                     <th except>Aksi</th>
                                 </tr>
                             </thead>
@@ -54,10 +54,10 @@
                               @foreach ($siswas as $siswa)
                               <tr>
                                   <td>{{ $i++; }}</td>
+                                  <td>{{ $siswa->nis }}</td>
                                   <td>{{ $siswa->nama }}</td>
                                   <td>{{ $siswa->kelas->kelas }}</td>
                                   <td>{{ date('d M Y', strtotime($siswa->tanggal_lahir)) }}</td>
-                                  <td>{{ $siswa->no_handphone }}</td>
                                   <td except>
                                       <div class="dropdown">
                                           <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown" aria-expanded="false">

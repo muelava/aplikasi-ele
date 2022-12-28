@@ -113,7 +113,7 @@ class AdministratorController extends Controller
     public function tambah_siswa(Request $request)
     {
         $inputValidate =  $request->validate([
-            'nis' => 'required | integer | unique:siswa,nis',
+            'nis' => 'required | numeric | unique:siswa,nis',
             'nama' => 'required',
             'kelas_id' => 'required',
             'email' => 'required | unique:siswa,email',

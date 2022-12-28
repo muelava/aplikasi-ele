@@ -22,8 +22,11 @@ class GuruController extends Controller
      */
     public function index()
     {
+        $materis = Materi::where('guru_id',auth()->id())->get();
+
         return view('guru.index', [
             'active' => 'beranda',
+            'materis' => $materis,
         ]);
     }
 
