@@ -45,7 +45,7 @@
                         <!-- Stats Vertical Card -->
                         <div class="row mx-0 px-2 mb-3">
                           @foreach ($materis as $materi)
-                          <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="{{ $materi->materi }}" onclick="card_materi('{{ $materi->materi }}', '{{ $materi->kelas->jenjang }}', '{{ $materi->kelas->kelas }}', '{{ $materi->deskripsi }}', '{{ $materi->dok_materi }}')">
+                          <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk lebih lanjut" onclick="card_materi('{{ $materi->materi }}', '{{ $materi->kelas->jenjang }}', '{{ $materi->kelas->kelas }}', '{{ $materi->deskripsi }}', '{{ $materi->dok_materi }}')">
                             <div class="card text-left">
                               <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $materi->created_at ? $materi->created_at->diffForHumans() : '-' }}</small>
                               <div class="card-body p-1">
