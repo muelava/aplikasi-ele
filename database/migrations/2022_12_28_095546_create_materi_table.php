@@ -20,7 +20,7 @@ class CreateMateriTable extends Migration
             $table->foreignId('kelas_id');
             $table->string('materi');
             $table->string('deskripsi');
-            $table->string('dok_materi');
+            $table->string('dok_materi')->nullable();
             $table->timestamps();
         });
     }

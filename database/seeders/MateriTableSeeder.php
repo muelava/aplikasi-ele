@@ -21,7 +21,7 @@ class MateriTableSeeder extends Seeder
                 'kelas_id' => '1',
                 'materi' => 'Phytagoras',
                 'deskripsi' => 'Belajar phytagoras',
-                'dok_materi' => 'matri-phytagoras.pdf',
+                'dok_materi' => null,
             ]
         ];
         DB::table('materi')->insert($materi);

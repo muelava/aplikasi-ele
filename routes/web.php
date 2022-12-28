@@ -74,6 +74,7 @@ Route::group(['middleware' => ['auth:guru']], function() {
     Route::get('/guru', [GuruController::class, 'index'])->name('guru-beranda');
 
     Route::get('/guru/materi', [GuruController::class, 'materi'])->name('guru-materi');
+    Route::post('/guru/materi/tambah', [GuruController::class, 'tambah_materi']);
 
 });
 

@@ -53,3 +53,13 @@ if ($("#error-modal-tambah-kelas").length) {
 if ($("#error-modal-tambah-mapel").length) {
     $("#modal-tambah-mapel").modal("show");
 }
+
+// data materi -> error ke modal
+if ($("#error-modal-tambah-materi").length) {
+    $("#modal-tambah-materi").modal("show");
+}
+
+function card_materi(e) {
+    let title = $(e).attr("title");
+    console.log(get);
+}

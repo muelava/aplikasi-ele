@@ -37,28 +37,29 @@
                             <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-materi"><i data-feather="plus"></i> Tambah Materi</button>
                         </div>
                         <hr>
-                        <div class="card-header justify-content-start">
-                            <a href="javascript:" class="btn btn-primary mr-2" >Semua</a>
-                            <a href="javascript:" class="btn btn-outline-primary mr-2" >SMP</a>
-                            <a href="javascript:" class="btn btn-outline-primary mr-2" >SMK</a>
+                        <div class="card-header justify-content-start d-flex" style="gap:1rem">
+                            <a href="javascript:" class="btn btn-primary" >Semua</a>
+                            <a href="javascript:" class="btn btn-outline-primary" >SMP</a>
+                            <a href="javascript:" class="btn btn-outline-primary" >SMK</a>
                         </div>
                         <!-- Stats Vertical Card -->
                         <div class="row mx-0 mb-3">
-                          @for ($i = 0; $i < 5; $i++)
-                          <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="cobain deh">
-                            <div class="card text-center">
-                              <div class="card-body">
+                          @foreach ($materis as $materi)
+                          <a href="#" class="col-xl-2 col-md-4 col-sm-6 shadow" title="{{ $materi->materi }}" data-toggle="modal" data-target="#modal-view-materi" onclick="card_materi(this)">
+                            <div class="card text-left">
+                              <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $materi->created_at ? $materi->created_at->diffForHumans() : '' }}</small>
+                              <div class="card-body p-1">
                                 <div class="avatar bg-light-primary p-50 mb-1">
                                   <div class="avatar-content">
-                                    <i data-feather="book" class="font-medium-5"></i>
+                                    <i data-feather="file-text" class="font-medium-5"></i>
                                   </div>
                                 </div>
-                                <h2 class="font-weight-bolder">SMK</h2>
-                                <p class="card-text text-dark">Pythagoras</p>
+                                <h5 class="font-weight-bolder text-uppercase">{{ $materi->kelas->jenjang }} ({{ $materi->kelas->kelas }})</h5>
+                                <small class="card-text text-dark mb-0">{{  Str::words($materi->materi, 2, ' ..') }}</small>
                               </div>
                             </div>
                           </a>
-                          @endfor
+                          @endforeach
                         </div>
                         <!--/ Stats Vertical Card -->
                         
@@ -80,9 +81,9 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="/administrator/materi/tambah" method="POST">
+      <form action="/guru/materi/tambah" enctype='multipart/form-data' method="POST">
         
-        @csrf
+        {{ csrf_field() }}
         <div class="modal-body">
           @if ($errors->any())
               <div id="error-modal-tambah-materi" class="alert alert-danger">
@@ -93,9 +94,37 @@
                   </ul>
               </div>
           @endif
+          <label>Mata Pelajaran</label>
+          <div class="form-group">
+            <select class="form-control" name="mata_pelajaran_id" required>
+              @foreach ($mapels as $mapel)
+              <option value="{{ $mapel->id }}">{{ $mapel->mapel }}</option>
+              @endforeach
+            </select>
+          </div>
+          <label>Kelas</label>
+          <div class="form-group">
+            <select class="form-control" name="kelas_id" required>
+              @foreach ($kelass as $kelas)
+              <option value="{{ $kelas->id }}">{{ $kelas->kelas }}</option>
+              @endforeach
+            </select>
+          </div>
           <label>Nama Materi</label>
           <div class="form-group">
-            <input type="text" placeholder="Pythagoras" class="form-control" name="mapel" required value="{{ old('materi') }}" />
+            <input type="text" placeholder="Pythagoras" class="form-control" name="materi" required value="{{ old('materi') }}" />
+          </div>
+          <label>Deskripsi</label>
+          <div class="form-group">
+            <textarea class="form-control" name="deskripsi" cols="30" rows="10" placeholder="Berikan keterangan.." required>{{ old('deskripsi') }}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="customFile">Dokumen Materi</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile" name="dok_materi">
+              <label class="custom-file-label" for="customFile">Pilih file</label>
+              <div class="form-text">Diharuskan PDF, maksimal 4MB</div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
@@ -106,6 +135,21 @@
   </div>
 </div>
 <!-- /Modal tambah -->
+
+<!-- Modal view -->
+<div class="modal fade text-left" id="modal-view-materi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel33"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Modal view -->
 @endsection
 
 @section('page-vendor-js')

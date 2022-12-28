@@ -11,4 +11,9 @@ class Mapel extends Model
     protected $table = "mata_pelajaran";
 
     protected $guarded = ['id'];
+
+    public function materi()
+    {
+        return $this->hasMany(Materi::class);
+    }
 }
