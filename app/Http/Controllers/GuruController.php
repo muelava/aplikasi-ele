@@ -7,6 +7,7 @@ use App\Models\Kelas;
 use App\Models\Materi;
 use App\Models\Mapel;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -48,7 +49,10 @@ class GuruController extends Controller
                          ->get();
         }
 
-        // dd($card_materis->get());
+        $shares = DB::table('kelas')
+                ->join('materi', 'kelas.id', '=', 'materi.kelas_id')
+                ->get();
+        dd($shares);
 
         return view('guru.pages.materi', [
             'active' => 'materi',
@@ -85,6 +89,34 @@ class GuruController extends Controller
 
         Materi::create($inputValidate);
         return redirect('/guru/materi')->with('success', 'Materi berhasil ditambahkan');
+    }
+
+    public function ubah_materi(Request $request, $id_materi)
+    {
+        $inputValidate =  $request->validate([
+            'mata_pelajaran_id' => 'required',
+            'kelas_id' => 'required',
+            'materi' => 'required',
+            'deskripsi' => 'required',
+            'dok_materi' => 'mimes:pdf|max:4000'
+        ]);
+        $inputValidate['guru_id'] = auth()->id();
+
+        $dok_materi = null;
+        if ($request->hasFile('dok_materi')) {
+            $file = $request->file('dok_materi');
+            $filename = time().'_'.$file->getClientOriginalName();
+            // File upload location
+            $location = 'files/materies';
+            // Upload file
+            $file->move($location,$filename);
+            $dok_materi = $filename;
+        }
+        $inputValidate['dok_materi'] = $dok_materi;
+
+        $affected = DB::table('materi')->where('id', $id_materi)->update($inputValidate);
+
+        return redirect('/guru/materi')->with('success', 'Materi berhasil dibuat');
     }
 
     /**

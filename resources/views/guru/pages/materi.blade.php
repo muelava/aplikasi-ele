@@ -43,8 +43,8 @@
                           <div class="form-group col-12 col-md-3">
                             <select class="form-control" name="kelas">
                               <option value="">Semua Kelas</option>
-                              @foreach ($materis as $materi)
-                              <option value="{{ $materi->kelas->kelas }}" {{ request('kelas') === $materi->kelas->kelas ? 'selected': '' }}>{{ $materi->kelas->kelas }}</option>
+                              @foreach ($kelass as $kelas)
+                              <option value="{{ $kelas->kelas }}" {{ request('kelas') === $kelas->kelas ? 'selected': '' }}>{{ $kelas->kelas }}</option>
                               @endforeach
                             </select>
                           </div>
@@ -60,7 +60,7 @@
                         <div class="row mx-0 px-2 mb-3">
                           @if ($card_materis->count() > 0)
                             @foreach ($card_materis as $card_materi)
-                            <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk lebih lanjut" onclick="card_materi('{{ $card_materi->id }}', '{{ $card_materi->materi }}', '{{ $card_materi->jenjang }}', '{{ $card_materi->kelas }}', '{{ $card_materi->mapel }}', '{{ $card_materi->deskripsi }}', '{{ $card_materi->dok_materi }}')">
+                            <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk lebih lanjut" onclick="card_materi('{{ $card_materi->id }}', '{{ $card_materi->materi }}', '{{ $card_materi->jenjang }}', '{{ $card_materi->kelas }}', '{{ $card_materi->mapel }}', '{{ $card_materi->deskripsi }}', '{{ $card_materi->dok_materi }}', '{{ $card_materi->mata_pelajaran_id }}', '{{ $card_materi->kelas_id }}')">
                               <div class="card text-left">
                                 <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $card_materi->created_at ? $card_materi->created_at->diffForHumans() : '-' }}</small>
                                 <div class="card-body p-1">
@@ -205,6 +205,71 @@
   </div>
 </div>
 <!-- /Modal view -->
+
+<!-- Modal ubah -->
+<div class="modal fade text-left" id="modal-ubah-materi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel33">Ubah Materi</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="#" enctype='multipart/form-data' method="POST">
+        
+        {{ csrf_field() }}
+        <div class="modal-body">
+          @if ($errors->any())
+              <div id="error-modal-ubah-materi" class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
+          <label>Mata Pelajaran</label>
+          <div class="form-group">
+            <select class="form-control" name="mata_pelajaran_id" required>
+              @foreach ($mapels as $mapel)
+              <option value="{{ $mapel->id }}">{{ $mapel->mapel }}</option>
+              @endforeach
+            </select>
+          </div>
+          <label>Kelas</label>
+          <div class="form-group">
+            <select class="form-control" name="kelas_id" required>
+              @foreach ($kelass as $kelas)
+              <option value="{{ $kelas->id }}">{{ $kelas->kelas }}</option>
+              @endforeach
+            </select>
+          </div>
+          <label>Nama Materi</label>
+          <div class="form-group">
+            <input type="text" placeholder="Pythagoras" class="form-control" name="materi" required />
+          </div>
+          <label>Deskripsi</label>
+          <div class="form-group">
+            <textarea class="form-control" name="deskripsi" cols="30" rows="10" placeholder="Berikan keterangan.." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="customFile">Dokumen Materi</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile" name="dok_materi" required>
+              <label class="custom-file-label" for="customFile">Pilih file</label>
+              <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- /Modal ubah -->
 @endsection
 
 @section('page-vendor-js')

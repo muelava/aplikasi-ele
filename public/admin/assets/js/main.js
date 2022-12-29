@@ -59,7 +59,17 @@ if ($("#error-modal-tambah-materi").length) {
     $("#modal-tambah-materi").modal("show");
 }
 
-function card_materi(id, materi, jenjang, kelas, mapel, deskripsi, dok_materi) {
+function card_materi(
+    id,
+    materi,
+    jenjang,
+    kelas,
+    mapel,
+    deskripsi,
+    dok_materi,
+    mata_pelajaran_id,
+    kelas_id
+) {
     let modal_view_materi = $("#modal-view-materi");
 
     modal_view_materi.find(".modal-title").text(materi);
@@ -73,9 +83,63 @@ function card_materi(id, materi, jenjang, kelas, mapel, deskripsi, dok_materi) {
         .html(
             `<a href='../../files/materies/${dok_materi}' class='btn btn-sm btn-outline-primary' target='_blank'>${dok_materi}</a>`
         );
-    modal_view_materi.find("#btn-ubah").attr("href", "materi/ubah/" + id);
+    modal_view_materi.find("#btn-ubah").on("click", function () {
+        ubah_materi(
+            id,
+            materi,
+            jenjang,
+            kelas,
+            mapel,
+            deskripsi,
+            dok_materi,
+            mata_pelajaran_id,
+            kelas_id
+        );
+        modal_view_materi.modal("hide");
+    });
     modal_view_materi.find("#btn-diskusi").attr("href", "materi/diskusi/" + id);
     modal_view_materi.find("#btn-hapus").attr("href", "materi/hapus/" + id);
 
     modal_view_materi.modal("show");
+}
+
+function ubah_materi(
+    id,
+    materi,
+    jenjang,
+    kelas,
+    mapel,
+    deskripsi,
+    dok_materi,
+    mata_pelajaran_id,
+    kelas_id
+) {
+    let modal_ubah_materi = $("#modal-ubah-materi");
+
+    modal_ubah_materi.find(".modal-title").text("Ubah " + materi);
+    modal_ubah_materi.find("form").attr("action", "materi/ubah/" + id);
+    modal_ubah_materi.find("[name='mata_pelajaran_id']").val(mata_pelajaran_id);
+    modal_ubah_materi.find("[name='kelas_id']").val(kelas_id);
+    modal_ubah_materi.find("[name='materi']").val(materi);
+    modal_ubah_materi.find("[name='deskripsi']").val(deskripsi);
+
+    // Get a reference to our file input
+    const input_dok_materi = document
+        .querySelector("#modal-ubah-materi")
+        .querySelector('input[name="dok_materi"]');
+    const myFile = new File([""], dok_materi, {
+        type: "application/pdf",
+    });
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(myFile);
+    input_dok_materi.files = dataTransfer.files;
+
+    modal_ubah_materi
+        .find('input[name="dok_materi')
+        .next("label")
+        .text(dok_materi);
+
+    setTimeout(() => {
+        modal_ubah_materi.modal("show");
+    }, 500);
 }
