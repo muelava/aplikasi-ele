@@ -35,12 +35,23 @@ class GuruController extends Controller
         $materis = Materi::where('guru_id',auth()->id())->get();
         $mapels = Mapel::get();
         $kelass = Kelas::get();
+        $card_materis = Kelas::join('materi', 'kelas.id', 'materi.kelas_id')->where('guru_id', auth()->id());
+
+        if (request('kelas')) {
+            $card_materis->where('kelas', request('kelas'))
+                         ->where('materi', 'LIKE', '%'.request('materi').'%')
+                         ->get();
+        }else{
+            $card_materis->where('materi', 'LIKE', '%'.request('materi').'%')
+                         ->get();
+        }
 
         return view('guru.pages.materi', [
             'active' => 'materi',
             'mapels' => $mapels,
             'kelass' => $kelass,
             'materis' => $materis,
+            'card_materis' => $card_materis->get(),
         ]);
     }
 

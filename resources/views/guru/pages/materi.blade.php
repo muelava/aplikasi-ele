@@ -36,30 +36,48 @@
                         <div class="card-header justify-content-start">
                             <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-materi"><i data-feather="plus"></i> Tambah Materi</button>
                         </div>
-                        <hr>
-                        <div class="card-header justify-content-start d-flex" style="gap:1rem">
-                            <a href="javascript:" class="btn btn-primary" >Semua</a>
-                            <a href="javascript:" class="btn btn-outline-primary" >SMP</a>
-                            <a href="javascript:" class="btn btn-outline-primary" >SMK</a>
+                        <div class="card-header">
+                          <h6>Cari Berdasarkan Kelas & Materi:</h6>
                         </div>
+                        <form action="/guru/materi" method="GET" class="card-header justify-content-start d-flex pt-0" style="gap:1rem">
+                          <div class="form-group col-12 col-md-3">
+                            <select class="form-control" name="kelas">
+                              <option value="">Semua Kelas</option>
+                              @foreach ($materis as $materi)
+                              <option value="{{ $materi->kelas->kelas }}" {{ request('kelas') === $materi->kelas->kelas ? 'selected': '' }}>{{ $materi->kelas->kelas }}</option>
+                              @endforeach
+                            </select>
+                          </div>
+                          <div class="form-group col-8 col-md">
+                            <input type="search" class="form-control" name="materi" placeholder="Nama Materi.." value="{{ request('materi') }}">
+                          </div>
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                          </div>
+                        </form>
+                        <hr>
                         <!-- Stats Vertical Card -->
                         <div class="row mx-0 px-2 mb-3">
-                          @foreach ($materis as $materi)
-                          <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk lebih lanjut" onclick="card_materi('{{ $materi->materi }}', '{{ $materi->kelas->jenjang }}', '{{ $materi->kelas->kelas }}', '{{ $materi->deskripsi }}', '{{ $materi->dok_materi }}')">
-                            <div class="card text-left">
-                              <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $materi->created_at ? $materi->created_at->diffForHumans() : '-' }}</small>
-                              <div class="card-body p-1">
-                                <div class="avatar bg-light-primary p-50 mb-1">
-                                  <div class="avatar-content">
-                                    <i data-feather="file-text" class="font-medium-5"></i>
+                          @if ($card_materis->count() > 0)
+                            @foreach ($card_materis as $card_materi)
+                            <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk lebih lanjut" onclick="card_materi('{{ $card_materi->materi }}', '{{ $card_materi->jenjang }}', '{{ $card_materi->kelas }}', '{{ $card_materi->deskripsi }}', '{{ $card_materi->dok_materi }}')">
+                              <div class="card text-left">
+                                <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $card_materi->created_at ? $card_materi->created_at->diffForHumans() : '-' }}</small>
+                                <div class="card-body p-1">
+                                  <div class="avatar bg-light-primary p-50 mb-1">
+                                    <div class="avatar-content">
+                                      <i data-feather="file-text" class="font-medium-5"></i>
+                                    </div>
                                   </div>
+                                  <h5 class="font-weight-bolder text-uppercase">{{ $card_materi->jenjang }} ({{ $card_materi->kelas }})</h5>
+                                  <small class="card-text text-dark mb-0">{{  Str::words($card_materi->materi, 2, ' ..') }}</small>
                                 </div>
-                                <h5 class="font-weight-bolder text-uppercase">{{ $materi->kelas->jenjang }} ({{ $materi->kelas->kelas }})</h5>
-                                <small class="card-text text-dark mb-0">{{  Str::words($materi->materi, 2, ' ..') }}</small>
                               </div>
-                            </div>
-                          </a>
-                          @endforeach
+                            </a>
+                            @endforeach
+                          @else
+                            <p class="h5 mx-auto">Tidak Ada Materi <b>{{ request('materi') }}</b></p>
+                          @endif
                         </div>
                         <!--/ Stats Vertical Card -->
                         
