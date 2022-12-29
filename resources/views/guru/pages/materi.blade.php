@@ -60,7 +60,7 @@
                         <div class="row mx-0 px-2 mb-3">
                           @if ($card_materis->count() > 0)
                             @foreach ($card_materis as $card_materi)
-                            <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk lebih lanjut" onclick="card_materi('{{ $card_materi->materi }}', '{{ $card_materi->jenjang }}', '{{ $card_materi->kelas }}', '{{ $card_materi->deskripsi }}', '{{ $card_materi->dok_materi }}')">
+                            <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk lebih lanjut" onclick="card_materi('{{ $card_materi->id }}', '{{ $card_materi->materi }}', '{{ $card_materi->jenjang }}', '{{ $card_materi->kelas }}', '{{ $card_materi->mapel }}', '{{ $card_materi->deskripsi }}', '{{ $card_materi->dok_materi }}')">
                               <div class="card text-left">
                                 <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $card_materi->created_at ? $card_materi->created_at->diffForHumans() : '-' }}</small>
                                 <div class="card-body p-1">
@@ -70,6 +70,7 @@
                                     </div>
                                   </div>
                                   <h5 class="font-weight-bolder text-uppercase">{{ $card_materi->jenjang }} ({{ $card_materi->kelas }})</h5>
+                                  <p class="mb-0">{{ $card_materi->mapel }}</p>
                                   <small class="card-text text-dark mb-0">{{  Str::words($card_materi->materi, 2, ' ..') }}</small>
                                 </div>
                               </div>
@@ -175,6 +176,10 @@
             <small class="d-block text-secondary" style="margin-bottom: 0.2rem">Kelas</small>
             <p class="h6 text-uppercase"></p>
           </div>
+          <div class="mapel mb-1">
+            <small class="d-block text-secondary" style="margin-bottom: 0.2rem">Mata Pelajaran</small>
+            <p class="h6"></p>
+          </div>
           <div class="materi mb-1">
             <small class="d-block text-secondary" style="margin-bottom: 0.2rem">Nama Materi</small>
             <p class="h6"></p>
@@ -189,9 +194,9 @@
           </div>
           <hr>
           <div class="d-flex" style="gap:1rem">
-            <button class="btn btn-sm bg-light-warning"><i data-feather="edit"></i> Ubah</button>
-            <button class="btn btn-sm bg-light-primary"><i data-feather="message-circle"></i> Diskusi</button>
-            <button class="btn btn-sm bg-light-danger ml-auto">Hapus</button>
+            <a href="javascript:" id="btn-ubah" class="btn btn-sm bg-light-warning"><i data-feather="edit"></i> Ubah</a>
+            <a href="javascript:" id="btn-diskusi" class="btn btn-sm bg-light-primary"><i data-feather="message-circle"></i> Diskusi</a>
+            <a href="javascript:" id="btn-hapus" class="btn btn-sm bg-light-danger ml-auto"><i data-feather="trash"></i> Hapus</a>
           </div>
         </div>
         
