@@ -50,7 +50,6 @@ class GuruController extends Controller
             $card_materis->where('materi', 'LIKE', '%'.request('materi').'%')
                          ->get();
         }
-        // dd($card_materis->get());
 
         return view('guru.pages.materi', [
             'active' => 'materi',
