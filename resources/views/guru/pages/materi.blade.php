@@ -33,6 +33,10 @@
                       @if (session()->has('success'))
                       <div class="alert alert-success">{{ session('success') }}</div>
                       @endif
+                      @error('dok_materi')
+                      <div class="alert alert-danger">{{ $message }}</div>
+                      @enderror
+
                         <div class="card-header justify-content-start">
                             <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-materi"><i data-feather="plus"></i> Tambah Materi</button>
                         </div>
@@ -104,15 +108,6 @@
         
         {{ csrf_field() }}
         <div class="modal-body">
-          @if ($errors->any())
-              <div id="error-modal-tambah-materi" class="alert alert-danger">
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-          @endif
           <label>Mata Pelajaran</label>
           <div class="form-group">
             <select class="form-control" name="mata_pelajaran_id" required>
@@ -220,15 +215,6 @@
         
         {{ csrf_field() }}
         <div class="modal-body">
-          @if ($errors->any())
-              <div id="error-modal-ubah-materi" class="alert alert-danger">
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-          @endif
           <label>Mata Pelajaran</label>
           <div class="form-group">
             <select class="form-control" name="mata_pelajaran_id" required>

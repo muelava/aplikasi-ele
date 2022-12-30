@@ -54,11 +54,6 @@ if ($("#error-modal-tambah-mapel").length) {
     $("#modal-tambah-mapel").modal("show");
 }
 
-// data materi -> error ke modal
-if ($("#error-modal-tambah-materi").length) {
-    $("#modal-tambah-materi").modal("show");
-}
-
 function card_materi(
     id,
     materi,

@@ -95,12 +95,13 @@ class GuruController extends Controller
             'kelas_id' => 'required',
             'materi' => 'required',
             'deskripsi' => 'required',
-            'dok_materi' => 'mimes:pdf|max:4000'
         ]);
         $inputValidate['guru_id'] = auth()->id();
 
-        $dok_materi = null;
-        if ($request->hasFile('dok_materi')) {
+        if($request->file('dok_materi')->getSize()){
+
+            $request->validate(['dok_materi' => 'mimes:pdf|max:4000']);
+            
             $file = $request->file('dok_materi');
             $filename = time().'_'.$file->getClientOriginalName();
             // File upload location
@@ -108,12 +109,13 @@ class GuruController extends Controller
             // Upload file
             $file->move($location,$filename);
             $dok_materi = $filename;
+            $inputValidate['dok_materi'] = $dok_materi;
         }
-        $inputValidate['dok_materi'] = $dok_materi;
+
 
         $affected = DB::table('materi')->where('id', $id_materi)->update($inputValidate);
-
-        return redirect('/guru/materi')->with('success', 'Materi berhasil dibuat');
+        
+        return redirect('/guru/materi')->with('success', 'Materi berhasil diubah');
     }
 
     /**
