@@ -60,7 +60,7 @@
                         <div class="row mx-0 px-2 mb-3">
                           @if ($card_materis->count() > 0)
                             @foreach ($card_materis as $card_materi)
-                            <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk lebih lanjut" onclick="card_materi('{{ $card_materi->id }}', '{{ $card_materi->materi }}', '{{ $card_materi->jenjang }}', '{{ $card_materi->kelas }}', '{{ $card_materi->mapel }}', '{{ $card_materi->deskripsi }}', '{{ $card_materi->dok_materi }}', '{{ $card_materi->mata_pelajaran_id }}', '{{ $card_materi->kelas_id }}')">
+                            <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk lebih lanjut" onclick="card_materi('{{ $card_materi->materi_id }}', '{{ $card_materi->materi }}', '{{ $card_materi->jenjang }}', '{{ $card_materi->kelas }}', '{{ $card_materi->mapel }}', '{{ $card_materi->deskripsi }}', '{{ $card_materi->dok_materi }}', '{{ $card_materi->mata_pelajaran_id }}', '{{ $card_materi->kelas_id }}')">
                               <div class="card text-left">
                                 <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $card_materi->created_at ? $card_materi->created_at->diffForHumans() : '-' }}</small>
                                 <div class="card-body p-1">

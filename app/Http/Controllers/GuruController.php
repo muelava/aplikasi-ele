@@ -36,9 +36,11 @@ class GuruController extends Controller
         $materis = Materi::where('guru_id',auth()->id())->get();
         $mapels = Mapel::get();
         $kelass = Kelas::get();
-        $card_materis = Materi::join('kelas', 'kelas_id', 'kelas.id')
-                        ->join('mata_pelajaran', 'mata_pelajaran_id', 'mata_pelajaran.id')
-                        ->where('guru_id', auth()->id());
+        $card_materis = Materi::join('kelas', 'kelas.id', '=', 'materi.kelas_id')
+                ->join('mata_pelajaran', 'mata_pelajaran.id', '=', 'materi.mata_pelajaran_id')
+                ->select()
+                ->addSelect('materi.id as materi_id', 'materi.created_at as materi_created_at', 'materi.updated_at as materi_updated_at')
+                ->where('guru_id',auth()->id());
 
         if (request('kelas')) {
             $card_materis->where('kelas', request('kelas'))
@@ -48,11 +50,7 @@ class GuruController extends Controller
             $card_materis->where('materi', 'LIKE', '%'.request('materi').'%')
                          ->get();
         }
-
-        $shares = DB::table('kelas')
-                ->join('materi', 'kelas.id', '=', 'materi.kelas_id')
-                ->get();
-        dd($shares);
+        // dd($card_materis->get());
 
         return view('guru.pages.materi', [
             'active' => 'materi',
