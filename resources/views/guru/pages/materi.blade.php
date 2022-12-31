@@ -191,6 +191,7 @@
           <div class="d-flex" style="gap:1rem">
             <a href="javascript:" id="btn-ubah" class="btn btn-sm bg-light-warning"><i data-feather="edit"></i> Ubah</a>
             <a href="javascript:" id="btn-diskusi" class="btn btn-sm bg-light-primary"><i data-feather="message-circle"></i> Diskusi</a>
+            <a href="javascript:" id="btn-tugas" class="btn btn-sm bg-light-success"><i data-feather="list"></i> Tugas</a>
             <a href="javascript:" id="btn-hapus" class="btn btn-sm bg-light-danger ml-auto"><i data-feather="trash"></i> Hapus</a>
           </div>
         </div>

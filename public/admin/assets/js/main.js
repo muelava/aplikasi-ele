@@ -93,6 +93,7 @@ function card_materi(
         modal_view_materi.modal("hide");
     });
     modal_view_materi.find("#btn-diskusi").attr("href", "materi/diskusi/" + id);
+    modal_view_materi.find("#btn-tugas").attr("href", "materi/tugas/" + id);
     modal_view_materi.find("#btn-hapus").on("click", function () {
         let konfirm = confirm("Apakah Anda yakin ingin hapus " + materi + "?");
         if (konfirm === true) {

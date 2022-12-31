@@ -40,8 +40,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>NIP</th>
                                     <th>Nama Guru</th>
-                                    <th>Tanggal Lahir</th>
                                     <th>No Telepon</th>
                                     <th except>Aksi</th>
                                 </tr>
@@ -53,8 +53,8 @@
                               @foreach ($gurus as $guru)
                               <tr>
                                   <td>{{ $i++ }}</td>
+                                  <td>{{ $guru->nip }}</td>
                                   <td>{{ $guru->nama }}</td>
-                                  <td>{{ date('d M Y', strtotime($guru->tanggal_lahir)) }}</td>
                                   <td>{{ $guru->no_handphone }}</td>
                                   <td except>
                                       <div class="dropdown">
