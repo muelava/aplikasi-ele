@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             SiswaTableSeeder::class,
             KelasTableSeeder::class,
             MatapelajaranTableSeeder::class,
-            MateriTableSeeder::class,
+            // MateriTableSeeder::class,
         ]);
     }
 }

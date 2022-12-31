@@ -103,6 +103,7 @@ class GuruController extends Controller
         if($request->file('dok_materi')->getSize()){
             $request->validate(['dok_materi' => 'mimes:pdf|max:4000']);
             
+            // deleted exist file
             $materi = Materi::where('id', $id_materi)->first();
             if (File::exists(public_path('files/materies/'.$materi->dok_materi))) {
                 File::delete(public_path('files/materies/'.$materi->dok_materi));
