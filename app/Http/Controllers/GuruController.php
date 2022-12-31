@@ -45,9 +45,11 @@ class GuruController extends Controller
         if (request('kelas')) {
             $card_materis->where('kelas', request('kelas'))
                          ->where('materi', 'LIKE', '%'.request('materi').'%')
+                         ->orderBy('materi.id', 'desc')
                          ->get();
         }else{
             $card_materis->where('materi', 'LIKE', '%'.request('materi').'%')
+                         ->orderBy('materi.id', 'desc')
                          ->get();
         }
 
@@ -56,7 +58,7 @@ class GuruController extends Controller
             'mapels' => $mapels,
             'kelass' => $kelass,
             'materis' => $materis,
-            'card_materis' => $card_materis->get(),
+            'card_materis' => $card_materis->orderBy('materi.id', 'desc')->get(),
         ]);
     }
 
