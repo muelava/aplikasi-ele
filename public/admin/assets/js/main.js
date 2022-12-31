@@ -144,3 +144,15 @@ function ubah_materi(
         modal_ubah_materi.modal("show");
     }, 500);
 }
+
+// materi/tugas
+function toggle_ubah_tugas() {
+    $("#input-ubah-tugas").toggleClass("d-none");
+    $("#show-tugas").toggleClass("d-none");
+}
+
+function tombol_batal_tugas() {
+    $("#input-ubah-tugas").toggleClass("d-none");
+    $("#show-tugas").toggleClass("d-none");
+}
+// /materi/tugas

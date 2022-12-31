@@ -6,6 +6,7 @@ use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Materi;
 use App\Models\Mapel;
+use App\Models\Tugas;
 
 use File;
 use Illuminate\Support\Facades\DB;
@@ -125,6 +126,40 @@ class GuruController extends Controller
         $affected = DB::table('materi')->where('id', $id_materi)->update($inputValidate);
         
         return redirect('/guru/materi')->with('success', 'Materi berhasil diubah');
+    }
+
+    public function tugas($materi_id)
+    {
+        $tugas = Tugas::where('materi_id', $materi_id)->first();
+        $materi = Materi::where('id', $materi_id)->first();
+
+        return view('guru.pages.materi-tugas',[
+            'active' => 'materi',
+            'tugas' => $tugas,
+            'materi' => $materi,
+        ]);
+    }
+
+    public function tambah_tugas(Request $request, $id_materi){
+        $inputValidate =  $request->validate([
+            'tugas' => 'required',
+        ]);
+        
+        $inputValidate['materi_id'] = $id_materi;
+
+        Tugas::create($inputValidate);
+        return redirect('/guru/materi/tugas/'.$id_materi)->with('success', 'Materi berhasil ditambahkan');
+    }
+
+    public function ubah_tugas(Request $request, $id_tugas){
+        $tugas = Tugas::where('id', $id_tugas)->first();
+
+        $inputValidate =  $request->validate([
+            'tugas' => 'required',
+        ]);
+        
+        $affected = DB::table('tugas')->where('id', $id_tugas)->update($inputValidate);
+        return redirect('/guru/materi/tugas/'.$tugas->materi_id)->with('success', 'Tugas berhasil ditambahkan');
     }
 
     /**

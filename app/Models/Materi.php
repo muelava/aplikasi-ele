@@ -22,4 +22,9 @@ class Materi extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
+
+    public function tugas()
+    {
+        return $this->hasMany(Tugas::class);
+    }
 }
