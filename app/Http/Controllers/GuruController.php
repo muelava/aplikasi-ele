@@ -7,8 +7,8 @@ use App\Models\Kelas;
 use App\Models\Materi;
 use App\Models\Mapel;
 
+use File;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -101,8 +101,12 @@ class GuruController extends Controller
         $inputValidate['guru_id'] = auth()->id();
 
         if($request->file('dok_materi')->getSize()){
-
             $request->validate(['dok_materi' => 'mimes:pdf|max:4000']);
+            
+            $materi = Materi::where('id', $id_materi)->first();
+            if (File::exists(public_path('files/materies/'.$materi->dok_materi))) {
+                File::delete(public_path('files/materies/'.$materi->dok_materi));
+            }
             
             $file = $request->file('dok_materi');
             $filename = time().'_'.$file->getClientOriginalName();
