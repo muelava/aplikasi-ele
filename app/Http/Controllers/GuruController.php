@@ -192,4 +192,17 @@ class GuruController extends Controller
     {
         //
     }
+
+    public function delete_materi($id_materi)
+    {
+
+        // deleted exist file
+        $materi = Materi::where('id', $id_materi)->first();
+        if (File::exists(public_path('files/materies/'.$materi->dok_materi))) {
+            File::delete(public_path('files/materies/'.$materi->dok_materi));
+        }
+        
+        DB::table('materi')->where('id', $id_materi)->delete();
+        return redirect('/guru/materi')->with('success', 'Materi berhasil dihapus!');
+    }
 }
