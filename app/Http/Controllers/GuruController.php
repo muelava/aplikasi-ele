@@ -85,6 +85,7 @@ class GuruController extends Controller
             $dok_materi = $filename;
         }
         $inputValidate['dok_materi'] = $dok_materi;
+        $inputValidate['deskripsi'] = str_replace(array("\r", "\n"), ' ', $request->deskripsi);
 
         Materi::create($inputValidate);
         return redirect('/guru/materi')->with('success', 'Materi berhasil ditambahkan');
@@ -118,7 +119,8 @@ class GuruController extends Controller
             $dok_materi = $filename;
             $inputValidate['dok_materi'] = $dok_materi;
         }
-
+        
+        $inputValidate['deskripsi'] = str_replace(array("\r", "\n"), ' ', $request->deskripsi);
 
         $affected = DB::table('materi')->where('id', $id_materi)->update($inputValidate);
         
