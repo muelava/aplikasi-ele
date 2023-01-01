@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
 Route::group(['middleware' => ['auth:guru']], function() {
 
     Route::get('/guru', [GuruController::class, 'index'])->name('guru-beranda');
+    Route::get('/guru/jadwal', [GuruController::class, 'jadwal'])->name('guru-jadwal');
 
     // crud materi
     Route::get('/guru/materi', [GuruController::class, 'materi'])->name('guru-materi');

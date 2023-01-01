@@ -1,5 +1,5 @@
 @extends('guru.layouts.main')
-@section('title', "Profile")
+@section('title', "Pengaturan")
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{asset('/admin/vendors/css/vendors.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
@@ -86,7 +86,7 @@
                                 <div class="media">
                                   <a href="javascript:void(0);" class="mr-25">
                                     <img
-                                      src="{{ asset('admin/images/portrait/small/avatar-s-11.jpg') }}"
+                                      src="{{ asset('admin/images/avatars/user.jpg') }}"
                                       id="account-upload-img"
                                       class="rounded mr-50"
                                       alt="profile image"
@@ -97,8 +97,8 @@
                                   <!-- upload and reset button -->
                                   <div class="media-body mt-75 ml-1">
                                     <label for="account-upload" class="btn btn-sm btn-primary mb-75 mr-75">Upload</label>
-                                    <input type="file" id="account-upload" hidden accept="image/*" />
-                                    <button class="btn btn-sm btn-outline-secondary mb-75">Reset</button>
+                                    <input type="file" id="account-upload" hidden accept="image/*" disabled/>
+                                    <button class="btn btn-sm btn-outline-secondary mb-75" disabled>Reset</button>
                                     <p>Allowed JPG, GIF or PNG. Max size of 800kB</p>
                                   </div>
                                   <!--/ upload and reset button -->

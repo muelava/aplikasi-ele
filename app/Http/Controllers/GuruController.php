@@ -7,6 +7,7 @@ use App\Models\Kelas;
 use App\Models\Materi;
 use App\Models\Mapel;
 use App\Models\Tugas;
+use App\Models\Jadwal;
 
 use File;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,16 @@ class GuruController extends Controller
         return view('guru.index', [
             'active' => 'beranda',
             'materis' => $materis,
+        ]);
+    }
+
+    public function jadwal()
+    {
+        $jadwals = Jadwal::get();
+
+        return view('guru.pages.jadwal', [
+            'active' => 'jadwal',
+            'jadwals' => $jadwals,
         ]);
     }
 
