@@ -58,6 +58,7 @@
                       @else
                       <div class="card-header">
                           <h6>Tugas:</h6>
+                          <p>created {{ $tugas->created_at->diffForHumans() }}</p>
                       </div>
                       <form action="/guru/materi/tugas/ubah/{{ $tugas->id }}" method="POST" class="card-header pt-0" style="gap:1rem">
 
@@ -79,6 +80,12 @@
                       </form>
                       @endif
 
+                    </div>
+
+                    <div class="card">
+                      <div class="card-body">
+                        <p><b>0</b> Terkumpul dari <b>1</b> siswa.<a href="javascript:"> Lihat selengkapnya</a></p>
+                      </div>
                     </div>
 
                 </div>
