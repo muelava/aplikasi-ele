@@ -8,6 +8,7 @@ use App\Models\Materi;
 use App\Models\Mapel;
 use App\Models\Tugas;
 use App\Models\Jadwal;
+use App\Models\Diskusi;
 
 use File;
 use Illuminate\Support\Facades\DB;
@@ -181,6 +182,18 @@ class GuruController extends Controller
         
         $affected = DB::table('tugas')->where('id', $id_tugas)->update($inputValidate);
         return redirect('/guru/materi/tugas/'.$tugas->materi_id)->with('success', 'Tugas berhasil ditambahkan');
+    }
+
+    public function diskusi($materi_id)
+    {
+        $diskusis = Diskusi::where('materi_id', $materi_id)->get();
+        $materi = Materi::where('id', $materi_id)->first();
+
+        return view('guru.pages.materi-diskusi',[
+            'active' => 'materi',
+            'materi' => $materi,
+            'diskusis' => $diskusis,
+        ]);
     }
 
     /**

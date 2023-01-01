@@ -16,4 +16,9 @@ class Mapel extends Model
     {
         return $this->hasMany(Materi::class);
     }
+
+    public function diskusi()
+    {
+        return $this->hasMany(Diskusi::class);
+    }
 }

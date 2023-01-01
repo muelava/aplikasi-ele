@@ -1,5 +1,5 @@
 @extends('guru.layouts.main')
-@section('title', "Belum Ada Jadwal")
+@section('title', "Diskusi")
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{asset('/admin/vendors/css/vendors.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
@@ -18,7 +18,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
               <div class="row breadcrumbs-top">
                 <div class="col-12">
-                  <h2 class="content-header-title float-left mb-0">Jadwal</h2>
+                  <h2 class="content-header-title float-left mb-0">Diskusi</h2>
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item active">
                       Guru
@@ -35,13 +35,6 @@
                   <div class="card">
 
                     <div class="card-body">
-
-                      @if ($jadwals->count() > 0)
-                      <h5>Jadwal</h5>
-                      @else
-                      <h5>Belum ada jadwal!</h5>
-                      @endif
-                      
                     </div>
                     
                   </div>

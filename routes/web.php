@@ -88,6 +88,9 @@ Route::group(['middleware' => ['auth:guru']], function() {
     //crud profile
     Route::get('/guru/pengaturan', [GuruController::class, 'pengaturan'])->name('guru-pengaturan');
 
+    // crud diskusi
+    Route::get('/guru/materi/diskusi/{materi_id}', [GuruController::class, 'diskusi']);
+
 });
 
 // route halaman course
