@@ -17,4 +17,9 @@ class Diskusi extends Model
     {
         return $this->belongsTo(Mapel::class);
     }
+
+    public function siswa()
+    {
+        return $this->belongsTo(SiswaModel::class);
+    }
 }

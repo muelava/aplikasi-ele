@@ -64,19 +64,30 @@
                   </div>
                   {{-- end Materi --}}
 
+                  @if ($diskusis->count() > 0)
+                  <h4 class="text-center mb-2 mt-3">({{ $diskusis->count() }}) Diskusi</h4>
+                  @else
+                  <h4 class="text-center mb-2 mt-3">Tidak Ada Diskusi</h4>
+                  @endif
                   <button class="btn btn-sm btn-primary mb-1" ><i data-feather="plus"></i> Diskusi</button>
 
                   {{-- start diskusi --}}
+                  @if ($diskusis->count() > 0)
+
+                  @foreach ($diskusis as $diskusi)
                   <div class="card">
                     <div class="card-header">
-                      <h5>Nama Siswa</h5>
-                      <small>{{ $materi->created_at->diffForHumans() }}</small>
+                      <h5>{{ $diskusi->siswa->nama }}</h5>
+                      <small>{{ $diskusi->created_at->diffForHumans() }}</small>
                     </div>
 
                     <div class="card-body">
-                      <p>Pak saya mau tanya, apakah bisa menjadi seorang programmer?</p>
+                      <p>{{ $diskusi->komentar }}</p>
                     </div>
                   </div>
+                  @endforeach
+                      
+                  @endif
                   {{-- end diskusi --}}
 
                 </div>

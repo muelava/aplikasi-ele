@@ -16,4 +16,9 @@ class SiswaModel extends Model
     {
         return $this->belongsTo(Kelas::class);
     }
+
+    public function diskusi()
+    {
+        return $this->belongsTo(Diskusi::class);
+    }
 }
