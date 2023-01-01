@@ -61,7 +61,10 @@ class AdministratorController extends Controller
             'no_handphone' => 'required'
         ]);
         $inputValidate['role'] = 'guru';
-        $inputValidate['password'] = Hash::make('123');
+
+        $get_tgl_lahir = date("d-m-Y", strtotime($request->tanggal_lahir));
+        $set_default_pass = str_replace("-","",$get_tgl_lahir);
+        $inputValidate['password'] = Hash::make('bi#'.$set_default_pass);
 
         Guru::create($inputValidate);
         return redirect('/administrator/data-guru')->with('success', 'Data guru berhasil ditambahkan');
@@ -125,7 +128,10 @@ class AdministratorController extends Controller
             'tahun_masuk' => 'required',
         ]);
         $inputValidate['role'] = 'siswa';
-        $inputValidate['password'] = Hash::make('123');
+
+        $get_tgl_lahir = date("d-m-Y", strtotime($request->tanggal_lahir));
+        $set_default_pass = str_replace("-","",$get_tgl_lahir);
+        $inputValidate['password'] = Hash::make($set_default_pass);
 
         Siswa::create($inputValidate);
         return redirect('/administrator/data-siswa')->with('success', 'Data siswa berhasil ditambahkan');
