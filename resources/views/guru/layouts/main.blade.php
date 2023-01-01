@@ -28,9 +28,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/vendors.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/charts/apexcharts.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/vendors/css/extensions/toastr.min.css')}}">
+    @yield('vendor-css')
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -43,15 +41,11 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/themes/semi-dark-layout.min.css')}}">
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/core/menu/menu-types/vertical-menu.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/pages/dashboard-ecommerce.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/charts/chart-apex.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/plugins/extensions/ext-component-toastr.min.css')}}">
+    @yield('page-css')
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('/admin/assets/css/main.css')}}">
-    @yield('top')
     <!-- END: Custom CSS-->
 
   </head>
@@ -86,7 +80,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
-    <script src="{{asset('/admin/vendors/js/extensions/toastr.min.js')}}"></script>
+    @yield('page-vendor-js')
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -95,8 +89,7 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="{{asset('/admin/assets/js/main.js')}}"></script>
-    @yield('bottom')
+    @yield('page-js')
     <!-- END: Page JS-->
   </body>
   <!-- END: Body-->

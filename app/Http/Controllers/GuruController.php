@@ -32,6 +32,16 @@ class GuruController extends Controller
         ]);
     }
 
+    public function pengaturan()
+    {
+        $guru = Guru::where('id',auth()->id())->first();
+
+        return view('guru.pages.pengaturan', [
+            'active' => 'beranda',
+            'guru' => $guru,
+        ]);
+    }
+
     public function materi()
     {
         $materis = Materi::where('guru_id',auth()->id())->get();

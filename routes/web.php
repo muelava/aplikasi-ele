@@ -84,6 +84,9 @@ Route::group(['middleware' => ['auth:guru']], function() {
     Route::post('/guru/materi/tugas/tambah/{id_materi}', [GuruController::class, 'tambah_tugas']);
     Route::post('/guru/materi/tugas/ubah/{id_tugas}', [GuruController::class, 'ubah_tugas']);
 
+    //crud profile
+    Route::get('/guru/pengaturan', [GuruController::class, 'pengaturan'])->name('guru-pengaturan');
+
 });
 
 // route halaman course
