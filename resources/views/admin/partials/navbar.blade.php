@@ -37,7 +37,7 @@
                   <a class="dropdown-item" href="{{url('/administrator/profil')}}"><i class="mr-50" data-feather="user"></i> Profil</a>
                   <a class="dropdown-item" href="{{url('/administrator/pengaturan')}}"><i class="mr-50" data-feather="settings"></i> Pengaturan</a>
                   <div class="dropdown-divider"></div>
-                  <form action="/logout" method="post">
+                  <form action="/logout" method="post" onclick="return confirm('yakin ingin keluar?')">
                       @csrf
                       <button class="dropdown-item btn w-100" type="submit"><i class="mr-50" data-feather="power"></i> Keluar</button>
                   </form>
