@@ -186,7 +186,7 @@ class GuruController extends Controller
 
     public function diskusi($materi_id)
     {
-        $diskusis = Diskusi::where('materi_id', $materi_id)->get();
+        $diskusis = Diskusi::where('materi_id', $materi_id)->orderBy('id', 'asc')->get();
         $materi = Materi::where('id', $materi_id)->first();
 
         return view('guru.pages.materi-diskusi',[
@@ -203,6 +203,11 @@ class GuruController extends Controller
         
         $inputValidate['materi_id'] = $id_materi;
         $inputValidate['siswa_id'] = '1';
+
+        if (auth('guru')->check()) {
+            $inputValidate['guru_id'] = auth()->id();
+            $inputValidate['siswa_id'] = null;
+        };
 
         Diskusi::create($inputValidate);
         return redirect('/guru/materi/diskusi/'.$id_materi)->with('success', 'Disukusi baru telah ditambahkan');

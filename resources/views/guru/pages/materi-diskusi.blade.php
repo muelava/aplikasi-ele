@@ -74,24 +74,37 @@
                   {{-- start diskusi --}}
                   @if ($diskusis->count() > 0)
 
-                  @foreach ($diskusis as $diskusi)
-                  <div class="card mb-1">
-                    <div class="card-header">
-                      <div>
-                        <small class="font-weight-bold">
-                          {{ $diskusi->siswa->nama }}
-                        </small>
-                        •
-                        <small>{{ $diskusi->created_at->diffForHumans() }}</small>
+                    @foreach ($diskusis as $diskusi)
+                    <div class="diskusi card mb-1">
+                      <div class="card-header">
+                        <div>
+                          <small class="font-weight-bold">{{ auth('guru')->check() ? $diskusi->guru->nama : $diskusi->siswa->nama }}</small>
+                          •
+                          <small>{{ $diskusi->created_at->diffForHumans() }}</small>
+                        </div>
+                        <small class="d-block text-capitalize" style="margin-top: 0.25rem">{{ auth('guru')->check() ? $diskusi->guru->role : $diskusi->siswa->role }}</small>
                       </div>
-                      <small class="d-block" style="margin-top: 0.25rem">Siswa</small>
+
+                      <div class="card-body">
+                        <p>{{ $diskusi->komentar }}</p>
+                        <button class="btn text-primary">Balas</button>
+                      </div>
                     </div>
 
-                    <div class="card-body">
-                      <p>{{ $diskusi->komentar }}</p>
-                    </div>
-                  </div>
-                  @endforeach
+                      <div class="sub-diskusi card ml-3">
+                        <div class="card-header">
+                          <div>
+                            <small class="font-weight-bold">Nama</small>
+                            •
+                            <small>Waktu</small>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <p>cobaindeh</p>
+                        </div>
+                      </div>
+
+                    @endforeach
                       
                   @endif
                   {{-- end diskusi --}}

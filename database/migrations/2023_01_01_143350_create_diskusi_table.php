@@ -16,8 +16,8 @@ class CreateDiskusiTable extends Migration
         Schema::create('diskusi', function (Blueprint $table) {
             $table->id();
             $table->foreignId('materi_id');
-            $table->foreignId('guru_id');
-            $table->foreignId('siswa_id');
+            $table->foreignId('guru_id')->nullable();
+            $table->foreignId('siswa_id')->nullable();
             $table->string('komentar');
             $table->timestamps();
         });
