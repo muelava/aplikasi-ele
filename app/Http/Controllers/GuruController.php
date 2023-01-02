@@ -196,6 +196,18 @@ class GuruController extends Controller
         ]);
     }
 
+    public function tambah_diskusi(Request $request, $id_materi){
+        $inputValidate =  $request->validate([
+            'komentar' => 'required',
+        ]);
+        
+        $inputValidate['materi_id'] = $id_materi;
+        $inputValidate['siswa_id'] = '1';
+
+        Diskusi::create($inputValidate);
+        return redirect('/guru/materi/diskusi/'.$id_materi)->with('success', 'Disukusi baru telah ditambahkan');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

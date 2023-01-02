@@ -69,16 +69,20 @@
                   @else
                   <h4 class="text-center mb-2 mt-3">Tidak Ada Diskusi</h4>
                   @endif
-                  <button class="btn btn-sm btn-primary mb-1" ><i data-feather="plus"></i> Diskusi</button>
+                  <button class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#modal-tambah-diskusi" ><i data-feather="plus"></i> Diskusi</button>
 
                   {{-- start diskusi --}}
                   @if ($diskusis->count() > 0)
 
                   @foreach ($diskusis as $diskusi)
-                  <div class="card">
+                  <div class="card mb-1">
                     <div class="card-header">
-                      <h5>{{ $diskusi->siswa->nama }}</h5>
-                      <small>{{ $diskusi->created_at->diffForHumans() }}</small>
+                      <p class="mb-0">
+                        {{ $diskusi->siswa->nama }}
+                        •
+                        <small>{{ $diskusi->created_at->diffForHumans() }}</small>
+                      </p>
+                      <small class="d-block" style="margin-top: 0.25rem">Siswa</small>
                     </div>
 
                     <div class="card-body">
@@ -95,6 +99,41 @@
           {{-- content start --}}
     </div>
 </div>
+
+<!-- Modal tambah -->
+<div class="modal fade text-left" id="modal-tambah-diskusi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel33">Tambah Diskusi</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/guru/materi/diskusi/tambah/{{ $materi->id }}" method="POST">
+        
+        {{ csrf_field() }}
+        <div class="modal-body">
+          <label>Diskusi materi</label>
+          <h4 class="mb-3">{{ $materi->materi }}</h4>
+          <label>Komentar</label>
+          <div class="form-group">
+            <textarea class="form-control @error('komentar') is-invalid @enderror" name="komentar" cols="30" rows="10" placeholder="Tulis komentar.." required>{{ old('komentar') }}</textarea>
+            @error('komentar')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+            @enderror
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- /Modal tambah -->
 @endsection
 
 @section('page-vendor-js')
