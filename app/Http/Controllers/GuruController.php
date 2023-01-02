@@ -49,7 +49,7 @@ class GuruController extends Controller
         $guru = Guru::where('id',auth()->id())->first();
 
         return view('guru.pages.pengaturan', [
-            'active' => 'beranda',
+            'active' => 'pengaturan',
             'guru' => $guru,
         ]);
     }
