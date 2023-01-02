@@ -77,11 +77,13 @@
                   @foreach ($diskusis as $diskusi)
                   <div class="card mb-1">
                     <div class="card-header">
-                      <p class="mb-0">
-                        {{ $diskusi->siswa->nama }}
+                      <div>
+                        <small class="font-weight-bold">
+                          {{ $diskusi->siswa->nama }}
+                        </small>
                         •
                         <small>{{ $diskusi->created_at->diffForHumans() }}</small>
-                      </p>
+                      </div>
                       <small class="d-block" style="margin-top: 0.25rem">Siswa</small>
                     </div>
 

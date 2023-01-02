@@ -22,4 +22,9 @@ class Diskusi extends Model
     {
         return $this->belongsTo(SiswaModel::class);
     }
+
+    public function guru()
+    {
+        return $this->belongsTo(GuruModel::class);
+    }
 }
