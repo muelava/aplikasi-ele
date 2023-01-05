@@ -19,6 +19,11 @@ class SiswaModel extends Model
 
     public function diskusi()
     {
-        return $this->belongsTo(Diskusi::class);
+        return $this->hasMany(Diskusi::class);
+    }
+
+    public function sub_diskusi()
+    {
+        return $this->hasMany(SubDiskusi::class);
     }
 }

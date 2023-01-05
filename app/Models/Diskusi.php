@@ -27,4 +27,9 @@ class Diskusi extends Model
     {
         return $this->belongsTo(GuruModel::class);
     }
+
+    public function sub_diskusi()
+    {
+        return $this->hasMany(SubDiskusi::class);
+    }
 }

@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth:guru']], function() {
     // crud diskusi
     Route::get('/guru/materi/diskusi/{materi_id}', [GuruController::class, 'diskusi']);
     Route::post('/guru/materi/diskusi/tambah/{id_materi}', [GuruController::class, 'tambah_diskusi']);
+    Route::post('/guru/materi/sub-diskusi/tambah/{id_diskusi}', [GuruController::class, 'tambah_sub_diskusi']);
 
 });
 

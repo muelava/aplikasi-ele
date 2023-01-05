@@ -9,6 +9,7 @@ use App\Models\Mapel;
 use App\Models\Tugas;
 use App\Models\Jadwal;
 use App\Models\Diskusi;
+use App\Models\SubDiskusi;
 
 use File;
 use Illuminate\Support\Facades\DB;
@@ -186,7 +187,7 @@ class GuruController extends Controller
 
     public function diskusi($materi_id)
     {
-        $diskusis = Diskusi::where('materi_id', $materi_id)->orderBy('id', 'asc')->get();
+        $diskusis = Diskusi::where('materi_id', $materi_id)->orderBy('id', 'desc')->get();
         $materi = Materi::where('id', $materi_id)->first();
 
         return view('guru.pages.materi-diskusi',[
@@ -202,15 +203,34 @@ class GuruController extends Controller
         ]);
         
         $inputValidate['materi_id'] = $id_materi;
-        $inputValidate['siswa_id'] = '1';
+
+        if (auth('guru')->check()) {
+            $inputValidate['guru_id'] = auth()->id();
+            $inputValidate['siswa_id'] = null;
+        }elseif (auth('siswa')->check()) {
+            $inputValidate['siswa_id'] = auth()->id();
+            $inputValidate['guru_id'] = null;
+
+        }
+
+        Diskusi::create($inputValidate);
+        return redirect('/guru/materi/diskusi/'.$id_materi)->with('success', 'Diskusi baru telah ditambahkan');
+    }
+
+    public function tambah_sub_diskusi(Request $request, $id_diskusi){
+        $inputValidate =  $request->validate([
+            'komentar' => 'required',
+        ]);
+        
+        $inputValidate['diskusi_id'] = $id_diskusi;
 
         if (auth('guru')->check()) {
             $inputValidate['guru_id'] = auth()->id();
             $inputValidate['siswa_id'] = null;
         };
 
-        Diskusi::create($inputValidate);
-        return redirect('/guru/materi/diskusi/'.$id_materi)->with('success', 'Disukusi baru telah ditambahkan');
+        SubDiskusi::create($inputValidate);
+        return back()->with('success', 'Balasan telah ditambahkan');
     }
 
     /**

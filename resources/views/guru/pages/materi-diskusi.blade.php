@@ -8,6 +8,8 @@
 @section('page-css')
 <link rel="stylesheet" type="text/css" href="{{asset('/admin/css/core/menu/menu-types/vertical-menu.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/admin/css/plugins/forms/pickers/form-flat-pickr.min.css') }}">
+
+<meta name="_token" content="{{ csrf_token() }}">
 @endsection
 
 @section('container')
@@ -75,7 +77,7 @@
                   @if ($diskusis->count() > 0)
 
                     @foreach ($diskusis as $diskusi)
-                    <div class="diskusi card mb-1">
+                    <div class="diskusi card mb-1" diskusi="{{ $diskusi->id }}">
                       <div class="card-header">
                         <div>
                           <small class="font-weight-bold">{{ auth('guru')->check() ? $diskusi->guru->nama : $diskusi->siswa->nama }}</small>
@@ -87,22 +89,31 @@
 
                       <div class="card-body">
                         <p>{{ $diskusi->komentar }}</p>
-                        <button class="btn text-primary">Balas</button>
+                        <button class="btn text-primary" onclick="reply_button(this)">Balas</button>
                       </div>
                     </div>
 
-                      <div class="sub-diskusi card ml-3">
-                        <div class="card-header">
-                          <div>
-                            <small class="font-weight-bold">Nama</small>
-                            •
-                            <small>Waktu</small>
+                    @php
+                    $tbl_sub_diskusi = App\Models\SubDiskusi::where('diskusi_id', $diskusi->id)->orderBy('id', 'desc')->get();
+                    @endphp
+
+                    @if ($tbl_sub_diskusi->count() > 0)
+                      @foreach ($tbl_sub_diskusi as $sub_diskusi)
+                          <div class="sub-diskusi card ml-3">
+                            <div class="card-header">
+                              <div>
+                                <small class="font-weight-bold">{{ auth('guru')->check() ? $sub_diskusi->guru->nama : $sub_diskusi->siswa->nama }}</small>
+                                •
+                                <small>{{ $sub_diskusi->created_at->diffForHumans() }}</small>
+                              </div>
+                              <small class="d-block text-capitalize" style="margin-top: 0.25rem">{{ auth('guru')->check() ? $sub_diskusi->guru->role : $diskusi->siswa->role }}</small>
+                            </div>
+                            <div class="card-body">
+                              <p>{{ $sub_diskusi->komentar }}</p>
+                            </div>
                           </div>
-                        </div>
-                        <div class="card-body">
-                          <p>cobaindeh</p>
-                        </div>
-                      </div>
+                      @endforeach
+                    @endif
 
                     @endforeach
                       
