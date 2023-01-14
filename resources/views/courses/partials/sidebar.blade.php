@@ -13,7 +13,7 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
           <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="nav-item {{ $active === 'beranda' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('courses-beranda')}}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Beranda">Beranda</span></a>
+            <li class="nav-item {{ $active === 'course' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('courses')}}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Course">Course</span></a>
             </li>
             <li class="nav-item {{ $active === 'materi' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{route('guru-materi')}}"><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Materi">Materi</span></a>
             </li>

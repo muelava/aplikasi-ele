@@ -54,11 +54,11 @@ License: You must have a valid license purchased only from themeforest(the above
   <!-- BEGIN: Body-->
   <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
 
-    @include('siswa.partials.navbar')
+    @include('courses.partials.navbar')
   
     <!-- END: Header-->
 
-    @include('guru.partials.sidebar')
+    @include('courses.partials.sidebar')
     
     <!-- BEGIN: Content-->
     @yield('container')

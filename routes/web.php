@@ -97,7 +97,7 @@ Route::group(['middleware' => ['auth:guru']], function() {
 
 // route halaman course
 Route::group(['middleware' => ['auth:siswa,guru']], function() {
-    Route::get('/courses', [CoursesController::class, 'index']);
+    Route::get('/courses', [CoursesController::class, 'index'])->name('courses');
 });
 
 // crud siswa

@@ -1,4 +1,4 @@
-@extends('guru.layouts.main')
+@extends('courses.layouts.main')
 @section('title', "Selamat Datang Siswa!")
 
 @section('vendor-css')
