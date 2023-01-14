@@ -59,7 +59,3 @@
       </div>
     </div>
   </nav>
-
-  @if ($active === 'courses')
-  @include('partials.my-sidebar')
-  @endif
