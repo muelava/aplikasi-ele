@@ -96,13 +96,16 @@ Route::group(['middleware' => ['auth:guru']], function() {
 });
 
 // route halaman course
-Route::group(['middleware' => ['auth:siswa,guru']], function() {
+Route::group(['middleware' => ['auth:siswa']], function() {
     Route::get('/courses', [CoursesController::class, 'index'])->name('courses');
 
     // crud diskusi
     Route::get('/courses/materi/{materi_id}', [CoursesController::class, 'diskusi']);
     Route::post('/courses/materi/tambah-diskusi/{id_materi}', [CoursesController::class, 'tambah_diskusi']);
     Route::post('/courses/materi/tambah-sub-diskusi/{id_diskusi}', [CoursesController::class, 'tambah_sub_diskusi']);
+
+    //crud profile
+    Route::get('/siswa/pengaturan', [CoursesController::class, 'pengaturan'])->name('siswa-pengaturan');
 
 });
 

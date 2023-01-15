@@ -75,4 +75,14 @@ class CoursesController extends Controller
         SubDiskusi::create($inputValidate);
         return back()->with('success', 'Balasan telah ditambahkan');
     }
+
+    public function pengaturan()
+    {
+        $siswa = SiswaModel::where('id',auth()->id())->first();
+
+        return view('courses.pages.pengaturan', [
+            'active' => 'pengaturan',
+            'siswa' => $siswa,
+        ]);
+    }
 }
