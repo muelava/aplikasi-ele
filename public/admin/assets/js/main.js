@@ -158,6 +158,7 @@ function tombol_batal_tugas() {
 // /materi/tugas
 
 // START materi/diskusi ============================
+// for Guru
 function reply_button(e) {
     let reply_btn = $(e),
         diskusi_card = reply_btn.parent(".card-body").parent(".diskusi"),
@@ -168,6 +169,31 @@ function reply_button(e) {
 
     form_sub_diskusi = `
     <form action="/guru/materi/sub-diskusi/tambah/${id_diskusi}" method="POST" class="reply-diskusi card ml-3 pt-1">
+        <input type="hidden" name="_token" value="${_token}">
+        <div class="form-group col-12">
+            <label>Balas</label>
+            <textarea class="form-control mb-2" name="komentar" rows="5" placeholder="Berikan balasan" required></textarea>
+            <div class="d-flex justify-content-end" style="gap:1rem">
+            <button type="submit" class="btn btn-primary">Balas</button>
+            </div>
+        </div>
+    </form>
+    `;
+
+    diskusi_card.after(form_sub_diskusi);
+}
+
+// for Siswa
+function reply_button_siswa(e) {
+    let reply_btn = $(e),
+        diskusi_card = reply_btn.parent(".card-body").parent(".diskusi"),
+        id_diskusi = diskusi_card.attr("diskusi"),
+        _token = $('meta[name="_token"]').attr("content");
+
+    $(".reply-diskusi").remove();
+
+    form_sub_diskusi = `
+    <form action="/courses/materi/tambah-sub-diskusi/${id_diskusi}" method="POST" class="reply-diskusi card ml-3 pt-1">
         <input type="hidden" name="_token" value="${_token}">
         <div class="form-group col-12">
             <label>Balas</label>

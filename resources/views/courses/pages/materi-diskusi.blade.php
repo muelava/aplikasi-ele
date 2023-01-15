@@ -1,5 +1,5 @@
-@extends('guru.layouts.main')
-@section('title', "Diskusi")
+@extends('courses.layouts.main')
+@section('title', "Materi")
 @section('vendor-css')
 <link rel="stylesheet" type="text/css" href="{{asset('/admin/vendors/css/vendors.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
@@ -89,7 +89,7 @@
 
                       <div class="card-body">
                         <p>{{ $diskusi->komentar }}</p>
-                        <button class="btn text-primary" onclick="reply_button(this)">Balas</button>
+                        <button class="btn text-primary" onclick="reply_button_siswa(this)">Balas</button>
                       </div>
                     </div>
 
@@ -136,7 +136,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="/guru/materi/diskusi/tambah/{{ $materi->id }}" method="POST">
+      <form action="/courses/materi/tambah-diskusi/{{ $materi->id }}" method="POST">
         
         {{ csrf_field() }}
         <div class="modal-body">
