@@ -57,7 +57,7 @@
 
                       <small class="d-block mt-2">Tugas</small>
                       @if ($materi->tugas->count() > 0)
-                      <a class="btn text-primary pl-0" href="{{ asset('guru/materi/tugas/'.$materi->id) }}">Lihat Tugas</a>
+                      <a class="btn text-primary pl-0" href="{{ asset('courses/materi/tugas/'.$materi->id) }}">Lihat Tugas</a>
                       @else
                       <p>Belum ada tugas</p>
                       @endif
