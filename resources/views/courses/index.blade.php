@@ -22,6 +22,11 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Courses</h2>
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active">
+                {{ $siswa->kelas->kelas }}
+              </li>
+            </ol>
           </div>
         </div>
       </div>
