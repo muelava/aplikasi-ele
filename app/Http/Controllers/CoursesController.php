@@ -33,7 +33,7 @@ class CoursesController extends Controller
         $materi = Materi::where('id', $materi_id)->first();
 
         return view('courses.pages.materi-diskusi',[
-            'active' => 'materi',
+            'active' => 'course',
             'materi' => $materi,
             'diskusis' => $diskusis,
         ]);
