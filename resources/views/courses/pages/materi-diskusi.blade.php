@@ -106,7 +106,7 @@
                                 •
                                 <small>{{ $sub_diskusi->created_at->diffForHumans() }}</small>
                               </div>
-                              <small class="d-block text-capitalize" style="margin-top: 0.25rem">{{ $sub_diskusi->guru ? $sub_diskusi->guru->role : $diskusi->siswa->role }}</small>
+                              <small class="d-block text-capitalize" style="margin-top: 0.25rem">{{ $sub_diskusi->guru ? $sub_diskusi->guru->role : $sub_diskusi->siswa->role }}</small>
                             </div>
                             <div class="card-body">
                               <p>{{ $sub_diskusi->komentar }}</p>
