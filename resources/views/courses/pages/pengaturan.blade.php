@@ -136,6 +136,20 @@
                                     </div>
                                     <div class="col-12 col-sm-6">
                                       <div class="form-group">
+                                        <label for="kelas">Kelas</label>
+                                        <input
+                                          type="text"
+                                          class="form-control"
+                                          id="kelas"
+                                          name="kelas"
+                                          placeholder="kelas"
+                                          value="{{ $siswa->kelas->kelas }}"
+                                          readonly
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="col-12 col-sm-6">
+                                      <div class="form-group">
                                         <label for="email">E-mail</label>
                                         <input
                                           type="email"
