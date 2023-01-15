@@ -69,7 +69,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
-      <p class="clearfix mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">&copy; 2022<a class="ml-25" href="#" target="_blank">Bina Ikhwani</a><span class="d-none d-sm-inline-block"></span></span></p>
+      <p class="clearfix mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">&copy; 2023<a class="ml-25" href="#" target="_blank">Bina Ikhwani</a><span class="d-none d-sm-inline-block"></span></span></p>
     </footer>
     <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
     <!-- END: Footer-->
