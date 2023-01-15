@@ -34,7 +34,7 @@
           <div class="col-12 row mx-0 p-2">
             @if ($materis->count() > 0)
               @foreach ($materis as $materi)
-              <a href="javascript:" class="col-xl-2 col-md-4 col-sm-6 shadow" title="Klik info untuk membuka materi">
+              <a href="courses/materi/{{ $materi->id }}" class="col-xl-2 col-md-4 col-sm-6 shadow-sm" title="Klik info untuk membuka materi">
                 <div class="card text-left">
                   <small class="d-block text-secondary mt-1 text-right" style="font-size:0.8rem">{{ $materi->created_at->diffForHumans() }}</small>
                   <div class="card-body p-1">
