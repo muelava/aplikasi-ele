@@ -17,7 +17,7 @@ class CreateSubDiskusiTable extends Migration
             $table->id();
             $table->foreignId('diskusi_id');
             $table->foreignId('guru_id')->nullable();
-            $table->foreignId('siswa_id')->nullable();
+            $table->foreignId('siswa_id')->nullable()->references('id')->on('siswa')->onDelete('cascade');
             $table->string('komentar');
             $table->timestamps();
         });
