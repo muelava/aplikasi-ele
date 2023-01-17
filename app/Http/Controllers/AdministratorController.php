@@ -62,7 +62,7 @@ class AdministratorController extends Controller
         ]);
         $inputValidate['role'] = 'guru';
 
-        $get_tgl_lahir = date("d-m-Y", strtotime($request->tanggal_lahir));
+        $get_tgl_lahir = date("d-m-y", strtotime($request->tanggal_lahir));
         $set_default_pass = str_replace("-","",$get_tgl_lahir);
         $inputValidate['password'] = Hash::make('bi#'.$set_default_pass);
 
@@ -129,7 +129,7 @@ class AdministratorController extends Controller
         ]);
         $inputValidate['role'] = 'siswa';
 
-        $get_tgl_lahir = date("d-m-Y", strtotime($request->tanggal_lahir));
+        $get_tgl_lahir = date("d-m-y", strtotime($request->tanggal_lahir));
         $set_default_pass = str_replace("-","",$get_tgl_lahir);
         $inputValidate['password'] = Hash::make($set_default_pass);
 
