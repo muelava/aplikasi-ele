@@ -110,7 +110,7 @@
                                   <div class="row">
                                     <div class="col-12 col-sm-6">
                                       <div class="form-group">
-                                        <label for="nip">NIP</label>
+                                        <label for="nip">NIP/NIK</label>
                                         <input
                                           type="text"
                                           class="form-control"

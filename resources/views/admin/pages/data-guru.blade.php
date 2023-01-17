@@ -108,7 +108,7 @@
                   </ul>
               </div>
           @endif
-          <label>NIP (Nomor Induk Pegawai)</label>
+          <label>NIP/NIK</label>
           <div class="form-group">
             <input type="text" placeholder="112233" class="form-control" name="nip" required value="{{ old('nip') }}" />
           </div>
