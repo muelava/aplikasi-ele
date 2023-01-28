@@ -15,8 +15,9 @@ class CreateTugasTable extends Migration
     {
         Schema::create('tugas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('materi_id');
+            $table->foreignId('materi_id')->nullable()->references('id')->on('materi')->onDelete('cascade');
             $table->string('tugas');
+            $table->string('dok_tugas')->nullable();
             $table->timestamps();
         });
     }

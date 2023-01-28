@@ -40,7 +40,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>NIP</th>
+                                    <th>NIP/NIK</th>
                                     <th>Nama Guru</th>
                                     <th>No Telepon</th>
                                     <th except>Aksi</th>

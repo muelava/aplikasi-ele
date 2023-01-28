@@ -146,9 +146,23 @@ function ubah_materi(
 }
 
 // materi/tugas
-function toggle_ubah_tugas() {
+function toggle_ubah_tugas(dok_tugas) {
     $("#input-ubah-tugas").toggleClass("d-none");
     $("#show-tugas").toggleClass("d-none");
+
+    // Get a reference to our file input
+    let input_dok_materi = document.querySelector(
+        'input[data-dok="tugas_update"]'
+    );
+    const myFile = new File([""], dok_tugas, {
+        type: "application/pdf",
+    });
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(myFile);
+    input_dok_materi.files = dataTransfer.files;
+
+    document.querySelector('[data-label="tugas_update"]').textContent =
+        dok_tugas;
 }
 
 function tombol_batal_tugas() {

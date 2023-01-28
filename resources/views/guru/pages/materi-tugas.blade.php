@@ -60,18 +60,26 @@
                           <h6>Tugas:</h6>
                           <p>created {{ $tugas->created_at->diffForHumans() }}</p>
                       </div>
-                      <form action="/guru/materi/tugas/ubah/{{ $tugas->id }}" method="POST" class="card-header pt-0" style="gap:1rem">
+                      <form action="/guru/materi/tugas/ubah/{{ $tugas->id }}" method="POST" enctype='multipart/form-data' class="card-header pt-0" style="gap:1rem">
 
                         {{ csrf_field() }}
                         <div id="show-tugas" class="col-12">
                           <article>
                             {{ $tugas->tugas }}
                           </article>
-                          <button type="button" class="btn text-primary d-block ml-auto" onclick="toggle_ubah_tugas()"><i data-feather="edit"></i> Ubah</button>
+                          <button type="button" class="btn text-primary d-block ml-auto" onclick="toggle_ubah_tugas('{{ $tugas->dok_tugas }}')"><i data-feather="edit"></i> Ubah</button>
                         </div>
                         <div id="input-ubah-tugas" class="form-group col-12 d-none">
-                          <label>Ubah</label>
-                          <textarea class="form-control mb-2" name="tugas" rows="10" placeholder="Tugas.." required>{{ $tugas->tugas ? $tugas->tugas : old('tugas') }}</textarea>
+                          <label>Tugas/Intruksi</label>
+                          <textarea class="form-control mb-2" name="tugas" rows="10" required>{{ $tugas->tugas ? $tugas->tugas : old('tugas') }}</textarea>
+                          <div class="form-group">
+                            <label for="customFile">Dokumen Tugas</label>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" name="dok_tugas" required>
+                              <label class="custom-file-label" for="customFile" data-label="tugas_update">Pilih File</label>
+                              <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
+                            </div>
+                          </div>
                           <div class="d-flex justify-content-end" style="gap:1rem">
                             <button type="button" class="btn bg-light-primary" onclick="tombol_batal_tugas()">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -104,7 +112,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="/guru/materi/tugas/tambah/{{ $materi->id }}" method="POST">
+      <form action="/guru/materi/tugas/tambah/{{ $materi->id }}" method="POST" enctype='multipart/form-data'>
         
         {{ csrf_field() }}
         <div class="modal-body">
@@ -112,14 +120,22 @@
           <div class="form-group">
             <input type="text" placeholder="Pythagoras" class="form-control" required value="{{ $materi->materi }}" disabled />
           </div>
-          <label>Tugas</label>
+          <label>Tugas/Intruksi</label>
           <div class="form-group">
-            <textarea class="form-control @error('tugas') is-invalid @enderror" name="tugas" cols="30" rows="10" placeholder="Tugas.." required>{{ old('tugas') }}</textarea>
+            <textarea class="form-control @error('tugas') is-invalid @enderror" name="tugas" cols="30" rows="10" required>{{ old('tugas') }}</textarea>
             @error('tugas')
                 <div class="invalid-feedback">
                   {{ $message }}
                 </div>
             @enderror
+          </div>
+          <div class="form-group">
+            <label for="customFile">Dokumen Tugas</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile" name="dok_tugas" required>
+              <label class="custom-file-label" for="customFile">Pilih file</label>
+              <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
+            </div>
           </div>
         </div>
         <div class="modal-footer">

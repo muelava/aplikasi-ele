@@ -168,10 +168,21 @@ class GuruController extends Controller
             'tugas' => 'required',
         ]);
         
+        $dok_tugas = null;
+        if ($request->hasFile('dok_tugas')) {
+            $file = $request->file('dok_tugas');
+            $filename = time().'_'.$file->getClientOriginalName();
+            // File upload location
+            $location = 'files/tugas';
+            // Upload file
+            $file->move($location,$filename);
+            $dok_tugas = $filename;
+        }
+        $inputValidate['dok_tugas'] = $dok_tugas;
         $inputValidate['materi_id'] = $id_materi;
 
         Tugas::create($inputValidate);
-        return redirect('/guru/materi/tugas/'.$id_materi)->with('success', 'Materi berhasil ditambahkan');
+        return redirect('/guru/materi/tugas/'.$id_materi)->with('success', 'Tugas berhasil ditambahkan');
     }
 
     public function ubah_tugas(Request $request, $id_tugas){
@@ -180,9 +191,28 @@ class GuruController extends Controller
         $inputValidate =  $request->validate([
             'tugas' => 'required',
         ]);
+
+        if($request->file('dok_tugas')->getSize()){
+            $request->validate(['dok_tugas' => 'mimes:pdf|max:4000']);
+            
+            // deleted exist file
+            $tugas = Tugas::where('id', $id_tugas)->first();
+            if (File::exists(public_path('files/tugas/'.$tugas->dok_tugas))) {
+                File::delete(public_path('files/tugas/'.$tugas->dok_tugas));
+            }
+            
+            $file = $request->file('dok_tugas');
+            $filename = time().'_'.$file->getClientOriginalName();
+            // File upload location
+            $location = 'files/tugas';
+            // Upload file
+            $file->move($location,$filename);
+            $dok_tugas = $filename;
+            $inputValidate['dok_tugas'] = $dok_tugas;
+        }
         
         $affected = DB::table('tugas')->where('id', $id_tugas)->update($inputValidate);
-        return redirect('/guru/materi/tugas/'.$tugas->materi_id)->with('success', 'Tugas berhasil ditambahkan');
+        return redirect('/guru/materi/tugas/'.$tugas->materi_id)->with('success', 'Tugas berhasil diubah');
     }
 
     public function diskusi($materi_id)
