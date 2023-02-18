@@ -76,6 +76,18 @@ class CoursesController extends Controller
         return back()->with('success', 'Balasan telah ditambahkan');
     }
 
+    public function tugas($materi_id)
+    {
+        $tugas = Tugas::where('materi_id', $materi_id)->first();
+        $materi = Materi::where('id', $materi_id)->first();
+
+        return view('courses.pages.materi-tugas',[
+            'active' => 'materi',
+            'tugas' => $tugas,
+            'materi' => $materi,
+        ]);
+    }
+
     public function pengaturan()
     {
         $siswa = SiswaModel::where('id',auth()->id())->first();
