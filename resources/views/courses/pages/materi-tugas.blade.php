@@ -76,8 +76,8 @@
                           <div class="form-group">
                             <label for="customFile">Dokumen Tugas</label>
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" name="dok_tugas" required value="{{ $tugas->dok_tugas ? $tugas->dok_tugas : old('tugas') }}">
-                              <label class="custom-file-label" for="customFile" data-label="tugas_update">{{ $tugas->dok_tugas ? $tugas->dok_tugas : old('tugas') }}</label>
+                              <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" name="dok_tugas" required>
+                              <label class="custom-file-label" for="customFile" data-label="tugas_update"></label>
                               <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
                             </div>
                           </div>
