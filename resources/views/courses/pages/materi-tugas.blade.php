@@ -49,9 +49,6 @@
                       @enderror
 
                       @if (empty($tugas))
-                      <div class="card-header justify-content-start">
-                          <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-tugas"><i data-feather="plus"></i> Buat Tugas</button>
-                      </div>
                       <div class="card-header">
                           <h6>Belum ada Tugas untuk materi <b>"{{ $materi->materi }}"</b>.</h6>
                       </div>
@@ -67,22 +64,25 @@
                           <article>
                             {{ $tugas->tugas }}
                           </article>
-                          <button type="button" class="btn text-primary d-block ml-auto" onclick="toggle_ubah_tugas('{{ $tugas->dok_tugas }}')"><i data-feather="edit"></i> Ubah</button>
+                          <div class="mt-2">
+                            <label for="">File Tugas</label>
+                            <a href="{{ asset('files/tugas/'.$tugas->dok_tugas) }}" target="_blank" class="d-block">{{ $tugas->dok_tugas }}</a>
+                          </div>
                         </div>
-                        <div id="input-ubah-tugas" class="form-group col-12 d-none">
+                        <hr>
+                        <div id="input-ubah-tugas" class="form-group col-12">
                           <label>Tugas/Intruksi</label>
                           <textarea class="form-control mb-2" name="tugas" rows="10" required>{{ $tugas->tugas ? $tugas->tugas : old('tugas') }}</textarea>
                           <div class="form-group">
                             <label for="customFile">Dokumen Tugas</label>
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" name="dok_tugas" required>
-                              <label class="custom-file-label" for="customFile" data-label="tugas_update">Pilih File</label>
+                              <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" name="dok_tugas" required value="{{ $tugas->dok_tugas ? $tugas->dok_tugas : old('tugas') }}">
+                              <label class="custom-file-label" for="customFile" data-label="tugas_update">{{ $tugas->dok_tugas ? $tugas->dok_tugas : old('tugas') }}</label>
                               <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
                             </div>
                           </div>
                           <div class="d-flex justify-content-end" style="gap:1rem">
-                            <button type="button" class="btn bg-light-primary" onclick="tombol_batal_tugas()">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Kirim</button>
                           </div>
                         </div>
                       </form>
