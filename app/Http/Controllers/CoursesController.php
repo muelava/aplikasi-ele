@@ -11,6 +11,7 @@ use App\Models\Tugas;
 use App\Models\Jadwal;
 use App\Models\Diskusi;
 use App\Models\SubDiskusi;
+use App\Models\SubTugas;
 
 use Illuminate\Http\Request;
 
@@ -80,12 +81,37 @@ class CoursesController extends Controller
     {
         $tugas = Tugas::where('materi_id', $materi_id)->first();
         $materi = Materi::where('id', $materi_id)->first();
+        $sub_tugas = SubTugas::where('siswa_id', auth()->id())->where('tugas_id', $tugas->id)->first();
 
         return view('courses.pages.materi-tugas',[
             'active' => 'materi',
             'tugas' => $tugas,
             'materi' => $materi,
+            'sub_tugas' => $sub_tugas
         ]);
+    }
+
+    public function tambah_sub_tugas(Request $request, $id_tugas){
+        $inputValidate =  $request->validate([
+            'tugas' => 'required',
+        ]);
+
+        $dok_tugas = null;
+        if ($request->hasFile('dok_tugas')) {
+            $file = $request->file('dok_tugas');
+            $filename = time().'_'.$file->getClientOriginalName();
+            // File upload location
+            $location = 'files/tugas';
+            // Upload file
+            $file->move($location,$filename);
+            $dok_tugas = $filename;
+        }
+        $inputValidate['siswa_id'] = auth()->id();
+        $inputValidate['dok_tugas'] = $dok_tugas;
+        $inputValidate['tugas_id'] = $id_tugas;
+
+        SubTugas::create($inputValidate);
+        return redirect('/courses/materi/tugas/'.$id_tugas)->with('success', 'Tugas berhasil terkirim');
     }
 
     public function pengaturan()

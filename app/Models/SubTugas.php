@@ -9,6 +9,10 @@ class SubTugas extends Model
 {
     use HasFactory;
 
+    protected $table = "sub_tugas";
+
+    protected $guarded = ['id'];
+
     public function tugas(){
         return $this->belongsTo(Tugas::class);
     }

@@ -56,45 +56,56 @@
                       <div class="card-header">
                           <h6>Tugas:</h6>
                           <p>created {{ $tugas->created_at->diffForHumans() }}</p>
-                      </div>
-                      <form action="/guru/materi/tugas/ubah/{{ $tugas->id }}" method="POST" enctype='multipart/form-data' class="card-header pt-0" style="gap:1rem">
-
-                        {{ csrf_field() }}
-                        <div id="show-tugas" class="col-12">
-                          <article>
-                            {{ $tugas->tugas }}
-                          </article>
-                          <div class="mt-2">
-                            <label for="">File Tugas</label>
-                            <a href="{{ asset('files/tugas/'.$tugas->dok_tugas) }}" target="_blank" class="d-block">{{ $tugas->dok_tugas }}</a>
-                          </div>
-                        </div>
-                        <hr>
-                        <div id="input-ubah-tugas" class="form-group col-12">
-                          <label>Tugas/Intruksi</label>
-                          <textarea class="form-control mb-2" name="tugas" rows="10" required>{{ $tugas->tugas ? $tugas->tugas : old('tugas') }}</textarea>
-                          <div class="form-group">
-                            <label for="customFile">Dokumen Tugas</label>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" name="dok_tugas" required>
-                              <label class="custom-file-label" for="customFile" data-label="tugas_update"></label>
-                              <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
+                          <div class="col-12">
+                            <article>
+                              {{ $tugas->tugas }}
+                            </article>
+                            <div class="mt-2">
+                              <label for="">File Tugas</label>
+                              <p>
+                                @if (empty($tugas->dok_tugas))
+                                <p>Tidak ada file tugas</p>
+                                @else
+                                <a href="{{ asset('files/tugas/'.$tugas->dok_tugas) }}" target="_blank">{{ $tugas->dok_tugas }}</a>
+                                @endif
+                              </p>
                             </div>
                           </div>
-                          <div class="d-flex justify-content-end" style="gap:1rem">
-                            <button type="submit" class="btn btn-primary">Kirim</button>
-                          </div>
-                        </div>
-                      </form>
+                          <hr>
+                      </div>
                       @endif
 
                     </div>
 
                     <div class="card">
                       <div class="card-body">
-                        <p><b>0</b> Terkumpul dari <b>1</b> siswa.<a href="javascript:"> Lihat selengkapnya</a></p>
+                        @if (empty($sub_tugas))
+                        <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-tugas"><i data-feather="plus"></i> Submit Tugas</button>
+                        @else
+                        <form action="/courses/materi/tugas/ubah/{{ $tugas->id }}" method="POST" enctype='multipart/form-data' class="card-header pt-0" style="gap:1rem">
+    
+                          {{ csrf_field() }}
+                          <div id="input-ubah-tugas" class="form-group col-12">
+                            <label>Tugas/Intruksi</label>
+                            <textarea class="form-control mb-2" name="tugas" rows="10" required>{{ $sub_tugas->tugas ? $sub_tugas->tugas : old('tugas') }}</textarea>
+                            <div class="form-group">
+                              <label for="customFile">Dokumen Tugas</label>
+                              <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" name="dok_tugas" required>
+                                <label class="custom-file-label" for="customFile" data-label="tugas_update"></label>
+                                <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
+                              </div>
+                            </div>
+                            <div class="d-flex justify-content-end" style="gap:1rem">
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                          </div>
+    
+                        </form>
+                        @endif
                       </div>
                     </div>
+
 
                 </div>
             </div>
@@ -107,20 +118,20 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel33">Buat Tugas untuk <b>{{ $materi->materi }}</b></h4>
+        <h4 class="modal-title" id="myModalLabel33">Submit tugas <b>{{ $materi->materi }}</b></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form action="/guru/materi/tugas/tambah/{{ $materi->id }}" method="POST" enctype='multipart/form-data'>
+      <form action="/courses/materi/tugas/tambah/{{ $tugas->id }}" method="POST" enctype='multipart/form-data'>
         
         {{ csrf_field() }}
         <div class="modal-body">
-          <label>Materi</label>
+          <label>Tugas</label>
           <div class="form-group">
-            <input type="text" placeholder="Pythagoras" class="form-control" required value="{{ $materi->materi }}" disabled />
+            <input type="text" class="form-control" required value="{{ $tugas->tugas }}" disabled />
           </div>
-          <label>Tugas/Intruksi</label>
+          <label>Jawaban Tugas</label>
           <div class="form-group">
             <textarea class="form-control @error('tugas') is-invalid @enderror" name="tugas" cols="30" rows="10" required>{{ old('tugas') }}</textarea>
             @error('tugas')
@@ -139,7 +150,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
     </div>
