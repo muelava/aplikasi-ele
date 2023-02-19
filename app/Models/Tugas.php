@@ -18,4 +18,9 @@ class Tugas extends Model
         return $this->belongsTo(Materi::class);
     }
 
+    public function sub_tugas()
+    {
+        return $this->hasMany(SubTugas::class);
+    }
+
 }

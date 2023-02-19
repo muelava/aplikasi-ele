@@ -26,4 +26,9 @@ class SiswaModel extends Model
     {
         return $this->hasMany(SubDiskusi::class);
     }
+
+    public function sub_tugas()
+    {
+        return $this->hasMany(SubTugas::class);
+    }
 }
