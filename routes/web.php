@@ -107,6 +107,7 @@ Route::group(['middleware' => ['auth:siswa']], function() {
     // crud tugas
     Route::get('/courses/materi/tugas/{materi_id}', [CoursesController::class, 'tugas']);
     Route::post('/courses/materi/tugas/tambah/{id_tugas}', [CoursesController::class, 'tambah_sub_tugas']);
+    Route::post('/courses/materi/tugas/ubah/{id_tugas}', [CoursesController::class, 'ubah_sub_tugas']);
 
     //crud profile
     Route::get('/siswa/pengaturan', [CoursesController::class, 'pengaturan'])->name('siswa-pengaturan');

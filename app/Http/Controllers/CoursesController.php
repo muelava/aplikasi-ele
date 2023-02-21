@@ -13,6 +13,8 @@ use App\Models\Diskusi;
 use App\Models\SubDiskusi;
 use App\Models\SubTugas;
 
+use File;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CoursesController extends Controller
@@ -112,6 +114,36 @@ class CoursesController extends Controller
 
         SubTugas::create($inputValidate);
         return redirect('/courses/materi/tugas/'.$id_tugas)->with('success', 'Tugas berhasil terkirim');
+    }
+
+    public function ubah_sub_tugas(Request $request, $id_tugas){
+        $sub_tugas = SubTugas::where('id', $id_tugas)->first();
+
+        $inputValidate =  $request->validate([
+            'tugas' => 'required',
+        ]);
+
+        if($request->file('dok_tugas')->getSize()){
+            $request->validate(['dok_tugas' => 'mimes:pdf|max:4000']);
+            
+            // deleted exist file
+            $sub_tugas = SubTugas::where('id', $id_tugas)->first();
+            if (File::exists(public_path('files/tugas/'.$sub_tugas->dok_tugas))) {
+                File::delete(public_path('files/tugas/'.$sub_tugas->dok_tugas));
+            }
+            
+            $file = $request->file('dok_tugas');
+            $filename = time().'_'.$file->getClientOriginalName();
+            // File upload location
+            $location = 'files/tugas';
+            // Upload file
+            $file->move($location,$filename);
+            $dok_tugas = $filename;
+            $inputValidate['dok_tugas'] = $dok_tugas;
+        }
+        
+        $affected = DB::table('sub_tugas')->where('id', $id_tugas)->update($inputValidate);
+        return redirect('/courses/materi/tugas/'.$sub_tugas->tugas_id)->with('success', 'Tugas berhasil diubah');
     }
 
     public function pengaturan()

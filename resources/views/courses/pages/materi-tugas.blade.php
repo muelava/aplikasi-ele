@@ -82,7 +82,7 @@
                         @if (empty($sub_tugas))
                         <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-tugas"><i data-feather="plus"></i> Submit Tugas</button>
                         @else
-                        <form action="/courses/materi/tugas/ubah/{{ $tugas->id }}" method="POST" enctype='multipart/form-data' class="card-header pt-0" style="gap:1rem">
+                        <form action="/courses/materi/tugas/ubah/{{ $sub_tugas->id }}" method="POST" enctype='multipart/form-data' class="card-header pt-0" style="gap:1rem">
     
                           {{ csrf_field() }}
                           <div id="input-ubah-tugas" class="form-group col-12">
@@ -91,8 +91,8 @@
                             <div class="form-group">
                               <label for="customFile">Dokumen Tugas</label>
                               <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" name="dok_tugas" required>
-                                <label class="custom-file-label" for="customFile" data-label="tugas_update"></label>
+                                <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" value="{{ asset('files/tugas/'.$sub_tugas->dok_tugas) }}" name="dok_tugas">
+                                <label class="custom-file-label" for="customFile" data-label="tugas_update">{{ $sub_tugas->dok_tugas }}</label>
                                 <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
                               </div>
                             </div>
