@@ -82,22 +82,23 @@
                         @if (empty($sub_tugas))
                         <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-tugas"><i data-feather="plus"></i> Submit Tugas</button>
                         @else
+                        <p id="reminder-text" class="px-2">kamu bisa melakukan perubahan tugas sebelum <span id="time-limit" class="text-warning"></span></p>
                         <form action="/courses/materi/tugas/ubah/{{ $sub_tugas->id }}" method="POST" enctype='multipart/form-data' class="card-header pt-0" style="gap:1rem">
     
                           {{ csrf_field() }}
-                          <div id="input-ubah-tugas" class="form-group col-12">
+                          <div id="input-ubah-tugas" class="form-group col-12 px-0">
                             <label>Tugas/Intruksi</label>
                             <textarea class="form-control mb-2" name="tugas" rows="10" required>{{ $sub_tugas->tugas ? $sub_tugas->tugas : old('tugas') }}</textarea>
                             <div class="form-group">
                               <label for="customFile">Dokumen Tugas</label>
                               <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" value="{{ asset('files/tugas/'.$sub_tugas->dok_tugas) }}" name="dok_tugas">
-                                <label class="custom-file-label" for="customFile" data-label="tugas_update">{{ $sub_tugas->dok_tugas }}</label>
+                                <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" value="{{ asset('files/tugas/'.$sub_tugas->dok_tugas ? $sub_tugas->dok_tugas : '') }}" name="dok_tugas">
+                                <label class="custom-file-label" for="customFile" data-label="tugas_update">{{ $sub_tugas->dok_tugas ? $sub_tugas->dok_tugas : '' }}</label>
                                 <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
                               </div>
                             </div>
                             <div class="d-flex justify-content-end" style="gap:1rem">
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                              <button type="submit" id="btn-perbarui" class="btn btn-primary">Perbarui</button>
                             </div>
                           </div>
     
@@ -164,5 +165,52 @@
 @endsection
 
 @section('page-js')
+<script>
+  let created_at = '{{ $sub_tugas->created_at }}';
+
+  let dateCurrent = new Date(created_at),
+      getTime = dateCurrent.getTime(),
+      someTime = getTime + 3500000, //3500000
+      decTime = someTime - new Date().getTime()
+      resultTmer = decTime/1000
+
+  if (resultTmer < 1) {
+    document.querySelector('#reminder-text').textContent = 'Sisa waktu perubahan kamu sudah habis';
+    document.querySelector('#btn-perbarui').setAttribute('disabled', true)
+  }else{
+    function startTimer(duration, display) {
+    var start = Date.now(),
+      diff,
+      hours,
+      minutes,
+      seconds;
+  
+    function timer() {
+      diff = duration - (((Date.now() - start) / 1000) | 0);
+  
+      hours = (diff / 3600) | 0;
+      minutes = (diff / 60) % 60 | 0;
+      seconds = (diff % 60) | 0;
+  
+      hours = hours < 10 ? "0" + hours : hours;
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+  
+      display.textContent = hours + ":" + minutes + ":" + seconds +" Menit";
+  
+      if (diff <= 0) {
+        // start = Date.now() + 1000;
+        clearInterval(runTime)
+      }
+    };
+    timer();
+    let runTime = setInterval(timer, 1000);
+  }
+  var display = document.querySelector('#time-limit');
+  startTimer(resultTmer, display);
+}
+
+
+</script>
 <script src="{{asset('/admin/assets/js/main.js')}}"></script>
 @endsection
