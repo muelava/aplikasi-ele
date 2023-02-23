@@ -123,23 +123,25 @@ class CoursesController extends Controller
             'tugas' => 'required',
         ]);
 
-        if($request->file('dok_tugas')->getSize()){
-            $request->validate(['dok_tugas' => 'mimes:pdf|max:4000']);
-            
-            // deleted exist file
-            $sub_tugas = SubTugas::where('id', $id_tugas)->first();
-            if (File::exists(public_path('files/tugas/'.$sub_tugas->dok_tugas))) {
-                File::delete(public_path('files/tugas/'.$sub_tugas->dok_tugas));
+        if ($request->file('dok_tugas') !== null) {
+            if($request->file('dok_tugas')->getSize()){
+                $request->validate(['dok_tugas' => 'mimes:pdf|max:4000']);
+                
+                // deleted exist file
+                $sub_tugas = SubTugas::where('id', $id_tugas)->first();
+                if (File::exists(public_path('files/tugas/'.$sub_tugas->dok_tugas))) {
+                    File::delete(public_path('files/tugas/'.$sub_tugas->dok_tugas));
+                }
+                
+                $file = $request->file('dok_tugas');
+                $filename = time().'_'.$file->getClientOriginalName();
+                // File upload location
+                $location = 'files/tugas';
+                // Upload file
+                $file->move($location,$filename);
+                $dok_tugas = $filename;
+                $inputValidate['dok_tugas'] = $dok_tugas;
             }
-            
-            $file = $request->file('dok_tugas');
-            $filename = time().'_'.$file->getClientOriginalName();
-            // File upload location
-            $location = 'files/tugas';
-            // Upload file
-            $file->move($location,$filename);
-            $dok_tugas = $filename;
-            $inputValidate['dok_tugas'] = $dok_tugas;
         }
         
         $affected = DB::table('sub_tugas')->where('id', $id_tugas)->update($inputValidate);
