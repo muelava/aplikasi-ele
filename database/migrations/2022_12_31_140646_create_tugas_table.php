@@ -18,6 +18,7 @@ class CreateTugasTable extends Migration
             $table->foreignId('materi_id')->nullable()->references('id')->on('materi')->onDelete('cascade');
             $table->string('tugas');
             $table->string('dok_tugas')->nullable();
+            $table->string('expired_tugas')->nullable();
             $table->timestamps();
         });
     }
