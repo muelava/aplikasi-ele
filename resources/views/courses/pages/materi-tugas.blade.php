@@ -70,6 +70,10 @@
                                 @endif
                               </p>
                             </div>
+                            <div class="mt-2">
+                              <label for="">Waktu berakhir tugas</label>
+                              <p>{{ date("d M Y H:i", strtotime($tugas->expired_tugas)) }} WIB <span id="expired-tugas" class="text-warning"></span></p>
+                            </div>
                           </div>
                           <hr>
                       </div>
@@ -82,7 +86,7 @@
                         @if (empty($sub_tugas))
                         <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-tugas"><i data-feather="plus"></i> Submit Tugas</button>
                         @else
-                        <p id="reminder-text" class="px-2">Kamu bisa lakukan perubahan tugas sebelum <span id="time-limit" class="text-warning"></span></p>
+                        <p id="reminder-text" class="px-2 text-center">Kamu bisa lakukan perubahan tugas sebelum <span id="time-limit" class="text-warning"></span></p>
                         <form id="form-submit-tugas" action="/courses/materi/tugas/ubah/{{ $sub_tugas->id }}" method="POST" enctype='multipart/form-data' class="card-header pt-0" style="gap:1rem">
     
                           {{ csrf_field() }}
@@ -166,56 +170,109 @@
 
 @section('page-js')
 
-@if ($sub_tugas)
+@if ($tugas)
 <script>
-  let created_at = '{{ $sub_tugas->created_at }}';
+  let expired_tugas = '{{ $tugas->expired_tugas }}';
 
-  let dateCurrent = new Date(created_at),
-      getTime = dateCurrent.getTime(),
-      someTime = getTime + 3500000, //3500000
-      decTime = someTime - new Date().getTime()
-      resultTmer = decTime/1000
+  let dateExpiredTugas = new Date(expired_tugas),
+      getTimeExTugas = dateExpiredTugas.getTime(),
+      decTimeExTugas   = getTimeExTugas - new Date().getTime()
+      resultExpiredTugas = decTimeExTugas/1000
 
-  if (resultTmer < 1) {
-    document.querySelector('#reminder-text').textContent = 'Tugas kamu sudah terkumpul.';
-    $('#reminder-text').after(`<div class="text-center"><a href="/files/tugas/{{ $sub_tugas->dok_tugas }}" target="_blank">{{ $sub_tugas->dok_tugas }}</a><p class="text-center text-success mt-1">Submited!</p></div>`)
-    document.querySelector('#btn-perbarui').setAttribute('disabled', true)
-    document.querySelector('form#form-submit-tugas').classList.add('d-none')
-  }else{
-    function startTimer(duration, display) {
-    var start = Date.now(),
-      diff,
-      hours,
-      minutes,
-      seconds;
-  
-    function timer() {
-      diff = duration - (((Date.now() - start) / 1000) | 0);
-  
-      hours = (diff / 3600) | 0;
-      minutes = (diff / 60) % 60 | 0;
-      seconds = (diff % 60) | 0;
-  
-      hours = hours < 10 ? "0" + hours : hours;
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-  
-      display.textContent = hours + ":" + minutes + ":" + seconds +" Detik";
-  
-      if (diff <= 0) {
-        // start = Date.now() + 1000;
-        clearInterval(runTime)
+  if (resultExpiredTugas < 1) {
+    $('#expired-tugas').text('(Waktu pengumpulan tugas telah berakhir)')
+    let sub_tugas = '{{ $sub_tugas }}'
+    if (sub_tugas.length) {
         document.querySelector('#reminder-text').textContent = 'Tugas kamu sudah terkumpul.';
         document.querySelector('form#form-submit-tugas').classList.add('d-none')
-      }
-    };
-    timer();
-    let runTime = setInterval(timer, 1000);
+    }else{
+      $('.card-body').html('<p class="text-center text-danger">Kamu tidak mengumpulkan tugas</p>')
+    }
+  }else{
+    function expiredTugas(duration, displayExpiredTugas) {
+      var start = Date.now(),
+        diff,
+        hours,
+        minutes,
+        seconds;
+
+      function timer() {
+        diff = duration - (((Date.now() - start) / 1000) | 0);
+
+        hours = (diff / 3600) | 0;
+        minutes = (diff / 60) % 60 | 0;
+        seconds = (diff % 60) | 0;
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        $(displayExpiredTugas).text('('+hours +' : '+ minutes +' : '+seconds+')')
+
+        if (diff <= 0) {
+          // start = Date.now() + 1000;
+          clearInterval(runTime)
+        }
+      };
+      timer();
+      let runTime = setInterval(timer, 1000);
+    }
+    let displayExpiredTugas = '#expired-tugas';
+    expiredTugas(resultExpiredTugas, displayExpiredTugas);
   }
-  var display = document.querySelector('#time-limit');
-  startTimer(resultTmer, display);
-}
-</script>
+  
+</script>    
+@endif
+
+@if ($sub_tugas)
+    <script>
+       // BEGIN: countdown ubah tugas
+      let created_at = '{{ $sub_tugas->created_at }}';
+      let dateCurrent = new Date(created_at),
+          getTime = dateCurrent.getTime(),
+          someTime = getTime + 1800000, //1800000 (30mnt)
+          decTime = someTime - new Date().getTime()
+          resultTmer = decTime/1000
+
+      if (resultTmer < 1) {
+        document.querySelector('#reminder-text').textContent = 'Tugas kamu sudah terkumpul.';
+        $('#reminder-text').after(`<div class="text-center"><a href="/files/tugas/{{ $sub_tugas->dok_tugas }}" target="_blank">{{ $sub_tugas->dok_tugas }}</a><p class="text-center text-success mt-1">Submited!</p></div>`)
+        document.querySelector('#btn-perbarui').setAttribute('disabled', true)
+        document.querySelector('form#form-submit-tugas').classList.add('d-none')
+      }else{
+          function startTimer(duration, display) {
+          var start = Date.now(),
+            diff,
+            hours,
+            minutes,
+            seconds;
+
+          function timer() {
+            diff = duration - (((Date.now() - start) / 1000) | 0);
+
+            hours = (diff / 3600) | 0;
+            minutes = (diff / 60) % 60 | 0;
+            seconds = (diff % 60) | 0;
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = hours + ":" + minutes + ":" + seconds +" Detik";
+
+            if (diff <= 0) {
+              // start = Date.now() + 1000;
+              clearInterval(runTime)
+            }
+          };
+          timer();
+          let runTime = setInterval(timer, 1000);
+        }
+        var display = document.querySelector('#time-limit');
+        startTimer(resultTmer, display);
+      }
+      // END: countdown ubah tugas
+    </script>
 @endif
 
 <script src="{{asset('/admin/assets/js/main.js')}}"></script>

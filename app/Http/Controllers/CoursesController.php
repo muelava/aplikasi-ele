@@ -94,6 +94,8 @@ class CoursesController extends Controller
     }
 
     public function tambah_sub_tugas(Request $request, $id_tugas){
+        $tugas = Tugas::where('id', $id_tugas)->first();
+
         $inputValidate =  $request->validate([
             'tugas' => 'required',
         ]);
@@ -113,7 +115,7 @@ class CoursesController extends Controller
         $inputValidate['tugas_id'] = $id_tugas;
 
         SubTugas::create($inputValidate);
-        return redirect('/courses/materi/tugas/'.$id_tugas)->with('success', 'Tugas berhasil terkirim');
+        return redirect('/courses/materi/tugas/'.$tugas->materi_id)->with('success', 'Tugas berhasil terkirim');
     }
 
     public function ubah_sub_tugas(Request $request, $id_tugas){
