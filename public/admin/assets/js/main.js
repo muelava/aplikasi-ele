@@ -16,6 +16,19 @@ if ($(".flatpickr-basic").length) {
     });
 }
 
+if ($(".flatpickr-basic-time").length) {
+    $(".flatpickr-basic-time").flatpickr({
+        enableTime: true,
+        dateFormat: "Y-m-d H:i:ss",
+        time_24hr: true,
+    });
+    $(document).on("focusin", function (e) {
+        if ($(e.target).closest(".flatpickr-calendar").length) {
+            e.stopImmediatePropagation();
+        }
+    });
+}
+
 // data guru -> error ke modal
 if ($("#error-modal-tambah-guru").length) {
     $("#modal-tambah-guru").modal("show");

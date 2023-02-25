@@ -80,6 +80,17 @@
                               <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
                             </div>
                           </div>
+                          <div class="form-group">
+                            <label for="fp-date-time">Tugas berakhir pada tanggal</label>
+                            <input
+                              type="text"
+                              id="fp-date-time"
+                              class="form-control flatpickr-basic-time"
+                              placeholder="YYYY-MM-DD HH:MM"
+                              name="expired_tugas" required
+                              value="{{ $tugas->expired_tugas ? $tugas->expired_tugas : old('expired_tugas') }}"
+                            />
+                          </div>
                           <div class="d-flex justify-content-end" style="gap:1rem">
                             <button type="button" class="btn bg-light-primary" onclick="tombol_batal_tugas()">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -136,6 +147,21 @@
               <label class="custom-file-label" for="customFile">Pilih file</label>
               <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
             </div>
+          </div>
+          <div class="form-group">
+            <label for="fp-date-time">Tugas berakhir pada tanggal</label>
+            <input
+              type="text"
+              id="fp-date-time"
+              class="form-control flatpickr-basic-time @error('expired_tugas') is-invalid @enderror"
+              placeholder="YYYY-MM-DD HH:MM"
+              name="expired_tugas" required
+            />
+            @error('expired_tugas')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+            @enderror
           </div>
         </div>
         <div class="modal-footer">

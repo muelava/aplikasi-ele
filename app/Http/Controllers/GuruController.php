@@ -166,6 +166,7 @@ class GuruController extends Controller
     public function tambah_tugas(Request $request, $id_materi){
         $inputValidate =  $request->validate([
             'tugas' => 'required',
+            'expired_tugas' => 'required',
         ]);
         
         $dok_tugas = null;
@@ -190,6 +191,7 @@ class GuruController extends Controller
 
         $inputValidate =  $request->validate([
             'tugas' => 'required',
+            'expired_tugas' => 'required',
         ]);
 
         if($request->file('dok_tugas')->getSize()){
