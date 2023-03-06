@@ -10,6 +10,7 @@ use App\Models\Siswa;
 use App\Models\Kelas;
 use App\Models\SiswaModel;
 use App\Models\Mapel;
+use App\Models\Pengumuman;
 
 class AdministratorController extends Controller
 {
@@ -247,6 +248,43 @@ class AdministratorController extends Controller
     }
     // ================== /data mapel ================== 
 
+    // ================== pengumuman ================== 
+    public function pengumuman()
+    {
+        $pengumumans = Pengumuman::get();
+
+        // dd($pengumumans);
+        return view('admin.pages.pengumuman',[
+            'active' => 'pengumuman',
+            'pengumumans' => $pengumumans
+        ]);
+    }
+
+    public function tambah_pengumuman(Request $request)
+    {
+        $inputValidate =  $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required',
+        ]);
+        
+        $file_pengumuman = null;
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $filename = time().'_'.$file->getClientOriginalName();
+            // File upload location
+            $location = 'files/pengumuman';
+            // Upload file
+            $file->move($location,$filename);
+            $file_pengumuman = $filename;
+        }
+        $inputValidate['file'] = $file_pengumuman;
+
+        Pengumuman::create($inputValidate);
+        return redirect('/administrator/pengumuman')->with('success', 'Pengumuman baru berhasil di publish');
+    }
+    // ================== /pengumuman ================== 
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -335,5 +373,11 @@ class AdministratorController extends Controller
     {
         DB::table('mata_pelajaran')->where('id', $id_mapel)->delete();
         return redirect('/administrator/data-mata-pelajaran')->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function delete_pengumuman($id_pengumuman)
+    {
+        DB::table('pengumuman')->where('id', $id_pengumuman)->delete();
+        return redirect('/administrator/pengumuman')->with('success', 'Pengumuman berhasil dihapus!');
     }
 }

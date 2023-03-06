@@ -66,6 +66,11 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     Route::get('/administrator/data-mata-pelajaran/ubah/{id_mapel}', [AdministratorController::class, 'lihat_mapel']);
     Route::post('/administrator/data-mata-pelajaran/ubah/{id_mapel}', [AdministratorController::class, 'ubah_mapel']);
 
+    // crud pengumuman
+    Route::get('/administrator/pengumuman', [AdministratorController::class, 'pengumuman'])->name('pengumuman');
+    Route::post('/administrator/pengumuman/tambah', [AdministratorController::class, 'tambah_pengumuman']);
+    Route::get('/administrator/pengumuman/hapus/{id_pengumuman}', [AdministratorController::class, 'delete_pengumuman']);
+
 });
 
 // route halaman guru
