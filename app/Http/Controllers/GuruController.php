@@ -265,6 +265,16 @@ class GuruController extends Controller
         return back()->with('success', 'Balasan telah ditambahkan');
     }
 
+    public function nilai()
+    {
+        // $jadwals = Jadwal::get();
+
+        return view('guru.pages.nilai', [
+            'active' => 'nilai',
+            // 'jadwals' => $jadwals,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
