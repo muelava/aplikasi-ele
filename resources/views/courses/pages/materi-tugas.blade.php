@@ -90,20 +90,17 @@
                                 <p id="reminder-text" class="px-2 text-center">Kamu bisa lakukan perubahan tugas sebelum
                                     <span id="time-limit" class="text-warning"></span>
                                 </p>
-                                <form id="form-submit-tugas" action="/courses/materi/tugas/ubah/{{ $sub_tugas->id }}" method="POST" enctype='multipart/form-data'
-                                    class="card-header pt-0" style="gap:1rem">
+                                <form id="form-submit-tugas" action="/courses/materi/tugas/ubah/{{ $sub_tugas->id }}" method="POST" enctype='multipart/form-data' class="card-header pt-0" style="gap:1rem">
 
                                     {{ csrf_field() }}
                                     <div id="input-ubah-tugas" class="form-group col-12 px-0">
-                                        <label>Tugas/Intruksi</label>
+                                        <label>Jawaban Tugas</label>
                                         <textarea class="form-control mb-2" name="tugas" rows="10" required>{{ $sub_tugas->tugas ? $sub_tugas->tugas : old('tugas') }}</textarea>
                                         <div class="form-group">
                                             <label for="customFile">Dokumen Tugas</label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update"
-                                                    value="{{ asset('files/tugas/' . $sub_tugas->dok_tugas ? $sub_tugas->dok_tugas : '') }}" name="dok_tugas">
-                                                <label class="custom-file-label" for="customFile"
-                                                    data-label="tugas_update">{{ $sub_tugas->dok_tugas ? $sub_tugas->dok_tugas : '' }}</label>
+                                                <input type="file" class="custom-file-input" id="customFile" data-dok="tugas_update" value="{{ asset('files/tugas/' . $sub_tugas->dok_tugas ? $sub_tugas->dok_tugas : '') }}" name="dok_tugas">
+                                                <label class="custom-file-label" for="customFile" data-label="tugas_update">{{ $sub_tugas->dok_tugas ? $sub_tugas->dok_tugas : '' }}</label>
                                                 <div class="form-text">Diizinkan PDF, maksimal 4 MB</div>
                                             </div>
                                         </div>
