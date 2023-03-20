@@ -32,7 +32,7 @@
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
                         <div class="card-header justify-content-start">
-                            <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-pengumuman"><i data-feather="plus"></i> Tambah Pengumuman</button>
+                            <button class="btn btn-primary mr-2" data-toggle="modal" data-target="#modal-tambah-pengumuman" {{ $pengumumans->count() > 0 ? 'disabled' : '' }}><i data-feather="plus"></i> Tambah Pengumuman</button>
                         </div>
                         <div class="table-responsive">
                             <table class="table table-hover">
@@ -54,7 +54,7 @@
                                             <td>{{ $i++ }}</td>
                                             <td class="text-uppercase">{{ $pengumuman->judul }}</td>
                                             <td>{{ $pengumuman->deskripsi }}</td>
-                                            <td>{{ $pengumuman->file }}</td>
+                                            <td><a href="{{ asset('files/pengumuman/' . $pengumuman->file) }}" target="_blank" rel="noopener noreferrer">{{ $pengumuman->file }}</a></td>
                                             <td except>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn btn-sm dropdown-toggle hide-arrow waves-effect waves-float waves-light" data-toggle="dropdown" aria-expanded="false">
