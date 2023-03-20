@@ -72,6 +72,11 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     Route::get('/administrator/pengumuman/detail/{id_pengumuman}', [AdministratorController::class, 'lihat_pengumuman'])->name('lihat-pengumuman');
     Route::post('/administrator/pengumuman/ubah/{id_pengumuman}', [AdministratorController::class, 'ubah_pengumuman']);
     Route::get('/administrator/pengumuman/hapus/{id_pengumuman}', [AdministratorController::class, 'delete_pengumuman']);
+    
+    // crud pengumuman
+    Route::get('/administrator/jadwal-pelajaran', [AdministratorController::class, 'jadwal_pelajaran'])->name('jadwal-pelajaran');
+    Route::post('/administrator/jadwal-pelajaran/tambah', [AdministratorController::class, 'tambah_jadwal_pelajaran']);
+    Route::post('/administrator/jadwal-pelajaran/ubah/{id_jadwal}', [AdministratorController::class, 'ubah_jadwal_pelajaran']);
 
 });
 

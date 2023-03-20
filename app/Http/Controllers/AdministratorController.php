@@ -11,6 +11,7 @@ use App\Models\Kelas;
 use App\Models\SiswaModel;
 use App\Models\Mapel;
 use App\Models\Pengumuman;
+use App\Models\Jadwal;
 
 use File;
 
@@ -289,8 +290,6 @@ class AdministratorController extends Controller
     {
         $pengumuman = DB::table('pengumuman')->where('id', $id_pengumuman)->first();
 
-        // dd($pengumuman);
-        
         return view('admin.pages.pengumuman-detail',[
             'active' => 'pengumuman',
             'pengumuman' => $pengumuman
@@ -331,6 +330,67 @@ class AdministratorController extends Controller
         return redirect('/administrator/pengumuman')->with('success', 'Pengumuman berhasil diubah');
     }
     // ================== /pengumuman ================== 
+
+    // ================== jadwal pelajaran ================== 
+    public function jadwal_pelajaran()
+    {
+        $jadwal = Jadwal::first();
+
+        // dd($pengumumans);
+        return view('admin.pages.jadwal-pelajaran',[
+            'active' => 'jadwal-pelajaran',
+            'jadwal' => $jadwal
+        ]);
+    }
+
+    public function tambah_jadwal_pelajaran(Request $request)
+    {
+        
+        $file_jadwal = null;
+        if ($request->hasFile('jadwal')) {
+            $jadwal = $request->file('jadwal');
+            $filename = time().'_'.$jadwal->getClientOriginalName();
+            // File upload location
+            $location = 'files/jadwal';
+            // Upload file
+            $jadwal->move($location,$filename);
+            $file_jadwal = $filename;
+        }
+        $inputValidate['jadwal'] = $file_jadwal;
+
+        Jadwal::create($inputValidate);
+        return redirect('/administrator/jadwal-pelajaran')->with('success', 'Jadwal baru berhasil di tambahkan!');
+    }
+
+    public function ubah_jadwal_pelajaran(Request $request, $id_jadwal)
+    {
+        $jadwal = DB::table('jadwal')->where('id', $id_jadwal)->first();
+
+        if ($request->file('jadwal') !== null) {
+            if($request->file('jadwal')->getSize()){
+                $request->validate(['jadwal' => 'mimes:pdf|max:4000']);
+                
+                // deleted exist file
+                $jadwal = Jadwal::where('id', $id_jadwal)->first();
+                if (File::exists(public_path('files/jadwal/'.$jadwal->jadwal))) {
+                    File::delete(public_path('files/jadwal/'.$jadwal->jadwal));
+                }
+                
+                $jadwal = $request->file('jadwal');
+                $filename = time().'_'.$jadwal->getClientOriginalName();
+                // File upload location
+                $location = 'files/jadwal';
+                // Upload file
+                $jadwal->move($location,$filename);
+                $jadwal = $filename;
+                $inputValidate['jadwal'] = $jadwal;
+                $affected = DB::table('jadwal')->where('id', $id_jadwal)->update($inputValidate);
+                return redirect('/administrator/jadwal-pelajaran')->with('success', 'Jadwal berhasil diubah!');
+            }
+        }
+        
+    }
+    // ================== /jadwal pelajaran ================== 
 
 
     /**
