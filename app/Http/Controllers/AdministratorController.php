@@ -384,11 +384,11 @@ class AdministratorController extends Controller
                 $jadwal->move($location,$filename);
                 $jadwal = $filename;
                 $inputValidate['jadwal'] = $jadwal;
-                $affected = DB::table('jadwal')->where('id', $id_jadwal)->update($inputValidate);
-                return redirect('/administrator/jadwal-pelajaran')->with('success', 'Jadwal berhasil diubah!');
             }
         }
         
+        $affected = DB::table('jadwal')->where('id', $id_jadwal)->update($inputValidate);
+        return redirect('/administrator/jadwal-pelajaran')->with('success', 'Jadwal berhasil diubah!');
     }
     // ================== /jadwal pelajaran ================== 
 
