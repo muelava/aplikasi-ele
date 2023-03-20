@@ -12,6 +12,8 @@ use App\Models\SiswaModel;
 use App\Models\Mapel;
 use App\Models\Pengumuman;
 
+use File;
+
 class AdministratorController extends Controller
 {
     /**
@@ -281,6 +283,52 @@ class AdministratorController extends Controller
 
         Pengumuman::create($inputValidate);
         return redirect('/administrator/pengumuman')->with('success', 'Pengumuman baru berhasil di publish');
+    }
+
+    public function lihat_pengumuman($id_pengumuman)
+    {
+        $pengumuman = DB::table('pengumuman')->where('id', $id_pengumuman)->first();
+
+        // dd($pengumuman);
+        
+        return view('admin.pages.pengumuman-detail',[
+            'active' => 'pengumuman',
+            'pengumuman' => $pengumuman
+        ]);
+    }
+
+    public function ubah_pengumuman(Request $request, $id_pengumuman)
+    {
+        $pengumuman = DB::table('pengumuman')->where('id', $id_pengumuman)->first();
+
+        $inputValidate =  $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required',
+        ]);
+
+        if ($request->file('file') !== null) {
+            if($request->file('file')->getSize()){
+                $request->validate(['file' => 'mimes:pdf|max:4000']);
+                
+                // deleted exist file
+                $pengumuman = Pengumuman::where('id', $id_pengumuman)->first();
+                if (File::exists(public_path('files/pengumuman/'.$pengumuman->file))) {
+                    File::delete(public_path('files/pengumuman/'.$pengumuman->file));
+                }
+                
+                $file = $request->file('file');
+                $filename = time().'_'.$file->getClientOriginalName();
+                // File upload location
+                $location = 'files/pengumuman';
+                // Upload file
+                $file->move($location,$filename);
+                $file = $filename;
+                $inputValidate['file'] = $file;
+            }
+        }
+
+        $affected = DB::table('pengumuman')->where('id', $id_pengumuman)->update($inputValidate);
+        return redirect('/administrator/pengumuman')->with('success', 'Pengumuman berhasil diubah');
     }
     // ================== /pengumuman ================== 
 

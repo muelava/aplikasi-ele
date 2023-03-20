@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     // crud pengumuman
     Route::get('/administrator/pengumuman', [AdministratorController::class, 'pengumuman'])->name('pengumuman');
     Route::post('/administrator/pengumuman/tambah', [AdministratorController::class, 'tambah_pengumuman']);
+    Route::get('/administrator/pengumuman/detail/{id_pengumuman}', [AdministratorController::class, 'lihat_pengumuman'])->name('lihat-pengumuman');
+    Route::post('/administrator/pengumuman/ubah/{id_pengumuman}', [AdministratorController::class, 'ubah_pengumuman']);
     Route::get('/administrator/pengumuman/hapus/{id_pengumuman}', [AdministratorController::class, 'delete_pengumuman']);
 
 });
