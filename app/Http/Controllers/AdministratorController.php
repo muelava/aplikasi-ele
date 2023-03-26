@@ -251,6 +251,46 @@ class AdministratorController extends Controller
     }
     // ================== /data mapel ================== 
 
+    // ================== kelas siswa ================== 
+    public function class_data(){
+        $classes = Kelas::get();
+
+        $data = collect(
+            [
+            'data' => $classes
+        ]
+        )->toArray();
+        
+        // $data = [
+        //     'data' =>  [
+        //         [
+        //             'id' => '1',
+        //             'tingkat' => 'SMP',
+        //             'kelas' => 'V',
+        //         ],
+        //         [
+        //             'id' => '2',
+        //             'tingkat' => 'SMK',
+        //             'kelas' => 'X',
+        //         ],
+        //     ],
+        // ];
+
+        return response()->json($data, 200);
+    }
+
+    public function kelas_siswa()
+    {
+        $classes = Kelas::get();
+        
+        return view('admin.pages.kelas-siswa',[
+            'active' => 'kelas-siswa',
+            'classes' => $classes
+        ]);
+    }
+    // ================== /kelas siswa ================== 
+
+
     // ================== pengumuman ================== 
     public function pengumuman()
     {

@@ -19,7 +19,7 @@
                 </li>
                 <li class="nav-item {{ $active === 'jadwal-pelajaran' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{ url('/administrator/jadwal-pelajaran') }}"><i data-feather="clock"></i><span class="menu-title text-truncate" data-i18n="Jadwal Pelajaran">Jadwal Pelajaran</span></a>
                 </li>
-                <li class="nav-item"><a class="d-flex align-items-center" href="{{ url('/administrator/kelas-siswa') }}"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Kelas Siswa">Kelas Siswa</span></a>
+                <li class="nav-item {{ $active === 'kelas-siswa' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{ route('kelas-siswa') }}"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Kelas Siswa">Kelas Siswa</span></a>
                 </li>
                 <li class="nav-item {{ $active === 'pengumuman' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{ route('pengumuman') }}"><i data-feather="volume-1"></i><span class="menu-title text-truncate" data-i18n="Pengumuman">Pengumuman</span></a>
                 </li>

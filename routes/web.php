@@ -73,6 +73,10 @@ Route::group(['middleware' => ['auth:admin','CekLevel:1']], function() {
     Route::post('/administrator/pengumuman/ubah/{id_pengumuman}', [AdministratorController::class, 'ubah_pengumuman']);
     Route::get('/administrator/pengumuman/hapus/{id_pengumuman}', [AdministratorController::class, 'delete_pengumuman']);
     
+    // crud kelas siswa
+    Route::get('/administrator/kelas-siswa', [AdministratorController::class, 'kelas_siswa'])->name('kelas-siswa');
+    Route::get('/administrator/class-data', [AdministratorController::class, 'class_data']);
+
     // crud pengumuman
     Route::get('/administrator/jadwal-pelajaran', [AdministratorController::class, 'jadwal_pelajaran'])->name('jadwal-pelajaran');
     Route::post('/administrator/jadwal-pelajaran/tambah', [AdministratorController::class, 'tambah_jadwal_pelajaran']);
