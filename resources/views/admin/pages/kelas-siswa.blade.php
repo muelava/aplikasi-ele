@@ -115,7 +115,11 @@
     <script src="{{ asset('/admin/vendors/js/tables/datatable/responsive.bootstrap4.js') }}"></script>
     <script src="{{ asset('/admin/vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>
     <script src="{{ asset('/admin/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
-    <script src="{{ asset('/admin/js/scripts/tables/table-datatables-basic.min.js') }}"></script>
+    <script src="{{ asset('/admin/vendors/js/tables/datatable/jszip.min.js') }}"></script>
+    <script src="{{ asset('/admin/vendors/js/tables/datatable/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('/admin/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('/admin/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('/admin/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
 
     <script src="{{ asset('/admin/assets/js/main.js') }}"></script>
 
@@ -128,11 +132,44 @@
         $('#kelas-siswa').DataTable({
             ajax: '/administrator/class-data',
             "scrollX": true,
+            dom: "<'row justify-content-between border-bottom py-1'<'col-sm-6 d-flex align-items-center head-table'><'col-sm-6 text-right'B>>" +
+                "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+            "language": {
+                "lengthMenu": "_MENU_",
+                "search": "",
+                searchPlaceholder: "Cari ..."
+            },
+            buttons: [{
+                extend: 'pdfHtml5',
+                className: 'btn btn-primary',
+                text: '<i data-feather="download"></i> Ekspor PDF',
+                exportOptions: {
+                    columns: ':not(:last-child)',
+                },
+                orientation: 'portrait',
+                customize: function(doc) {
+                    var colCount = new Array();
+                    $('#kelas-siswa').find('tbody tr:first-child td').each(function() {
+                        if ($(this).attr('colspan')) {
+                            for (var i = 1; i <= $(this).attr('colspan'); $i++) {
+                                colCount.push('*');
+                            }
+                        } else {
+                            colCount.push('*');
+                        }
+                    });
+                    doc.content[1].table.widths = colCount;
+                }
+            }],
             columns: [{
                     data: 'id'
                 },
                 {
-                    data: 'jenjang'
+                    data: 'jenjang',
+                    className: 'text-uppercase'
+
                 },
                 {
                     data: 'kelas'
@@ -147,9 +184,10 @@
             columnDefs: [{
                 targets: -1,
                 "render": function(data, type, row, meta) {
-                    return `<a href="javascript:" class="btn btn-sm btn-outline-primary">Detail</a>`;
+                    return `<a href="javascript:" class="btn btn-sm btn-outline-muted">Detail</a>`;
                 }
             }]
         });
+        $('.head-table').html('<h6 class="mb-0">Kelas Siswa</h6>')
     </script>
 @endsection
