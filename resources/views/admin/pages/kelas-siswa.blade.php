@@ -138,10 +138,10 @@
                     data: 'kelas'
                 },
                 {
-                    data: 'kelas'
+                    data: 'jml_siswa'
                 },
                 {
-                    data: 'kelas'
+                    data: 'id'
                 },
             ],
             columnDefs: [{

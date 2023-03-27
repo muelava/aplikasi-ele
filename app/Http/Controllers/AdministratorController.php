@@ -253,7 +253,9 @@ class AdministratorController extends Controller
 
     // ================== kelas siswa ================== 
     public function class_data(){
-        $classes = Kelas::get();
+        $classes = Kelas::join('siswa', 'kelas.id', '=', 'siswa.kelas_id')->select('kelas.id','kelas.jenjang','kelas.kelas',DB::raw("count(siswa.kelas_id) as jml_siswa"))->groupBy('kelas.id')->get();
+
+
 
         $data = collect(
             [
