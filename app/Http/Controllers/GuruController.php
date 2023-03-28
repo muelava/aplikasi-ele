@@ -10,6 +10,7 @@ use App\Models\Tugas;
 use App\Models\Jadwal;
 use App\Models\Diskusi;
 use App\Models\SubDiskusi;
+use App\Models\Nilai;
 
 use File;
 use Illuminate\Support\Facades\DB;
@@ -267,7 +268,8 @@ class GuruController extends Controller
 
     public function nilai()
     {
-        // $jadwals = Jadwal::get();
+        $value = Nilai::first();
+        dd($value->mata_pelajaran);
 
         return view('guru.pages.nilai', [
             'active' => 'nilai',
