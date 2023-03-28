@@ -42,7 +42,7 @@
                                     <a class="btn btn-outline-primary" href="{{ asset('files/jadwal/' . $jadwal->jadwal) }}" target="_blank">Download Jadwal</a>
                                 </div>
                             @else
-                                <h4>Tidak ada jadwal</h4>
+                                <p>Tidak ada jadwal</p>
                             @endif
                         </div>
 
