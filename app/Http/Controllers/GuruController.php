@@ -37,11 +37,11 @@ class GuruController extends Controller
 
     public function jadwal()
     {
-        $jadwals = Jadwal::get();
+        $jadwal = Jadwal::first();
 
         return view('guru.pages.jadwal', [
             'active' => 'jadwal',
-            'jadwals' => $jadwals,
+            'jadwal' => $jadwal,
         ]);
     }
 
