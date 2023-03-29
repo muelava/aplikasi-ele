@@ -13,7 +13,7 @@ class Nilai extends Model
 
     protected $guarded = ['id'];
 
-    public function mata_pelajaran(){
+    public function sub_tugas(){
         return $this->belongsTo(Mapel::class);
     }
 }

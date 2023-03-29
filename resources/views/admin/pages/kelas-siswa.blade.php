@@ -1,9 +1,9 @@
 @extends('admin.layouts.main')
 @section('title', 'Kelas Siswa')
 @section('vendor-css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/tables/datatable/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/tables/datatable/dataTables.bootstrap4.min.css') }}">
 @endsection
 
 @section('page-css')
@@ -106,9 +106,6 @@
 
 @section('page-vendor-js')
     <script src="{{ asset('/admin/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
-@endsection
-
-@section('page-js')
     <script src="{{ asset('/admin/vendors/js/tables/datatable/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('/admin/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('/admin/vendors/js/tables/datatable/dataTables.responsive.min.js') }}"></script>
@@ -120,7 +117,9 @@
     <script src="{{ asset('/admin/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
     <script src="{{ asset('/admin/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('/admin/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
+@endsection
 
+@section('page-js')
     <script src="{{ asset('/admin/assets/js/main.js') }}"></script>
 
     <script>

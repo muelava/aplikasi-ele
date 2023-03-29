@@ -110,6 +110,7 @@ Route::group(['middleware' => ['auth:guru']], function() {
     Route::post('/guru/materi/sub-diskusi/tambah/{id_diskusi}', [GuruController::class, 'tambah_sub_diskusi']);
 
     // crud nilai
+    Route::get('/guru/value-data', [GuruController::class, 'get_data_nilai']);
     Route::get('/guru/nilai', [GuruController::class, 'nilai'])->name('nilai');
 
 });

@@ -21,9 +21,4 @@ class Mapel extends Model
     {
         return $this->hasMany(Diskusi::class);
     }
-
-    public function nilai()
-    {
-        return $this->hasMany(Nilai::class);
-    }
 }

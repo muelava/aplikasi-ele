@@ -266,16 +266,32 @@ class GuruController extends Controller
         return back()->with('success', 'Balasan telah ditambahkan');
     }
 
+
+    // ================== BEGIN::nilai ================== 
+    public function get_data_nilai()
+    {
+        $values = Nilai::join('sub_tugas', 'sub_tugas_id', 'sub_tugas.id')->join('siswa', 'siswa_id', 'siswa.id')->get();
+
+        $data = collect(
+            [
+            'data' => $values
+        ]
+        )->toArray();
+
+        return response()->json($data, 200);
+    }
+
     public function nilai()
     {
-        $value = Nilai::first();
-        dd($value->mata_pelajaran);
+        // $values = Nilai::join('sub_tugas', 'sub_tugas_id', 'sub_tugas.id')->join('siswa', 'siswa_id', 'siswa.id')->get();
+        // dd($values);
 
         return view('guru.pages.nilai', [
             'active' => 'nilai',
-            // 'jadwals' => $jadwals,
+            // 'values' => $values,
         ]);
     }
+    // ================== END::nilai ================== 
 
     /**
      * Show the form for creating a new resource.

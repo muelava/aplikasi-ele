@@ -21,7 +21,7 @@
                             <h2 class="content-header-title float-left mb-0">Nilai</h2>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active">
-                                    Daftar Nilai
+                                    Daftar Nilai Siswa
                                 </li>
                             </ol>
                         </div>

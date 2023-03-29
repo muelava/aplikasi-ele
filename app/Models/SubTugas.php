@@ -20,4 +20,9 @@ class SubTugas extends Model
     public function siswa(){
         return $this->belongsTo(SiswaModel::class);
     }
+    
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class);
+    }
 }
