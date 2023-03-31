@@ -7,6 +7,7 @@ use App\Models\Kelas;
 use App\Models\Materi;
 use App\Models\Mapel;
 use App\Models\Tugas;
+use App\Models\SubTugas;
 use App\Models\Jadwal;
 use App\Models\Diskusi;
 use App\Models\SubDiskusi;
@@ -266,11 +267,44 @@ class GuruController extends Controller
         return back()->with('success', 'Balasan telah ditambahkan');
     }
 
+    // ================== BEGIN::tugas ================== 
+    public function get_data_daftar_tugas()
+    {
+        $values = SubTugas::join('tugas', 'tugas_id', 'tugas.id')
+        ->join('materi', 'materi_id', 'materi.id')
+        ->join('kelas', 'kelas_id', 'kelas.id')
+        ->join('siswa', 'siswa_id', 'siswa.id')
+        ->join('mata_pelajaran', 'mata_pelajaran_id', 'mata_pelajaran.id')
+        ->select('siswa.nis', 'siswa.nama', 'kelas.kelas', 'mata_pelajaran.mapel', 'materi.materi', 'sub_tugas.id', 'sub_tugas.created_at as created_sub_tugas')
+        ->get();
+
+        $data = collect(
+            [
+            'data' => $values
+        ]
+        )->toArray();
+
+        return response()->json($data, 200);
+    }
+
+    public function daftar_tugas()
+    {
+        return view('guru.pages.daftar-tugas', [
+            'active' => 'tugas',
+            // 'values' => $values,
+        ]);
+    }
+    // ================== BEGIN::tugas ================== 
+
 
     // ================== BEGIN::nilai ================== 
     public function get_data_nilai()
     {
-        $values = Nilai::join('sub_tugas', 'sub_tugas_id', 'sub_tugas.id')->join('siswa', 'siswa_id', 'siswa.id')->get();
+        $values = Nilai::join('sub_tugas', 'sub_tugas_id', 'sub_tugas.id')
+        ->join('siswa', 'siswa_id', 'siswa.id')
+        ->join('tugas', 'tugas_id', 'tugas.id')
+        ->join('kelas', 'kelas_id', 'kelas.id')
+        ->get();
 
         $data = collect(
             [

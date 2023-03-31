@@ -57,7 +57,7 @@
                                     </div>
                                 </form>
                             @else
-                                <p>Belum ada jadwal pelajara. Silakan Upload jadwal pelajaran</p>
+                                <p>Belum ada jadwal pelajaran. Silakan Upload jadwal pelajaran</p>
                                 <form action="/administrator/jadwal-pelajaran/tambah" method="POST" enctype='multipart/form-data'>
                                     @csrf
                                     <div class="form-group">

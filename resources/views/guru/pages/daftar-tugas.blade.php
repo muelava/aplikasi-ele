@@ -1,5 +1,5 @@
 @extends('guru.layouts.main')
-@section('title', 'Daftar Nilai Siswa')
+@section('title', 'Daftar Tugas Siswa')
 @section('vendor-css')
     <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
@@ -18,10 +18,10 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Nilai</h2>
+                            <h2 class="content-header-title float-left mb-0">Tugas</h2>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active">
-                                    Daftar Nilai Siswa
+                                    Daftar Tugas Siswa
                                 </li>
                             </ol>
                         </div>
@@ -40,10 +40,12 @@
                             <table class="table table-hover" id="kelas-siswa">
                                 <thead>
                                     <tr>
+                                        <th>NIS</th>
                                         <th>Nama</th>
                                         <th>Kelas</th>
-                                        <th>Tugas</th>
-                                        <th>Nilai</th>
+                                        <th>Mata Pelajaran</th>
+                                        <th>Materi</th>
+                                        <th>Waktu</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -67,13 +69,13 @@
     <script src="{{ asset('/admin/assets/js/main.js') }}"></script>
 
     <script>
-        // $.ajax("/guru/value-data")
+        // $.ajax("/guru/task-list")
         //     .done(function(data) {
         //         console.log(data);
         //     });
 
         $('#kelas-siswa').DataTable({
-            ajax: '/guru/value-data',
+            ajax: '/guru/task-list',
             "scrollX": true,
             dom: "<'row justify-content-between border-bottom py-1'<'col-sm-6 d-flex align-items-center head-table'><'col-sm-6 text-right'B>>" +
                 "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
@@ -107,7 +109,11 @@
                 }
             }],
             columns: [{
-                    data: 'nama'
+                    data: 'nis'
+                },
+                {
+                    data: 'nama',
+
                 },
                 {
                     data: 'kelas',
@@ -115,22 +121,33 @@
 
                 },
                 {
-                    data: 'tugas'
+                    data: 'mapel'
                 },
                 {
-                    data: 'nilai'
+                    data: 'materi'
+                },
+                {
+                    data: 'created_sub_tugas'
                 },
                 {
                     data: 'id'
                 },
             ],
             columnDefs: [{
-                targets: -1,
-                "render": function(data, type, row, meta) {
-                    return `<a href="javascript:" class="btn btn-sm btn-outline-muted">Detail</a>`;
+                    targets: -1,
+                    "render": function(data, type, row, meta) {
+                        return `<a href="javascript:" class="btn btn-sm btn-outline-primary">Ubah</a>`;
+                    }
+                },
+                {
+                    targets: 5,
+                    render: function(data, type, row, meta) {
+                        let date_submited = (data !== null) ? data : '';
+                        return new Date(date_submited).toLocaleString('id', 'ID').replaceAll('/', '-').replaceAll('.', ':') + ' WIB';
+                    }
                 }
-            }]
+            ]
         });
-        $('.head-table').html('<h6 class="mb-0">Nilai Siswa</h6>')
+        $('.head-table').html('<h6 class="mb-0">Daftar Tugas</h6>')
     </script>
 @endsection
