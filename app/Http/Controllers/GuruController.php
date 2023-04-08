@@ -275,12 +275,15 @@ class GuruController extends Controller
         ->join('kelas', 'kelas_id', 'kelas.id')
         ->join('siswa', 'siswa_id', 'siswa.id')
         ->join('mata_pelajaran', 'mata_pelajaran_id', 'mata_pelajaran.id')
-        ->select('siswa.nis', 'siswa.nama', 'kelas.kelas', 'mata_pelajaran.mapel', 'materi.materi', 'sub_tugas.id', 'sub_tugas.created_at as created_sub_tugas')
+        ->select('sub_tugas.id', 'siswa.nis', 'siswa.nama', 'kelas.kelas', 'mata_pelajaran.mapel', 'materi.materi', 'sub_tugas.created_at as created_sub_tugas', 'sub_tugas.dok_tugas as dok_sub_tugas')
         ->get();
+
+        $nilai = Nilai:: join('sub_tugas', 'sub_tugas_id', 'sub_tugas.id')->get();
 
         $data = collect(
             [
-            'data' => $values
+            'data' => $values,
+            'nilai' => $nilai
         ]
         )->toArray();
 
@@ -298,21 +301,31 @@ class GuruController extends Controller
 
 
     // ================== BEGIN::nilai ================== 
-    public function get_data_nilai()
+    public function get_data_nilai(Request $request, $sub_tugas_id)
     {
-        $values = Nilai::join('sub_tugas', 'sub_tugas_id', 'sub_tugas.id')
-        ->join('siswa', 'siswa_id', 'siswa.id')
-        ->join('tugas', 'tugas_id', 'tugas.id')
-        ->join('kelas', 'kelas_id', 'kelas.id')
-        ->get();
+
+        if ($sub_tugas_id === 'all') {
+            $values = Nilai::join('sub_tugas', 'sub_tugas_id', 'sub_tugas.id')
+            ->join('tugas', 'tugas_id', 'tugas.id')
+            ->join('materi', 'materi_id', 'materi.id')
+            ->join('mata_pelajaran', 'mata_pelajaran_id', 'mata_pelajaran.id')
+            ->join('kelas', 'kelas_id', 'kelas.id')
+            ->join('siswa', 'siswa_id', 'siswa.id')
+            ->select('nilai.id', 'siswa.nis', 'siswa.nama', 'mata_pelajaran.mapel', 'materi.materi', 'kelas.kelas', 'nilai.nilai', 'sub_tugas.dok_tugas')
+            ->get();
+        }else{
+            $values = Nilai::where('sub_tugas_id', '=', $sub_tugas_id)
+            ->get();
+        }
 
         $data = collect(
             [
-            'data' => $values
+            'data' => $values,
         ]
         )->toArray();
 
         return response()->json($data, 200);
+
     }
 
     public function nilai()
@@ -324,6 +337,32 @@ class GuruController extends Controller
             'active' => 'nilai',
             // 'values' => $values,
         ]);
+    }
+
+    public function tambah_nilai(Request $request, $sub_tugas_id)
+    {
+
+        $inputValidate =  $request->validate([
+            'nilai' => 'required',
+        ]);
+
+        $inputValidate['sub_tugas_id'] = $sub_tugas_id;
+
+        Nilai::create($inputValidate);
+        return redirect('/guru/daftar-tugas')->with('success', 'Nilai berhasil ditambahkan!');
+    }
+
+    public function ubah_nilai(Request $request, $sub_tugas_id)
+    {
+
+        $inputValidate =  $request->validate([
+            'nilai' => 'required',
+        ]);
+
+        $inputValidate['sub_tugas_id'] = $sub_tugas_id;
+
+        $affected = DB::table('nilai')->where('sub_tugas_id', $sub_tugas_id)->update($inputValidate);
+        return redirect('/guru/daftar-tugas')->with('success', 'Nilai berhasil diubah!');
     }
     // ================== END::nilai ================== 
 

@@ -31,6 +31,16 @@ class CoursesController extends Controller
         ]);
     }
 
+    public function jadwal()
+    {
+        $jadwal = Jadwal::first();
+
+        return view('courses.pages.jadwal', [
+            'active' => 'courses-jadwal',
+            'jadwal' => $jadwal,
+        ]);
+    }
+
     public function diskusi($materi_id)
     {
         $diskusis = Diskusi::where('materi_id', $materi_id)->orderBy('id', 'desc')->get();

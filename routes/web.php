@@ -114,14 +114,17 @@ Route::group(['middleware' => ['auth:guru']], function() {
     Route::get('/guru/daftar-tugas', [GuruController::class, 'daftar_tugas'])->name('guru-daftar-tugas');
 
     // crud nilai
-    Route::get('/guru/value-data', [GuruController::class, 'get_data_nilai']);
+    Route::get('/guru/value-data/{sub_tugas_id}', [GuruController::class, 'get_data_nilai']);
     Route::get('/guru/nilai', [GuruController::class, 'nilai'])->name('nilai');
+    Route::post('/guru/nilai/tambah/{sub_tugas_id}', [GuruController::class, 'tambah_nilai']);
+    Route::post('/guru/nilai/ubah/{sub_tugas_id}', [GuruController::class, 'ubah_nilai']);
 
 });
 
 // route halaman course
 Route::group(['middleware' => ['auth:siswa']], function() {
     Route::get('/courses', [CoursesController::class, 'index'])->name('courses');
+    Route::get('/courses/jadwal', [CoursesController::class, 'jadwal'])->name('courses-jadwal');
 
     // crud diskusi
     Route::get('/courses/materi/{materi_id}', [CoursesController::class, 'diskusi']);

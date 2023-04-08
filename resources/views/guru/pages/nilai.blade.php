@@ -40,9 +40,11 @@
                             <table class="table table-hover" id="kelas-siswa">
                                 <thead>
                                     <tr>
+                                        <th>NIS</th>
                                         <th>Nama</th>
                                         <th>Kelas</th>
-                                        <th>Tugas</th>
+                                        <th>Mapel</th>
+                                        <th>Materi</th>
                                         <th>Nilai</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -73,7 +75,7 @@
         //     });
 
         $('#kelas-siswa').DataTable({
-            ajax: '/guru/value-data',
+            ajax: '/guru/value-data/all',
             "scrollX": true,
             dom: "<'row justify-content-between border-bottom py-1'<'col-sm-6 d-flex align-items-center head-table'><'col-sm-6 text-right'B>>" +
                 "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
@@ -107,6 +109,9 @@
                 }
             }],
             columns: [{
+                    data: 'nis'
+                },
+                {
                     data: 'nama'
                 },
                 {
@@ -115,7 +120,10 @@
 
                 },
                 {
-                    data: 'tugas'
+                    data: 'mapel'
+                },
+                {
+                    data: 'materi'
                 },
                 {
                     data: 'nilai'

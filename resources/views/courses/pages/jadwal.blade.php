@@ -1,4 +1,4 @@
-@extends('guru.layouts.main')
+@extends('courses.layouts.main')
 @section('title', 'Jadwal')
 @section('vendor-css')
     <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/vendors.min.css') }}">
@@ -21,7 +21,7 @@
                             <h2 class="content-header-title float-left mb-0">Jadwal</h2>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active">
-                                    Guru
+                                    Courses
                                 </li>
                             </ol>
                         </div>

@@ -59,6 +59,66 @@
             {{-- content start --}}
         </div>
     </div>
+
+    <!-- Modal edit -->
+    <div class="modal modal-slide-in fade" id="modal-edit">
+        <div class="modal-dialog sidebar-xxl">
+            <form method="POST" id="form-lihat-tugas" class="modal-content pt-0">
+                @csrf
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                <div class="modal-header mb-1">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                </div>
+                <div class="modal-body flex-grow-1">
+                    <div class="form-group">
+                        <label class="form-label" for="nis">NIS</label>
+                        <input type="text" class="form-control" id="nis" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="nama">Nama</label>
+                        <input type="text" class="form-control" id="nama" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="kelas">Kelas</label>
+                        <input type="text" class="form-control" id="kelas" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="mapel">Mata Pelajaran</label>
+                        <input type="text" class="form-control" id="mapel" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="materi">Materi</label>
+                        <input type="text" class="form-control" id="materi" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="waktu">Waktu</label>
+                        <input type="text" class="form-control" id="waktu" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="file">File Tugas</label>
+                        <p><a href="javascript" id="file" target="_blank" rel="noopener noreferrer"></a></p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="nilai">Nilai</label>
+                        <input type="number" min="0" max="100" class="form-control @error('nilai') is-invalid @enderror" id="nilai" name="nilai" placeholder="0-100" />
+                        @error('nilai')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary mr-1"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /Modal edit -->
+
+    @include('components.loader')
+
 @endsection
 
 @section('page-vendor-js')
@@ -135,8 +195,14 @@
             ],
             columnDefs: [{
                     targets: -1,
-                    "render": function(data, type, row, meta) {
-                        return `<a href="javascript:" class="btn btn-sm btn-outline-primary">Ubah</a>`;
+                    render: function(data, type, row, meta) {
+                        let datas = [row.nis, row.nama, row.kelas, row.mapel, row.materi, row.created_sub_tugas, row.dok_sub_tugas, data];
+                        return `
+                        <a class="btn btn-sm btn-outline-primary text-nowrap" href="javascript:void(0);" data-toggle="modal" data-target="#modal-edit" onclick="value('${datas}')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                            <span>Nilai</span>
+                        </a>
+                        `;
                     }
                 },
                 {
@@ -149,5 +215,51 @@
             ]
         });
         $('.head-table').html('<h6 class="mb-0">Daftar Tugas</h6>')
+    </script>
+
+    {{-- set value --}}
+    <script>
+        function value(datas = null) {
+            let data = datas.split(',');
+            // console.log(data)
+            document.querySelector('#exampleModalLabel').textContent = 'Detil Tugas ' + data[1]
+
+            let form = document.querySelector('#form-lihat-tugas');
+
+            form.querySelector('#nis').value = data[0];
+            form.querySelector('#nama').value = data[1];
+            form.querySelector('#kelas').value = data[2];
+            form.querySelector('#mapel').value = data[3];
+            form.querySelector('#materi').value = data[4];
+            form.querySelector('#waktu').value = data[5] ? data[5] : 'data tidak valid';
+            form.querySelector('#file').setAttribute('href', '/files/tugas/' + data[6]);
+            form.querySelector('#file').textContent = data[6] ? data[6] : 'tidak ada file terlmapir';
+
+            $.ajax({
+                    url: "/guru/value-data/" + data[7],
+                    beforeSend: function() {
+                        $('#loader').removeClass('d-none')
+                    }
+                })
+                .done(function(d) {
+                    $('#loader').addClass('d-none')
+                    // console.log(d)
+
+                    let nilai = '',
+                        textButton = 'Beri Nilai',
+                        form_action = '/guru/nilai/tambah/' + data[7];
+
+                    if (d.data.length) {
+                        nilai = d.data[0]['nilai'];
+                        textButton = 'Update Nilai'
+                        form_action = '/guru/nilai/ubah/' + data[7];
+                    }
+
+                    document.querySelector('#nilai').value = nilai;
+                    form.querySelector('button[type="submit"]').textContent = textButton;
+                    form.setAttribute('action', form_action);
+                });
+
+        }
     </script>
 @endsection
