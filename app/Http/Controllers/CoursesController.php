@@ -12,6 +12,7 @@ use App\Models\Jadwal;
 use App\Models\Diskusi;
 use App\Models\SubDiskusi;
 use App\Models\SubTugas;
+use App\Models\Nilai;
 
 use File;
 use Illuminate\Support\Facades\DB;
@@ -159,6 +160,38 @@ class CoursesController extends Controller
         $affected = DB::table('sub_tugas')->where('id', $id_tugas)->update($inputValidate);
         return redirect('/courses/materi/tugas/'.$sub_tugas->tugas_id)->with('success', 'Tugas berhasil diubah');
     }
+
+    // ================== BEGIN::nilai ================== 
+    public function get_nilai()
+    {
+
+        $values = Nilai::join('sub_tugas', 'sub_tugas_id', 'sub_tugas.id')
+        ->join('tugas', 'tugas_id', 'tugas.id')
+        ->join('siswa', 'siswa_id', 'siswa.id')
+        ->join('kelas', 'kelas_id', 'kelas.id')
+        ->join('materi', 'materi_id', 'materi.id')
+        ->join('mata_pelajaran', 'mata_pelajaran_id', 'mata_pelajaran.id')
+        ->select('nilai.id', 'siswa.nama', 'kelas.kelas', 'mata_pelajaran.mapel', 'materi.materi', 'nilai.nilai')
+        ->where('siswa_id', '=', auth()->id())
+        ->get();
+        
+        $data = collect(
+            [
+            'data' => $values,
+        ]
+        )->toArray();
+
+        return response()->json($data, 200);
+
+    }
+
+    public function nilai()
+    {
+        return view('courses.pages.nilai', [
+            'active' => 'nilai'
+        ]);
+    }
+    // ================== END::nilai ================== 
 
     public function pengaturan()
     {

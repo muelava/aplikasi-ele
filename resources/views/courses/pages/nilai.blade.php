@@ -1,5 +1,5 @@
-@extends('guru.layouts.main')
-@section('title', 'Daftar Nilai Siswa')
+@extends('courses.layouts.main')
+@section('title', 'Daftar Nilai')
 @section('vendor-css')
     <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/admin/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
@@ -21,7 +21,7 @@
                             <h2 class="content-header-title float-left mb-0">Nilai</h2>
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item active">
-                                    Daftar Nilai Siswa
+                                    Daftar Nilai
                                 </li>
                             </ol>
                         </div>
@@ -37,16 +37,15 @@
                             <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
                         <div class="table-responsive">
-                            <table class="table table-hover" id="kelas-siswa">
+                            <table class="table table-hover" id="tabel-nilai">
                                 <thead>
                                     <tr>
-                                        <th>NIS</th>
                                         <th>Nama</th>
                                         <th>Kelas</th>
-                                        <th>Mapel</th>
+                                        <th>Mata Pelajaran</th>
                                         <th>Materi</th>
                                         <th>Nilai</th>
-                                        <th>Aksi</th>
+                                        {{-- <th>Aksi</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,8 +73,8 @@
         //         console.log(data);
         //     });
 
-        $('#kelas-siswa').DataTable({
-            ajax: '/guru/value-data/all',
+        var oTable = $('#tabel-nilai').DataTable({
+            ajax: '/courses/value-data',
             "scrollX": true,
             dom: "<'row justify-content-between border-bottom py-1'<'col-sm-6 d-flex align-items-center head-table'><'col-sm-6 text-right'B>>" +
                 "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
@@ -96,7 +95,7 @@
                 orientation: 'portrait',
                 customize: function(doc) {
                     var colCount = new Array();
-                    $('#kelas-siswa').find('tbody tr:first-child td').each(function() {
+                    $('#tabel-nilai').find('tbody tr:first-child td').each(function() {
                         if ($(this).attr('colspan')) {
                             for (var i = 1; i <= $(this).attr('colspan'); $i++) {
                                 colCount.push('*');
@@ -109,18 +108,14 @@
                 }
             }],
             columns: [{
-                    data: 'nis'
-                },
-                {
                     data: 'nama'
                 },
                 {
                     data: 'kelas',
                     className: 'text-uppercase'
-
                 },
                 {
-                    data: 'mapel'
+                    data: 'mapel',
                 },
                 {
                     data: 'materi'
@@ -128,12 +123,12 @@
                 {
                     data: 'nilai'
                 },
-                {
-                    data: 'id'
-                },
+                // {
+                //     data: 'id'
+                // },
             ],
             columnDefs: [{
-                targets: -1,
+                // targets: -1,
                 "render": function(data, type, row, meta) {
                     return `<a href="javascript:" class="btn btn-sm btn-outline-muted">Detail</a>`;
                 }
@@ -144,7 +139,7 @@
                     .every(function() {
                         var column = this;
                         var select = $(`
-                            <select class="form-control"><option value="">Semua Kelas</option></select>
+                            <select class="form-control"><option value="">Semua Mapel</option></select>
                         `)
                             .appendTo($('.head-table').empty())
                             .on('change', function() {

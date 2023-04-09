@@ -212,9 +212,33 @@
                         return new Date(date_submited).toLocaleString('id', 'ID').replaceAll('/', '-').replaceAll('.', ':') + ' WIB';
                     }
                 }
-            ]
+            ],
+            initComplete: function() {
+                this.api()
+                    .columns([2]) // This is the hidden jurisdiction column index
+                    .every(function() {
+                        var column = this;
+                        var select = $(`
+                            <select class="form-control"><option value="">Semua Kelas</option></select>
+                        `)
+                            .appendTo($('.head-table').empty())
+                            .on('change', function() {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                            });
+
+                        column
+                            .data()
+                            .unique()
+                            .sort()
+                            .each(function(d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>');
+                            });
+                    });
+            },
         });
-        $('.head-table').html('<h6 class="mb-0">Daftar Tugas</h6>')
+        // $('.head-table').html('<h6 class="mb-0">Daftar Tugas</h6>')
     </script>
 
     {{-- set value --}}

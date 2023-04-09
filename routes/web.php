@@ -139,6 +139,10 @@ Route::group(['middleware' => ['auth:siswa']], function() {
     //crud profile
     Route::get('/siswa/pengaturan', [CoursesController::class, 'pengaturan'])->name('siswa-pengaturan');
 
+    // crud nilai
+    Route::get('/courses/value-data', [CoursesController::class, 'get_nilai']);
+    Route::get('/courses/nilai', [CoursesController::class, 'nilai'])->name('nilai');
+
 });
 
 // crud siswa

@@ -86,13 +86,13 @@
                                                         <div class="col-12 col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="nis">NIS</label>
-                                                                <input type="text" class="form-control" id="nis" name="nis" placeholder="NIS" value="{{ $siswa->nis }}" />
+                                                                <input type="text" class="form-control" id="nis" name="nis" placeholder="NIS" value="{{ $siswa->nis }}" readonly />
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="nama">Nama</label>
-                                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="nama" value="{{ $siswa->nama }}" />
+                                                                <input type="text" class="form-control" id="nama" name="nama" placeholder="nama" value="{{ $siswa->nama }}" readonly />
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-sm-6">
@@ -104,7 +104,7 @@
                                                         <div class="col-12 col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="email">E-mail</label>
-                                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ $siswa->email }}" />
+                                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="{{ $siswa->email }}" readonly />
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-sm-6">
@@ -116,8 +116,7 @@
                                                         <div class="col-12 col-sm-6">
                                                             <div class="form-group">
                                                                 <label for="tanggal_lahir">Tanggal Lahir</label>
-                                                                <input type="text" class="form-control flatpickr-basic" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir"
-                                                                    value="{{ $siswa->tanggal_lahir }}" />
+                                                                <input type="text" class="form-control flatpickr-basic" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" value="{{ $siswa->tanggal_lahir }}" readonly />
                                                             </div>
                                                         </div>
                                                         {{-- <div class="col-12 mt-75">
@@ -174,8 +173,7 @@
                                                             <div class="form-group">
                                                                 <label for="account-retype-new-password">Konfirmasi Password Baru</label>
                                                                 <div class="input-group form-password-toggle input-group-merge">
-                                                                    <input type="password" class="form-control" id="account-retype-new-password" name="confirm-new-password"
-                                                                        placeholder="Masukkan Konfirmasi Password Baru" />
+                                                                    <input type="password" class="form-control" id="account-retype-new-password" name="confirm-new-password" placeholder="Masukkan Konfirmasi Password Baru" />
                                                                     <div class="input-group-append">
                                                                         <div class="input-group-text cursor-pointer"><i data-feather="eye"></i></div>
                                                                     </div>

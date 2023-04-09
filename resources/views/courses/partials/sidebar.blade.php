@@ -16,7 +16,7 @@
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
                 <li class="nav-item {{ $active === 'course' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{ route('courses') }}"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Course">Course</span></a>
                 </li>
-                <li class="nav-item {{ $active === 'nilai' ? 'active' : '' }}"><a class="d-flex align-items-center" href="#"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Nilai">Nilai</span></a>
+                <li class="nav-item {{ $active === 'nilai' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{ route('nilai') }}"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Nilai">Nilai</span></a>
                 </li>
                 <li class="nav-item {{ $active === 'courses-jadwal' ? 'active' : '' }}"><a class="d-flex align-items-center" href="{{ route('courses-jadwal') }}"><i data-feather="clock"></i><span class="menu-title text-truncate" data-i18n="Jadwal">Jadwal</span></a>
                 </li>
