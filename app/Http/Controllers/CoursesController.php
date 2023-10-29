@@ -54,6 +54,39 @@ class CoursesController extends Controller
         ]);
     }
 
+    public function cosine_similarity($text1, $text2) {
+        // Preprocess text (tokenization, stop word removal, etc.) as needed
+    
+        // Tokenize the text into words
+        $words1 = preg_split('/\s+/', $text1, -1, PREG_SPLIT_NO_EMPTY);
+        $words2 = preg_split('/\s+/', $text2, -1, PREG_SPLIT_NO_EMPTY);
+    
+        // Calculate the term frequency for each word in both texts
+        $tf1 = array_count_values($words1);
+        $tf2 = array_count_values($words2);
+    
+        // Calculate the dot product of the term frequency vectors
+        $dotProduct = 0;
+        foreach ($tf1 as $word => $freq1) {
+            if (isset($tf2[$word])) {
+                $dotProduct += $freq1 * $tf2[$word];
+            }
+        }
+    
+        // Calculate the magnitude of each vector
+        $magnitude1 = sqrt(array_sum(array_map(function($freq) { return $freq * $freq; }, $tf1)));
+        $magnitude2 = sqrt(array_sum(array_map(function($freq) { return $freq * $freq; }, $tf2)));
+    
+        // Calculate the cosine similarity
+        if ($magnitude1 > 0 && $magnitude2 > 0) {
+            $similarity = $dotProduct / ($magnitude1 * $magnitude2);
+        } else {
+            $similarity = 0;
+        }
+    
+        return $similarity;
+    }
+
     public function tambah_diskusi(Request $request, $id_materi){
         $inputValidate =  $request->validate([
             'komentar' => 'required',
@@ -67,7 +100,17 @@ class CoursesController extends Controller
         }elseif (auth('siswa')->check()) {
             $inputValidate['guru_id'] = null;
             $inputValidate['siswa_id'] = auth()->id();
+        }
 
+        // Ambil semua komentar yang sudah ada dalam database
+        $existingDiskusi = Diskusi::where('materi_id', $id_materi)->get();
+
+        // Hitung cosine similarity
+        foreach ($existingDiskusi as $diskusi) {
+            $similarity = $this->cosine_similarity($request->komentar, $diskusi->komentar);
+            if ($similarity > 0.8) {
+                return back()->with('similiarity_error', 'Maaf, komentar atau diskusi ini sudah ada dalam sistem. Silakan tambahkan konten yang berbeda');
+            }
         }
 
         Diskusi::create($inputValidate);
@@ -78,6 +121,16 @@ class CoursesController extends Controller
         $inputValidate =  $request->validate([
             'komentar' => 'required',
         ]);
+
+        $existingSubDiskusi = SubDiskusi::where('diskusi_id', $id_diskusi)->get();
+
+        // Hitung cosine similarity
+        foreach ($existingSubDiskusi as $diskusi) {
+            $similarity = $this->cosine_similarity($request->komentar, $diskusi->komentar);
+            if ($similarity > 0.8) {
+                return back()->with('similiarity_error', 'Maaf, komentar atau diskusi ini sudah ada dalam sistem. Silakan tambahkan konten yang berbeda');
+            }
+        }
         
         $inputValidate['diskusi_id'] = $id_diskusi;
 

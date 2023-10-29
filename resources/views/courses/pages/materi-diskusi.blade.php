@@ -75,6 +75,12 @@
                     <button class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#modal-tambah-diskusi"><i data-feather="plus"></i>
                         Diskusi</button>
 
+                    @if (session()->has('similiarity_error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('similiarity_error') }}
+                        </div>
+                    @endif
+
                     {{-- start diskusi --}}
                     @if ($diskusis->count() > 0)
 
@@ -110,8 +116,7 @@
                                                 •
                                                 <small>{{ $sub_diskusi->created_at->diffForHumans() }}</small>
                                             </div>
-                                            <small class="d-block text-capitalize"
-                                                style="margin-top: 0.25rem">{{ $sub_diskusi->guru ? $sub_diskusi->guru->role : $sub_diskusi->siswa->role }}</small>
+                                            <small class="d-block text-capitalize" style="margin-top: 0.25rem">{{ $sub_diskusi->guru ? $sub_diskusi->guru->role : $sub_diskusi->siswa->role }}</small>
                                         </div>
                                         <div class="card-body">
                                             <p>{{ $sub_diskusi->komentar }}</p>
