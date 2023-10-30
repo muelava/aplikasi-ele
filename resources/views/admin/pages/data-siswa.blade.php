@@ -42,6 +42,7 @@
                                         <th>No</th>
                                         <th>NIS</th>
                                         <th>Nama Siswa</th>
+                                        <th>Jenis Kelamin</th>
                                         <th>Kelas</th>
                                         <th>Tanggal Lahir</th>
                                         <th except>Aksi</th>
@@ -56,6 +57,7 @@
                                             <td>{{ $i++ }}</td>
                                             <td>{{ $siswa->nis }}</td>
                                             <td>{{ $siswa->nama }}</td>
+                                            <td>{{ $siswa->jenis_kelamin }}</td>
                                             <td>{{ $siswa->kelas->kelas }}</td>
                                             <td>{{ date('d M Y', strtotime($siswa->tanggal_lahir)) }}</td>
                                             <td except>

@@ -16,7 +16,12 @@ class KelasTableSeeder extends Seeder
     {
         $kelas = new Kelas;
         $kelas -> jenjang = 'smp';
-        $kelas -> kelas = 'VII A';
+        $kelas -> kelas = 'VIII A';
+        $kelas -> save();
+
+        $kelas = new Kelas;
+        $kelas -> jenjang = 'smk';
+        $kelas -> kelas = 'XII AP';
         $kelas -> save();
     }
 }
