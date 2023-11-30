@@ -61,11 +61,11 @@ class CoursesController extends Controller
         $words1 = preg_split('/\s+/', $text1, -1, PREG_SPLIT_NO_EMPTY);
         $words2 = preg_split('/\s+/', $text2, -1, PREG_SPLIT_NO_EMPTY);
     
-        // Calculate the term frequency for each word in both texts
+        // Hitung frekuensi istilah untuk setiap kata di kedua teks
         $tf1 = array_count_values($words1);
         $tf2 = array_count_values($words2);
     
-        // Calculate the dot product of the term frequency vectors
+        // Hitung produk titik dari vektor frekuensi istilah
         $dotProduct = 0;
         foreach ($tf1 as $word => $freq1) {
             if (isset($tf2[$word])) {
@@ -73,11 +73,11 @@ class CoursesController extends Controller
             }
         }
     
-        // Calculate the magnitude of each vector
+        // Hitung besarnya masing-masing vektor
         $magnitude1 = sqrt(array_sum(array_map(function($freq) { return $freq * $freq; }, $tf1)));
         $magnitude2 = sqrt(array_sum(array_map(function($freq) { return $freq * $freq; }, $tf2)));
     
-        // Calculate the cosine similarity
+        // Hitung besarnya masing-masing vektor
         if ($magnitude1 > 0 && $magnitude2 > 0) {
             $similarity = $dotProduct / ($magnitude1 * $magnitude2);
         } else {
